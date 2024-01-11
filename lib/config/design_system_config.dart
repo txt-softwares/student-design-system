@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'colors_interface.dart';
+import 'app_colors.dart';
 
 class DesignSystemConfig {
   final StudentDSColors colors;

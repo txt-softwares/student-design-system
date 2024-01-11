@@ -1,7 +1,7 @@
 library student_design_system;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+export 'config/config.dart';
+export 'inputs/inputs.dart';
+export 'spacing/spacing.dart';
+export 'typography/typography.dart';
+export 'components/components.dart';
