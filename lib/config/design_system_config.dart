@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 import 'app_colors.dart';
 
-class DesignSystemConfig {
+class StudentDSConfig {
   final StudentDSColors colors;
   final String fontFamily;
   final double borderRadius;
   final double spacing;
   final EdgeInsets padding;
 
-  DesignSystemConfig({
+  StudentDSConfig({
     required this.colors,
     required this.fontFamily,
     required this.borderRadius,
