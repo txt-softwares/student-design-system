@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../config/ds_config.dart';
 import '../../spacing/spacing_size.dart';
 
 class StudentButtonWidget extends StatelessWidget {
@@ -47,7 +48,7 @@ class StudentButtonWidget extends StatelessWidget {
     required this.title,
     this.onTap,
     this.leading,
-    this.height = 46,
+    this.height = 56,
     this.color,
     this.width,
     this.textColor = Colors.white,
@@ -63,13 +64,15 @@ class StudentButtonWidget extends StatelessWidget {
       minWidth: width ?? double.maxFinite,
       shape: outline
           ? RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(5),
+              borderRadius: BorderRadius.circular(
+                  StudentDesignSystem.config.borderRadius),
               side: BorderSide(color: color!))
           : RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(5),
+              borderRadius: BorderRadius.circular(
+                  StudentDesignSystem.config.borderRadius),
             ),
-      color: color ?? Theme.of(context).primaryColor,
-      disabledColor: Theme.of(context).primaryColor,
+      color: color ?? StudentDesignSystem.config.colors.primary1,
+      disabledColor: StudentDesignSystem.config.colors.primary1,
       onPressed: !isLoading ? onTap : null,
       child: !isLoading
           ? _buildContent()
