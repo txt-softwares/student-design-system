@@ -19,6 +19,8 @@ class _HomePageState extends State<HomePage> {
         padding: EdgeInsets.all(20),
         children: [
           StudentButtonWidget(
+            prefixIcon: Icon(Icons.airplane_ticket),
+            leading: Icon(Icons.airplane_ticket),
             title: 'Button',
             onTap: () {},
           ),

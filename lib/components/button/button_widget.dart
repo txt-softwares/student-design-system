@@ -12,6 +12,8 @@ class StudentButtonWidget extends StatelessWidget {
   final double height;
   final double? width;
   final Widget? leading;
+  final Widget? prefixIcon;
+
   final Color? color;
   final Color textColor;
 
@@ -37,6 +39,7 @@ class StudentButtonWidget extends StatelessWidget {
     this.onTap,
     this.height = 60,
     this.leading,
+    this.prefixIcon,
     this.color,
     this.width,
     this.textColor = Colors.white,
@@ -48,6 +51,7 @@ class StudentButtonWidget extends StatelessWidget {
     required this.title,
     this.onTap,
     this.leading,
+    this.prefixIcon,
     this.height = 56,
     this.color,
     this.width,
@@ -72,7 +76,8 @@ class StudentButtonWidget extends StatelessWidget {
                   StudentDesignSystem.config.borderRadius),
             ),
       color: color ?? StudentDesignSystem.config.colors.primary1,
-      disabledColor: StudentDesignSystem.config.colors.primary1,
+      disabledColor:
+          StudentDesignSystem.config.colors.primary1.withOpacity(0.48),
       onPressed: !isLoading ? onTap : null,
       child: !isLoading
           ? _buildContent()
@@ -112,10 +117,23 @@ class StudentButtonWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const Spacer(),
+        if (prefixIcon != null)
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: const EdgeInsets.only(left: Spacing.x10),
+              child: leading,
+            ),
+          ),
+        const SizedBox(
+          width: 16,
+        ),
         Center(
           child: _buildText(),
         ),
-        const Spacer(),
+        const SizedBox(
+          width: 16,
+        ),
         Align(
           alignment: Alignment.centerRight,
           child: Padding(
@@ -123,6 +141,7 @@ class StudentButtonWidget extends StatelessWidget {
             child: leading,
           ),
         ),
+        const Spacer(),
       ],
     );
   }
