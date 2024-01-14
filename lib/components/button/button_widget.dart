@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import '../../config/ds_config.dart';
 import '../../spacing/spacing_size.dart';
 
+enum ButtonType { primary, secundary }
+
 class StudentButtonWidget extends StatelessWidget {
+  final ButtonType type;
   final String title;
   final bool disabled;
   final bool isLoading;
@@ -15,7 +18,7 @@ class StudentButtonWidget extends StatelessWidget {
   final Widget? prefixIcon;
 
   final Color? color;
-  final Color textColor;
+  final Color? textColor;
 
   ///  Button
   /// button that will be execute show a circular progress indicator
@@ -42,8 +45,9 @@ class StudentButtonWidget extends StatelessWidget {
     this.prefixIcon,
     this.color,
     this.width,
-    this.textColor = Colors.white,
+    this.textColor,
   })  : outline = false,
+        type = ButtonType.primary,
         super(key: key);
 
   const StudentButtonWidget.outline({
@@ -55,15 +59,31 @@ class StudentButtonWidget extends StatelessWidget {
     this.height = 56,
     this.color,
     this.width,
-    this.textColor = Colors.white,
+    this.textColor,
   })  : disabled = false,
         isLoading = false,
         outline = true,
+        type = ButtonType.primary,
         super(key: key);
+  const StudentButtonWidget.secoundary({
+    super.key,
+    required this.title,
+    this.disabled = false,
+    this.isLoading = false,
+    this.onTap,
+    this.height = 56,
+    this.leading,
+    this.prefixIcon,
+    this.color,
+    this.width,
+    this.textColor,
+  })  : type = ButtonType.secundary,
+        outline = false;
 
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
+      elevation: 0,
       height: height,
       minWidth: width ?? double.maxFinite,
       shape: outline
@@ -75,9 +95,8 @@ class StudentButtonWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(
                   StudentDesignSystem.config.borderRadius),
             ),
-      color: color ?? StudentDesignSystem.config.colors.primary1,
-      disabledColor:
-          StudentDesignSystem.config.colors.primary1.withOpacity(0.48),
+      color: color ?? buttonColor,
+      disabledColor: buttonDisabledColor,
       onPressed: !isLoading ? onTap : null,
       child: !isLoading
           ? _buildContent()
@@ -102,10 +121,12 @@ class StudentButtonWidget extends StatelessWidget {
         return Text(
           title,
           style: TextStyle(
-            fontFamily: 'Inter',
-            color: textColor,
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
+            fontFamily: 'Urbanist',
+            color: textColor ?? buttonTitleColor,
+            fontSize: 18,
+            fontWeight: FontWeight.w700,
+            height: 0.08,
+            letterSpacing: 0.20,
           ),
         );
       },
@@ -144,5 +165,23 @@ class StudentButtonWidget extends StatelessWidget {
         const Spacer(),
       ],
     );
+  }
+
+  Color get buttonColor {
+    return type == ButtonType.primary
+        ? StudentDesignSystem.config.colors.primary1
+        : StudentDesignSystem.config.colors.buttonSecounday1;
+  }
+
+  Color get buttonTitleColor {
+    return type == ButtonType.primary
+        ? Colors.white
+        : StudentDesignSystem.config.colors.primary1;
+  }
+
+  Color get buttonDisabledColor {
+    return type == ButtonType.primary
+        ? StudentDesignSystem.config.colors.primary1.withOpacity(0.48)
+        : StudentDesignSystem.config.colors.buttonSecounday1.withOpacity(0.48);
   }
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class StudentDSColors {
+  final Color buttonSecounday1;
+
   final Color primary1;
   final Color primary2;
   final Color primary3;
@@ -21,6 +23,7 @@ class StudentDSColors {
   final Color scafoldBackground;
 
   StudentDSColors({
+    required this.buttonSecounday1,
     required this.primary1,
     required this.primary2,
     required this.primary3,
