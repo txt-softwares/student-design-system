@@ -56,7 +56,7 @@ class StudentButtonWidget extends StatelessWidget {
     this.disabled = false,
     this.isLoading = false,
     this.onTap,
-    this.height = 56,
+    this.height = 60,
     this.leading,
     this.prefixIcon,
     this.color,
@@ -67,7 +67,7 @@ class StudentButtonWidget extends StatelessWidget {
   Color get buttonColor {
     return type == ButtonType.primary
         ? StudentDesignSystem.config.colors.primary1
-        : StudentDesignSystem.config.colors.buttonSecoundary1;
+        : StudentDesignSystem.config.colors.buttonSecondary1;
   }
 
   Color get buttonTitleColor {
@@ -79,7 +79,7 @@ class StudentButtonWidget extends StatelessWidget {
   Color get buttonDisabledColor {
     return type == ButtonType.primary
         ? StudentDesignSystem.config.colors.primary1.withOpacity(0.48)
-        : StudentDesignSystem.config.colors.buttonSecoundary1.withOpacity(0.48);
+        : StudentDesignSystem.config.colors.buttonSecondary1.withOpacity(0.48);
   }
 
   @override
