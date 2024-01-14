@@ -50,21 +50,6 @@ class StudentButtonWidget extends StatelessWidget {
         type = ButtonType.primary,
         super(key: key);
 
-  const StudentButtonWidget.outline({
-    Key? key,
-    required this.title,
-    this.onTap,
-    this.leading,
-    this.prefixIcon,
-    this.height = 56,
-    this.color,
-    this.width,
-    this.textColor,
-  })  : disabled = false,
-        isLoading = false,
-        outline = true,
-        type = ButtonType.primary,
-        super(key: key);
   const StudentButtonWidget.secoundary({
     super.key,
     required this.title,
@@ -79,6 +64,23 @@ class StudentButtonWidget extends StatelessWidget {
     this.textColor,
   })  : type = ButtonType.secundary,
         outline = false;
+  Color get buttonColor {
+    return type == ButtonType.primary
+        ? StudentDesignSystem.config.colors.primary1
+        : StudentDesignSystem.config.colors.buttonSecoundary1;
+  }
+
+  Color get buttonTitleColor {
+    return type == ButtonType.primary
+        ? Colors.white
+        : StudentDesignSystem.config.colors.primary1;
+  }
+
+  Color get buttonDisabledColor {
+    return type == ButtonType.primary
+        ? StudentDesignSystem.config.colors.primary1.withOpacity(0.48)
+        : StudentDesignSystem.config.colors.buttonSecoundary1.withOpacity(0.48);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -121,7 +123,7 @@ class StudentButtonWidget extends StatelessWidget {
         return Text(
           title,
           style: TextStyle(
-            fontFamily: 'Urbanist',
+            fontFamily: StudentDesignSystem.config.fontFamily,
             color: textColor ?? buttonTitleColor,
             fontSize: 18,
             fontWeight: FontWeight.w700,
@@ -165,23 +167,5 @@ class StudentButtonWidget extends StatelessWidget {
         const Spacer(),
       ],
     );
-  }
-
-  Color get buttonColor {
-    return type == ButtonType.primary
-        ? StudentDesignSystem.config.colors.primary1
-        : StudentDesignSystem.config.colors.buttonSecounday1;
-  }
-
-  Color get buttonTitleColor {
-    return type == ButtonType.primary
-        ? Colors.white
-        : StudentDesignSystem.config.colors.primary1;
-  }
-
-  Color get buttonDisabledColor {
-    return type == ButtonType.primary
-        ? StudentDesignSystem.config.colors.primary1.withOpacity(0.48)
-        : StudentDesignSystem.config.colors.buttonSecounday1.withOpacity(0.48);
   }
 }
