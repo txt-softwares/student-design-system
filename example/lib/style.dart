@@ -5,7 +5,8 @@ class AppStyle {
   StudentDSConfig config = StudentDSConfig(
     padding: const EdgeInsets.all(24),
     colors: StudentDSColors(
-      primary1: Color(0xffFF4D6F),
+      buttonSecondary1: const Color(0xffFFEFF3),
+      primary1: const Color(0xffFF4D6F),
       primary2: Colors.black,
       primary3: Colors.black,
       secondary1: Colors.black,
