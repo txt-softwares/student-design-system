@@ -5,7 +5,6 @@ class AppStyle {
   StudentDSConfig config = StudentDSConfig(
     padding: const EdgeInsets.all(24),
     colors: StudentDSColors(
-      errorValidatorColor: const Color(0XFFFF7043),
       focusInputColor: const Color(0xffB140FF),
       inputColor: const Color(0xffFAFAFC),
       hintColor: const Color(0xFF7F89A8),

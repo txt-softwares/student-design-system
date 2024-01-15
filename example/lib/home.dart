@@ -61,21 +61,13 @@ class _HomePageState extends State<HomePage> {
               prefix: const Icon(Icons.person)),
           const SpaceVertical.x4(),
           StudentInputWidget(
-              controller: TextEditingController(),
-              hintText: 'Username',
-              sufix: const Icon(
-                Icons.visibility_off,
-              )),
+            controller: TextEditingController(),
+            hintText: 'Username',
+            sufix: const Icon(
+              Icons.visibility_off,
+            ),
+          ),
           const SpaceVertical.x4(),
-          StudentInputWidget(
-              prefix: const Icon(
-                Icons.key,
-              ),
-              controller: TextEditingController(),
-              hintText: 'Username',
-              sufix: const Icon(
-                Icons.ac_unit,
-              )),
           StudentInputWidget(
             prefix: const Icon(
               Icons.key,
@@ -83,12 +75,24 @@ class _HomePageState extends State<HomePage> {
             controller: TextEditingController(),
             hintText: 'Username',
             sufix: const Icon(
-              Icons.person,
+              Icons.ac_unit,
             ),
-            validatorKey: _formKey,
-            validator: (p0) {
-              return 'Error message';
-            },
+          ),
+          Form(
+            key: _formKey,
+            child: StudentInputWidget(
+              prefix: const Icon(
+                Icons.key,
+              ),
+              controller: TextEditingController(),
+              hintText: 'Username',
+              sufix: const Icon(
+                Icons.person,
+              ),
+              validator: (p0) {
+                return 'Error message';
+              },
+            ),
           ),
           const SpaceVertical.x4(),
           StudentButtonWidget(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class StudentDSColors {
-  final Color errorValidatorColor;
+
   final Color focusInputColor;
   final Color inputColor;
   final Color buttonSecondary1;
@@ -26,7 +26,7 @@ class StudentDSColors {
   final Color scafoldBackground;
 
   StudentDSColors({
-    required this.errorValidatorColor,
+ 
     required this.focusInputColor,
     required this.inputColor,
     required this.buttonSecondary1,

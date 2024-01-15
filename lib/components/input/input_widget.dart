@@ -4,7 +4,6 @@ import 'package:student_design_system/config/ds_config.dart';
 
 class StudentInputWidget extends StatelessWidget {
   final bool hasError;
-  final GlobalKey? validatorKey;
   final TextEditingController controller;
   final Widget? prefix;
 
@@ -65,7 +64,6 @@ class StudentInputWidget extends StatelessWidget {
     this.align = TextAlign.left,
     this.hasPadding = true,
     Key? key,
-    this.validatorKey,
   }) : super(key: key);
 
   FocusNode myFocusNode = FocusNode();
@@ -85,85 +83,82 @@ class StudentInputWidget extends StatelessWidget {
               ),
             ),
           ),
-        Form(
-          key: validatorKey,
-          child: Focus(
-            child: Builder(builder: (
-              BuildContext context,
-            ) {
-              final FocusNode focusNode = Focus.of(context);
-              final bool hasFocus = focusNode.hasFocus;
+        Focus(
+          child: Builder(builder: (
+            BuildContext context,
+          ) {
+            final FocusNode focusNode = Focus.of(context);
+            final bool hasFocus = focusNode.hasFocus;
 
-              return TextFormField(
-                focusNode: myFocusNode,
-                validator: validator,
-                autovalidateMode: autoValidate,
-                onChanged: onChanged,
-                enabled: isEnabled,
-                autofillHints: autofillHints,
-                controller: controller,
-                textInputAction: action,
-                textAlignVertical: TextAlignVertical.center,
-                onFieldSubmitted: onSubmitted,
-                readOnly: readOnly,
-                inputFormatters: inputFormatters,
-                keyboardType: keyboardType,
-                obscureText: obscureText ?? false,
-                maxLines: lines,
-                style: TextStyle(
-                    color: StudentDesignSystem.config.colors.black,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    letterSpacing: 0.2),
-                textAlign: TextAlign.left,
-                decoration: InputDecoration(
-                  contentPadding: hasPadding
-                      ? const EdgeInsets.symmetric(
-                          horizontal: 20.0, vertical: 17.0)
-                      : null,
-                  errorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(
-                          StudentDesignSystem.config.borderRadius),
-                      borderSide: BorderSide(
-                          color: StudentDesignSystem
-                              .config.colors.errorValidatorColor)),
-                  errorStyle: TextStyle(
-                      color: StudentDesignSystem
-                          .config.colors.errorValidatorColor),
-                  filled: true,
-                  fillColor: hasFocus
-                      ? StudentDesignSystem.config.colors.focusInputColor
-                          .withOpacity(0.08)
-                      : StudentDesignSystem.config.colors.inputColor,
-                  focusedBorder: OutlineInputBorder(
+            return TextFormField(
+              focusNode: myFocusNode,
+              validator: validator,
+              autovalidateMode: autoValidate,
+              onChanged: onChanged,
+              enabled: isEnabled,
+              autofillHints: autofillHints,
+              controller: controller,
+              textInputAction: action,
+              textAlignVertical: TextAlignVertical.center,
+              onFieldSubmitted: onSubmitted,
+              readOnly: readOnly,
+              inputFormatters: inputFormatters,
+              keyboardType: keyboardType,
+              obscureText: obscureText ?? false,
+              maxLines: lines,
+              style: TextStyle(
+                  color: StudentDesignSystem.config.colors.black,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  letterSpacing: 0.2),
+              textAlign: TextAlign.left,
+              decoration: InputDecoration(
+                contentPadding: hasPadding
+                    ? const EdgeInsets.symmetric(
+                        horizontal: 20.0, vertical: 17.0)
+                    : null,
+                errorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(
+                      StudentDesignSystem.config.borderRadius),
+                  borderSide: BorderSide(
+                      color: StudentDesignSystem.config.colors.error),
+                ),
+                errorStyle:
+                    TextStyle(color: StudentDesignSystem.config.colors.error),
+                filled: true,
+                fillColor: hasFocus
+                    ? StudentDesignSystem.config.colors.focusInputColor
+                        .withOpacity(0.08)
+                    : StudentDesignSystem.config.colors.inputColor,
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(
+                      StudentDesignSystem.config.borderRadius),
+                  borderSide: BorderSide(
+                    color: StudentDesignSystem.config.colors.focusInputColor,
+                  ),
+                ),
+                focusedErrorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(
+                      StudentDesignSystem.config.borderRadius),
+                ),
+                focusColor: Colors.black,
+                border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(
                         StudentDesignSystem.config.borderRadius),
-                    borderSide: BorderSide(
-                      color: StudentDesignSystem.config.colors.focusInputColor,
-                    ),
-                  ),
-                  focusedErrorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(
-                          StudentDesignSystem.config.borderRadius)),
-                  focusColor: Colors.black,
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(
-                          StudentDesignSystem.config.borderRadius),
-                      borderSide: BorderSide.none),
-                  prefixIcon: prefix,
-                  hintStyle: TextStyle(
-                      color: StudentDesignSystem.config.colors.hintColor,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                      fontFamily: 'Urbanist',
-                      height: 0.09,
-                      letterSpacing: 0.20),
-                  hintText: hintText,
-                  suffixIcon: sufix,
-                ),
-              );
-            }),
-          ),
+                    borderSide: BorderSide.none),
+                prefixIcon: prefix,
+                hintStyle: TextStyle(
+                    color: StudentDesignSystem.config.colors.hintColor,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                    fontFamily: 'Urbanist',
+                    height: 0.09,
+                    letterSpacing: 0.20),
+                hintText: hintText,
+                suffixIcon: sufix,
+              ),
+            );
+          }),
         ),
       ],
     );
