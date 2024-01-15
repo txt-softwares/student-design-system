@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 
 class StudentDSColors {
-  final Color buttonSecondary1;
-
-  final Color primary1;
-  final Color primary2;
-  final Color primary3;
-  final Color secondary1;
-  final Color secondary2;
+  final MaterialColor primaryRed;
+  final MaterialColor primaryPurple;
+  final MaterialColor primaryBlue;
+  final MaterialColor secondaryGreen;
+  final MaterialColor secondaryYellow;
   final MaterialColor dark;
   final MaterialColor error;
-  final Color success;
-  final Color warning;
   final Color white;
   final Color black;
   final Color transparentRed;
@@ -23,16 +19,13 @@ class StudentDSColors {
   final Color scafoldBackground;
 
   StudentDSColors({
-    required this.buttonSecondary1,
-    required this.primary1,
-    required this.primary2,
-    required this.primary3,
-    required this.secondary1,
-    required this.secondary2,
+    required this.primaryRed,
+    required this.primaryPurple,
+    required this.primaryBlue,
+    required this.secondaryGreen,
+    required this.secondaryYellow,
     required this.dark,
     required this.error,
-    required this.success,
-    required this.warning,
     required this.white,
     required this.black,
     required this.transparentRed,

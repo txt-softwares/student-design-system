@@ -7,17 +7,17 @@ class StudentAppTheme {
     final config = StudentDesignSystem.config;
 
     return ThemeData(
-      primaryColor: config.colors.primary1,
+      primaryColor: config.colors.primaryRed,
       scaffoldBackgroundColor: config.colors.scafoldBackground,
       fontFamily: config.fontFamily,
       textTheme: const TextTheme(),
       appBarTheme: AppBarTheme(
-        color: config.colors.primary2,
+        color: config.colors.primaryPurple,
         elevation: 0,
         iconTheme: IconThemeData(color: config.colors.white),
       ),
       buttonTheme: ButtonThemeData(
-        buttonColor: config.colors.primary1,
+        buttonColor: config.colors.primaryRed,
         textTheme: ButtonTextTheme.primary,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(config.borderRadius),
@@ -30,7 +30,8 @@ class StudentAppTheme {
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          primary: config.colors.primary1,
+          backgroundColor: config.colors.primaryRed,
+          textStyle: const TextStyle(color: Colors.white),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(config.borderRadius),
           ),
@@ -38,7 +39,8 @@ class StudentAppTheme {
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
-          primary: config.colors.primary1,
+          backgroundColor: config.colors.primaryRed,
+          textStyle: const TextStyle(color: Colors.white),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(config.borderRadius),
           ),

@@ -11,7 +11,6 @@ class StudentButtonWidget extends StatelessWidget {
   final bool disabled;
   final bool isLoading;
   final void Function()? onTap;
-  final bool outline;
   final double height;
   final double? width;
   final Widget? leading;
@@ -46,8 +45,7 @@ class StudentButtonWidget extends StatelessWidget {
     this.color,
     this.width,
     this.textColor,
-  })  : outline = false,
-        type = ButtonType.primary,
+  })  : type = ButtonType.primary,
         super(key: key);
 
   const StudentButtonWidget.secoundary({
@@ -62,25 +60,20 @@ class StudentButtonWidget extends StatelessWidget {
     this.color,
     this.width,
     this.textColor,
-  })  : type = ButtonType.secundary,
-        outline = false;
+  }) : type = ButtonType.secundary;
   Color get buttonColor {
     return type == ButtonType.primary
-        ? StudentDesignSystem.config.colors.primary1
-        : StudentDesignSystem.config.colors.buttonSecondary1;
+        ? StudentDesignSystem.config.colors.primaryRed
+        : StudentDesignSystem.config.colors.primaryRed[50]!;
   }
 
   Color get buttonTitleColor {
     return type == ButtonType.primary
         ? Colors.white
-        : StudentDesignSystem.config.colors.primary1;
+        : StudentDesignSystem.config.colors.primaryRed;
   }
 
-  Color get buttonDisabledColor {
-    return type == ButtonType.primary
-        ? StudentDesignSystem.config.colors.primary1.withOpacity(0.48)
-        : StudentDesignSystem.config.colors.buttonSecondary1.withOpacity(0.48);
-  }
+  Color get buttonDisabledColor => buttonColor.withOpacity(0.48);
 
   @override
   Widget build(BuildContext context) {
@@ -88,15 +81,11 @@ class StudentButtonWidget extends StatelessWidget {
       elevation: 0,
       height: height,
       minWidth: width ?? double.maxFinite,
-      shape: outline
-          ? RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(
-                  StudentDesignSystem.config.borderRadius),
-              side: BorderSide(color: color!))
-          : RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(
-                  StudentDesignSystem.config.borderRadius),
-            ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(
+          StudentDesignSystem.config.borderRadius,
+        ),
+      ),
       color: color ?? buttonColor,
       disabledColor: buttonDisabledColor,
       onPressed: !isLoading ? onTap : null,
