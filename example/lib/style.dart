@@ -80,6 +80,8 @@ class AppStyle {
           50: Color(0xFFFAFAFC),
         },
       ),
+      darkblue: MaterialColor(
+          const Color(0xff8089A8).value, const {500: Color(0xff8089A8)}),
       error: MaterialColor(
         const Color(0xFFFF7043).value,
         const {

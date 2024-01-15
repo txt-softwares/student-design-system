@@ -21,6 +21,13 @@ class BoxText extends StatelessWidget {
         ),
         super(key: key);
 
+  BoxText.heading1(
+    this.text, {
+    Key? key,
+    Color color = Colors.black,
+    this.align,
+  })  : style = TextStyles.heading1.copyWith(color: color),
+        super(key: key);
   @override
   Widget build(BuildContext context) {
     return Text(

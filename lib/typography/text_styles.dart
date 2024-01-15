@@ -4,6 +4,11 @@ class TextStyles {
   static const TextStyle subcaptionStyle = TextStyle(
     fontSize: 10,
     fontWeight: FontWeight.normal,
-    fontFamily: 'Inter',
+  );
+
+  static const heading1 = TextStyle(
+    fontSize: 48,
+    fontWeight: FontWeight.w700,
+    height: 0.02,
   );
 }

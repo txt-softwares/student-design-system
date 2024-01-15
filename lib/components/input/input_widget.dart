@@ -127,14 +127,15 @@ class StudentInputWidget extends StatelessWidget {
                     TextStyle(color: StudentDesignSystem.config.colors.error),
                 filled: true,
                 fillColor: hasFocus
-                    ? StudentDesignSystem.config.colors.focusInputColor
-                        .withOpacity(0.08)
-                    : StudentDesignSystem.config.colors.inputColor,
+                    ? StudentDesignSystem.config.colors.error[300]
+                        ?.withOpacity(0.08)
+                    : StudentDesignSystem.config.colors.dark[50],
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(
                       StudentDesignSystem.config.borderRadius),
                   borderSide: BorderSide(
-                    color: StudentDesignSystem.config.colors.focusInputColor,
+                    color:
+                        StudentDesignSystem.config.colors.primaryPurple[500]!,
                   ),
                 ),
                 focusedErrorBorder: OutlineInputBorder(
@@ -148,7 +149,7 @@ class StudentInputWidget extends StatelessWidget {
                     borderSide: BorderSide.none),
                 prefixIcon: prefix,
                 hintStyle: TextStyle(
-                    color: StudentDesignSystem.config.colors.hintColor,
+                    color: StudentDesignSystem.config.colors.darkblue[500],
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
                     fontFamily: 'Urbanist',
