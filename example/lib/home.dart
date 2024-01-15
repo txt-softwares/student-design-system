@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
       body: ListView(
         padding: const EdgeInsets.all(20),
         children: [
-          Text('Botões'),
+          const Text('Botões'),
           const SpaceVertical.x4(),
           StudentButtonWidget(
             title: 'Button',
