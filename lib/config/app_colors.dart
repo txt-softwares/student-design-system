@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 class StudentDSColors {
+  final Color focusInputColor;
+  final Color inputColor;
   final Color buttonSecondary1;
-
+  final Color hintColor;
   final Color primary1;
   final Color primary2;
   final Color primary3;
@@ -23,7 +25,10 @@ class StudentDSColors {
   final Color scafoldBackground;
 
   StudentDSColors({
+    required this.focusInputColor,
+    required this.inputColor,
     required this.buttonSecondary1,
+    required this.hintColor,
     required this.primary1,
     required this.primary2,
     required this.primary3,

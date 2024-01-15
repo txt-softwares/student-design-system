@@ -9,6 +9,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,34 +19,15 @@ class _HomePageState extends State<HomePage> {
       body: ListView(
         padding: const EdgeInsets.all(20),
         children: [
-          StudentButtonWidget(
-            title: 'Button',
-            onTap: () {},
-          ),
+          StudentInputWidget(
+              controller: controller,
+              hintText: 'Username',
+              prefix: Icons.person),
           const SpaceVertical.x4(),
-          StudentButtonWidget(
-            prefixIcon: const Icon(Icons.airplane_ticket),
-            leading: const Icon(Icons.airplane_ticket),
-            title: 'Button',
-            onTap: () {},
-          ),
-          const SpaceVertical.x4(),
-          const StudentButtonWidget(
-            title: 'Button',
-            onTap: null,
-          ),
-          const SpaceVertical.x4(),
-          StudentButtonWidget.secoundary(
-            title: 'Button',
-            onTap: () {},
-          ),
-          const SpaceVertical.x4(),
-          const StudentButtonWidget.secoundary(title: 'Button', onTap: null),
-          const SpaceVertical.x4(),
-          const StudentButtonWidget(
-            isLoading: true,
-            title: 'Button',
-            onTap: null,
+          StudentInputWidget(
+            controller: controller,
+            hintText: 'Username',
+            sufix: Icons.visibility_off,
           ),
         ],
       ),
