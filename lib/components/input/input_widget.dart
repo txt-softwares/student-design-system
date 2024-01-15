@@ -73,25 +73,6 @@ class StudentInputWidget extends StatefulWidget {
 }
 
 class _StudentInputWidgetState extends State<StudentInputWidget> {
-  @override
-  void dispose() {
-    myFocusNode.dispose();
-    super.dispose();
-  }
-
-  @override
-  void initState() {
-    myFocusNode.addListener(() {
-      setState(() {
-        // if (myFocusNode.hasFocus) {
-        //   fillnputColor = StudentDesignSystem.config.colors.focusInputColor;
-        // }
-      });
-    });
-
-    super.initState();
-  }
-
   FocusNode myFocusNode = FocusNode();
   Color fillnputColor = StudentDesignSystem.config.colors.inputColor;
   bool hasError = false;
@@ -188,17 +169,6 @@ class _StudentInputWidgetState extends State<StudentInputWidget> {
             );
           })),
         ),
-        const SizedBox(height: 14),
-        if (widget.hasError)
-          const Padding(
-              padding: EdgeInsets.only(
-                  top: 8.0), // Ajuste a margem para o texto de erro
-              child: Text(
-                'Por favor, preencha este campo.',
-                style: TextStyle(
-                  color: Colors.red,
-                ),
-              ))
       ],
     );
   }

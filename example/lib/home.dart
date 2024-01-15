@@ -21,6 +21,40 @@ class _HomePageState extends State<HomePage> {
       body: ListView(
         padding: const EdgeInsets.all(20),
         children: [
+          Text('Botões'),
+          const SpaceVertical.x4(),
+          StudentButtonWidget(
+            title: 'Button',
+            onTap: () {},
+          ),
+          const SpaceVertical.x4(),
+          StudentButtonWidget(
+            prefixIcon: const Icon(Icons.airplane_ticket),
+            leading: const Icon(Icons.airplane_ticket),
+            title: 'Button',
+            onTap: () {},
+          ),
+          const SpaceVertical.x4(),
+          const StudentButtonWidget(
+            title: 'Button',
+            onTap: null,
+          ),
+          const SpaceVertical.x4(),
+          StudentButtonWidget.secoundary(
+            title: 'Button',
+            onTap: () {},
+          ),
+          const SpaceVertical.x4(),
+          const StudentButtonWidget.secoundary(title: 'Button', onTap: null),
+          const SpaceVertical.x4(),
+          const StudentButtonWidget(
+            isLoading: true,
+            title: 'Button',
+            onTap: null,
+          ),
+          const SpaceVertical.x4(),
+          const Text('Inputs'),
+          const SpaceVertical.x4(),
           StudentInputWidget(
               controller: TextEditingController(),
               hintText: 'Username',
