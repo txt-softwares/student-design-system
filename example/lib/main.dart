@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:student_design_system/student_design_system.dart';
 
 void main() {
-  StudentDesignSystem.init(AppStyle().config);
+  StudentDesignSystem.init(AppStyle.dsConfig);
 
   runApp(const MyApp());
 }
