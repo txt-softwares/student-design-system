@@ -21,6 +21,7 @@ class _HomePageState extends State<HomePage> {
       body: ListView(
         padding: const EdgeInsets.all(20),
         children: [
+          BoxText.heading4('Entre com seu celular and lets learn!'),
           const Text('Botões'),
           const SpaceVertical.x4(),
           StudentButtonWidget(
@@ -100,7 +101,7 @@ class _HomePageState extends State<HomePage> {
             onTap: () {
               _formKey.currentState?.validate();
             },
-          )
+          ),
         ],
       ),
     );
