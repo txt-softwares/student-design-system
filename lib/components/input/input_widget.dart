@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import 'borders.dart';
+import 'package:student_design_system/student_design_system.dart';
 
 class StudentInputWidget extends StatelessWidget {
   final TextEditingController controller;
   final Widget? prefix;
-
   final Widget? sufix;
   final TextInputType keyboardType;
   final bool isEnabled;
-  final bool hasBorder;
 
   final String? hintText;
   final bool? obscureText;
 
-  final String? labelText;
   final String? Function(String?)? validator;
   final ValueChanged<String>? onChanged;
   final Iterable<String>? autofillHints;
@@ -25,8 +21,7 @@ class StudentInputWidget extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final int? lines;
   final AutovalidateMode? autoValidate;
-  final TextAlign align;
-  final bool hasPadding;
+  final FocusNode? focus;
 
   /// FormInput
   ///
@@ -41,10 +36,9 @@ class StudentInputWidget extends StatelessWidget {
   /// [validator] function that validate input
   ///
   /// [onChanged] onChanged of formInput
-  const StudentInputWidget({
+  StudentInputWidget({
     required this.controller,
     this.isEnabled = true,
-    this.hasBorder = true,
     this.prefix,
     this.keyboardType = TextInputType.text,
     this.validator,
@@ -52,7 +46,6 @@ class StudentInputWidget extends StatelessWidget {
     this.hintText,
     this.sufix,
     this.autofillHints,
-    this.labelText,
     this.obscureText,
     this.readOnly = false,
     this.inputFormatters,
@@ -60,71 +53,87 @@ class StudentInputWidget extends StatelessWidget {
     this.onSubmitted,
     this.lines,
     this.autoValidate,
-    this.align = TextAlign.left,
-    this.hasPadding = false,
+    this.focus,
     Key? key,
   }) : super(key: key);
+
+  final _focus = FocusNode();
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (labelText != null)
-          Padding(
-            padding: const EdgeInsets.only(bottom: 4.0),
-            child: Text(
-              labelText!,
-              style: const TextStyle(
-                fontFamily: 'Inter',
+    return Focus(
+      child: Builder(
+        builder: (context) {
+          final FocusNode focusNode = Focus.of(context);
+          final bool hasFocus = focusNode.hasFocus;
+          return TextFormField(
+            focusNode: focus ?? _focus,
+            validator: validator,
+            autovalidateMode: autoValidate,
+            onChanged: onChanged,
+            enabled: isEnabled,
+            autofillHints: autofillHints,
+            controller: controller,
+            textInputAction: action,
+            textAlignVertical: TextAlignVertical.center,
+            onFieldSubmitted: onSubmitted,
+            readOnly: readOnly,
+            cursorColor: StudentDesignSystem.config.colors.primaryPurple[500],
+            cursorHeight: 22,
+            inputFormatters: inputFormatters,
+            keyboardType: keyboardType,
+            obscureText: obscureText ?? false,
+            maxLines: lines,
+            style: TextStyles.bodyLargeSemiBold,
+            textAlign: TextAlign.left,
+            decoration: InputDecoration(
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 20.0,
+                vertical: 17.0,
               ),
+              errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(
+                  StudentDesignSystem.config.borderRadius,
+                ),
+                borderSide:
+                    BorderSide(color: StudentDesignSystem.config.colors.error),
+              ),
+              errorStyle:
+                  TextStyle(color: StudentDesignSystem.config.colors.error),
+              filled: true,
+              fillColor: hasFocus
+                  ? StudentDesignSystem.config.colors.transparentPurple
+                  : StudentDesignSystem.config.colors.dark[50],
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(
+                  StudentDesignSystem.config.borderRadius,
+                ),
+                borderSide: BorderSide(
+                  color: StudentDesignSystem.config.colors.primaryPurple[500]!,
+                ),
+              ),
+              focusedErrorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(
+                  StudentDesignSystem.config.borderRadius,
+                ),
+              ),
+              focusColor: Colors.black,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(
+                  StudentDesignSystem.config.borderRadius,
+                ),
+                borderSide: BorderSide.none,
+              ),
+              prefixIcon: prefix,
+              hintStyle: TextStyles.bodyLargeRegular.copyWith(
+                color: StudentDesignSystem.config.colors.darkblue[500]!,
+              ),
+              hintText: hintText,
+              suffixIcon: sufix,
             ),
-          ),
-        TextFormField(
-          validator: validator,
-          autovalidateMode: autoValidate,
-          onChanged: onChanged,
-          enabled: isEnabled,
-          autofillHints: autofillHints,
-          controller: controller,
-          textInputAction: action,
-          textAlignVertical: TextAlignVertical.center,
-          onFieldSubmitted: onSubmitted,
-          readOnly: readOnly,
-          inputFormatters: inputFormatters,
-          keyboardType: keyboardType,
-          obscureText: obscureText ?? false,
-          maxLines: lines,
-          style: const TextStyle(
-            color: Color(0xff828282),
-            fontSize: 20,
-          ),
-          textAlign: align,
-          decoration: InputDecoration(
-            contentPadding: hasPadding
-                ? const EdgeInsets.symmetric(horizontal: 0.0, vertical: 0)
-                : null,
-            border: InputBorderType.getBorder(hasBorder),
-            enabledBorder: InputBorderType.getBorder(hasBorder),
-            disabledBorder: InputBorderType.getBorder(hasBorder),
-            focusedBorder: InputBorderType.getBorder(hasBorder),
-            errorBorder: InputBorderType.getBorder(hasBorder),
-            focusedErrorBorder: InputBorderType.getBorder(hasBorder),
-            labelStyle: const TextStyle(
-              color: Color(0xff4f4f4f),
-              fontSize: 14,
-            ),
-            prefixIcon: prefix,
-            hintStyle: const TextStyle(
-              color: Color(0xFFBCBCBC),
-              fontSize: 16,
-              fontFamily: 'Inter',
-            ),
-            hintText: hintText,
-            suffixIcon: sufix,
-          ),
-        ),
-        const SizedBox(height: 14),
-      ],
+          );
+        },
+      ),
     );
   }
 }
