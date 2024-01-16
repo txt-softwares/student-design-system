@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../config/ds_config.dart';
-import '../../spacing/spacing_size.dart';
+import 'package:student_design_system/student_design_system.dart';
 
 enum ButtonType { primary, secundary }
 
@@ -39,7 +37,7 @@ class StudentButtonWidget extends StatelessWidget {
     this.disabled = false,
     this.isLoading = false,
     this.onTap,
-    this.height = 60,
+    this.height = 56,
     this.leading,
     this.prefixIcon,
     this.color,
@@ -54,7 +52,7 @@ class StudentButtonWidget extends StatelessWidget {
     this.disabled = false,
     this.isLoading = false,
     this.onTap,
-    this.height = 60,
+    this.height = 56,
     this.leading,
     this.prefixIcon,
     this.color,
@@ -100,27 +98,13 @@ class StudentButtonWidget extends StatelessWidget {
   }
 
   Widget _buildContent() {
-    if (leading != null) {
-      return _buildWithIcon();
-    }
-    return _buildText();
+    return leading != null ? _buildWithIcon() : _buildText();
   }
 
   Widget _buildText() {
-    return Builder(
-      builder: (context) {
-        return Text(
-          title,
-          style: TextStyle(
-            fontFamily: StudentDesignSystem.config.fontFamily,
-            color: textColor ?? buttonTitleColor,
-            fontSize: 18,
-            fontWeight: FontWeight.w700,
-            height: 0.08,
-            letterSpacing: 0.20,
-          ),
-        );
-      },
+    return BoxText.bodyXLargeBold(
+      title,
+      color: textColor ?? buttonTitleColor,
     );
   }
 

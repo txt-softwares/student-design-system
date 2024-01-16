@@ -1,145 +1,147 @@
 import 'package:flutter/material.dart';
+import 'package:student_design_system/config/config.dart';
 
 class TextStyles {
-  static const TextStyle subcaptionStyle = TextStyle(
+  static final TextStyle subcaptionStyle = TextStyle(
+    color: StudentDesignSystem.config.colors.darkblue[900],
     fontSize: 10,
     fontWeight: FontWeight.normal,
   );
 
-  static const heading1 = TextStyle(
+  static final heading1 = TextStyle(
+    color: StudentDesignSystem.config.colors.darkblue[900],
     fontSize: 48,
     fontWeight: FontWeight.w700,
-    height: 0.02,
   );
-  static const heading2 = TextStyle(
+  static final heading2 = TextStyle(
+    color: StudentDesignSystem.config.colors.darkblue[900],
     fontSize: 40,
     fontWeight: FontWeight.w700,
-    height: 0.03,
   );
-  static const heading3 = TextStyle(
+  static final heading3 = TextStyle(
+    color: StudentDesignSystem.config.colors.darkblue[900],
     fontSize: 32,
     fontWeight: FontWeight.w700,
-    height: 0.04,
   );
-  static const heading4 = TextStyle(
+  static final heading4 = TextStyle(
+    color: StudentDesignSystem.config.colors.darkblue[900],
     fontSize: 24,
     fontWeight: FontWeight.w700,
-    height: 0.05,
   );
-  static const heading5 = TextStyle(
+  static final heading5 = TextStyle(
+    color: StudentDesignSystem.config.colors.darkblue[900],
     fontSize: 20,
     fontWeight: FontWeight.w700,
-    height: 0.06,
   );
-  static const heading6 = TextStyle(
+  static final heading6 = TextStyle(
+    color: StudentDesignSystem.config.colors.darkblue[900],
     fontSize: 18,
     fontWeight: FontWeight.w700,
-    height: 0.07,
   );
-  static const bodyXLargeBold = TextStyle(
+  static final bodyXLargeBold = TextStyle(
+    color: StudentDesignSystem.config.colors.darkblue[900],
     fontSize: 18,
     fontWeight: FontWeight.w700,
-    height: 0.08,
     letterSpacing: 0.20,
   );
-  static const bodyXLargeSemiBold = TextStyle(
+  static final bodyXLargeSemiBold = TextStyle(
+    color: StudentDesignSystem.config.colors.darkblue[900],
     fontSize: 18,
     fontWeight: FontWeight.w600,
-    height: 0.08,
     letterSpacing: 0.20,
   );
-  static const bodyXLargeMedium = TextStyle(
+  static final bodyXLargeMedium = TextStyle(
+    color: StudentDesignSystem.config.colors.darkblue[900],
     fontSize: 18,
     fontWeight: FontWeight.w500,
-    height: 0.08,
     letterSpacing: 0.20,
   );
-  static const bodyXLargeRegular = TextStyle(
+  static final bodyXLargeRegular = TextStyle(
+    color: StudentDesignSystem.config.colors.darkblue[900],
     fontSize: 18,
     fontWeight: FontWeight.w400,
-    height: 0.08,
     letterSpacing: 0.20,
   );
-  static const bodyLargeBold = TextStyle(
+  static final bodyLargeBold = TextStyle(
+    color: StudentDesignSystem.config.colors.darkblue[900],
     fontSize: 16,
     fontWeight: FontWeight.w700,
-    height: 0.09,
   );
-  static const bodyLargeSemiBold = TextStyle(
+  static final bodyLargeSemiBold = TextStyle(
+    color: StudentDesignSystem.config.colors.darkblue[900],
     fontSize: 16,
     fontWeight: FontWeight.w600,
-    height: 0.09,
   );
-  static const bodyLargeMedium = TextStyle(
+  static final bodyLargeMedium = TextStyle(
+    color: StudentDesignSystem.config.colors.darkblue[900],
     fontSize: 16,
     fontWeight: FontWeight.w500,
-    height: 0.09,
   );
-  static const bodyLargeRegular = TextStyle(
+  static final bodyLargeRegular = TextStyle(
+    color: StudentDesignSystem.config.colors.darkblue[900],
     fontSize: 16,
     fontWeight: FontWeight.w400,
-    height: 0.09,
   );
-  static const bodyMediumBold = TextStyle(
+  static final bodyMediumBold = TextStyle(
+    color: StudentDesignSystem.config.colors.darkblue[900],
     fontSize: 14,
     fontWeight: FontWeight.w700,
-    height: 0.10,
   );
-  static const bodyMediumSemiBold = TextStyle(
+  static final bodyMediumSemiBold = TextStyle(
+    color: StudentDesignSystem.config.colors.darkblue[900],
     fontSize: 14,
     fontWeight: FontWeight.w600,
-    height: 0.10,
   );
-  static const bodyMediumMedium = TextStyle(
+  static final bodyMediumMedium = TextStyle(
+    color: StudentDesignSystem.config.colors.darkblue[900],
     fontSize: 14,
     fontWeight: FontWeight.w500,
-    height: 0.10,
   );
-  static const bodyMediumRegular = TextStyle(
+  static final bodyMediumRegular = TextStyle(
+    color: StudentDesignSystem.config.colors.darkblue[900],
     fontSize: 14,
     fontWeight: FontWeight.w400,
-    height: 0.10,
   );
-  static const bodySmallBold = TextStyle(
+  static final bodySmallBold = TextStyle(
+    color: StudentDesignSystem.config.colors.darkblue[900],
     fontSize: 12,
     fontWeight: FontWeight.w700,
-    height: 0,
   );
-  static const bodySmallSemiBold = TextStyle(
+  static final bodySmallSemiBold = TextStyle(
+    color: StudentDesignSystem.config.colors.darkblue[900],
     fontSize: 12,
     fontWeight: FontWeight.w600,
-    height: 0,
   );
 
-  static const bodySmallMidium = TextStyle(
+  static final bodySmallMidium = TextStyle(
+    color: StudentDesignSystem.config.colors.darkblue[900],
     fontSize: 12,
     fontWeight: FontWeight.w500,
-    height: 0,
   );
 
-  static const bodySmallRegular = TextStyle(
+  static final bodySmallRegular = TextStyle(
+    color: StudentDesignSystem.config.colors.darkblue[900],
     fontSize: 12,
     fontWeight: FontWeight.w400,
-    height: 0,
   );
-  static const bodyXSmallBold = TextStyle(
+  static final bodyXSmallBold = TextStyle(
+    color: StudentDesignSystem.config.colors.darkblue[900],
     fontSize: 10,
     fontWeight: FontWeight.w700,
-    height: 0,
   );
-  static const bodyXSmallSemiBold = TextStyle(
+  static final bodyXSmallSemiBold = TextStyle(
+    color: StudentDesignSystem.config.colors.darkblue[900],
     fontSize: 10,
     fontWeight: FontWeight.w600,
-    height: 0,
   );
-  static const bodyXSmallMidium = TextStyle(
+  static final bodyXSmallMidium = TextStyle(
+    color: StudentDesignSystem.config.colors.darkblue[900],
     fontSize: 10,
     fontWeight: FontWeight.w500,
-    height: 0,
   );
-  static const bodyXSmallRegular = TextStyle(
+  static final bodyXSmallRegular = TextStyle(
+    color: StudentDesignSystem.config.colors.darkblue[900],
     fontSize: 10,
     fontWeight: FontWeight.w400,
-    height: 0,
   );
 }

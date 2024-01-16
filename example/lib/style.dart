@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:student_design_system/student_design_system.dart';
 
 class AppStyle {
-  static StudentDSConfig dsConfig = StudentDSConfig(
+  static StudentDSConfig theme = StudentDSConfig(
     padding: const EdgeInsets.all(24),
     colors: StudentDSColors(
       primaryRed: MaterialColor(
@@ -81,7 +81,11 @@ class AppStyle {
         },
       ),
       darkblue: MaterialColor(
-          const Color(0xff8089A8).value, const {500: Color(0xff8089A8)}),
+        const Color(0xff8089A8).value,
+        const {
+          500: Color(0xff8089A8),
+        },
+      ),
       error: MaterialColor(
         const Color(0xFFFF7043).value,
         const {
