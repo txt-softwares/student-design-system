@@ -5,3 +5,4 @@ export 'inputs/inputs.dart';
 export 'spacing/spacing.dart';
 export 'typography/typography.dart';
 export 'components/components.dart';
+export 'icons/iconly_bold_icons.dart';

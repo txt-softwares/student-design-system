@@ -102,6 +102,7 @@ class _HomePageState extends State<HomePage> {
               _formKey.currentState?.validate();
             },
           ),
+          const Icon(IconlyBold.activity),
         ],
       ),
     );
