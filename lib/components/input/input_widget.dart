@@ -117,7 +117,6 @@ class StudentInputWidget extends StatelessWidget {
                   StudentDesignSystem.config.borderRadius,
                 ),
               ),
-              focusColor: Colors.black,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(
                   StudentDesignSystem.config.borderRadius,

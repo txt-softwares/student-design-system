@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 class InputValidators {
   static String? phone(String? text) {
     if (text!.length < 11) {
-      return 'Telefone inválido';
+      return 'Informe um número válido';
     }
     return null;
   }
