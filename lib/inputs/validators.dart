@@ -61,6 +61,6 @@ class InputValidators {
       return 'Por favor, insira um nome completo.';
     }
 
-    return '';
+    return null;
   }
 }
