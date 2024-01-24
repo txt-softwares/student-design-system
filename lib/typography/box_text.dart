@@ -24,6 +24,14 @@ class BoxText extends StatelessWidget {
     this.align,
   })  : style = TextStyles.heading1.copyWith(color: color),
         super(key: key);
+
+  BoxText.heading1Black(
+    this.text, {
+    Key? key,
+    Color? color,
+    this.align,
+  })  : style = TextStyles.heading1Black.copyWith(color: color),
+        super(key: key);
   BoxText.heading2(
     this.text, {
     Key? key,

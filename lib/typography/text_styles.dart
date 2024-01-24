@@ -13,6 +13,13 @@ class TextStyles {
     fontSize: 48,
     fontWeight: FontWeight.w700,
   );
+
+  static final heading1Black = TextStyle(
+    color: StudentDesignSystem.config.colors.darkblue[900],
+    fontSize: 48,
+    fontWeight: FontWeight.w900,
+  );
+
   static final heading2 = TextStyle(
     color: StudentDesignSystem.config.colors.darkblue[900],
     fontSize: 40,
