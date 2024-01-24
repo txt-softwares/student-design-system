@@ -14,7 +14,7 @@ class StudentAppTheme {
       appBarTheme: AppBarTheme(
         color: config.colors.primaryPurple,
         elevation: 0,
-        iconTheme: IconThemeData(color: config.colors.white),
+        iconTheme: const IconThemeData(color: Color(0xff212121)),
       ),
       buttonTheme: ButtonThemeData(
         buttonColor: config.colors.primaryRed,
