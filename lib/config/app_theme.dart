@@ -12,7 +12,6 @@ class StudentAppTheme {
       fontFamily: config.fontFamily,
       textTheme: const TextTheme(),
       appBarTheme: AppBarTheme(
-        color: config.colors.white,
         backgroundColor: config.colors.white,
         elevation: 0,
         iconTheme: const IconThemeData(color: Color(0xff212121)),
