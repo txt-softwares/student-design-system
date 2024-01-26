@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loading_indicator/loading_indicator.dart';
 import 'package:student_design_system/student_design_system.dart';
 
 enum ButtonType { primary, secundary }
@@ -85,13 +86,21 @@ class StudentButtonWidget extends StatelessWidget {
         ),
       ),
       color: color ?? buttonColor,
-      disabledColor: buttonDisabledColor,
+      disabledColor: !isLoading ? buttonDisabledColor : color ?? buttonColor,
       onPressed: !isLoading ? onTap : null,
       child: !isLoading
           ? _buildContent()
           : const Center(
-              child: CircularProgressIndicator(
-                color: Colors.white,
+              child: SizedBox(
+                height: 8,
+                width: 48,
+                child: LoadingIndicator(
+                  indicatorType: Indicator.ballPulse,
+                  colors: [
+                    Colors.white,
+                  ],
+                  strokeWidth: 1,
+                ),
               ),
             ),
     );
