@@ -11,7 +11,7 @@ class InputValidators {
 
   static String? cpf(String? text) {
     if (!CPFValidator.isValid(text)) {
-      return 'CPF inválido';
+      return 'Informe um CPF válido';
     }
     return null;
   }
