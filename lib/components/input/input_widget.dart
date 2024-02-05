@@ -95,8 +95,8 @@ class StudentInputWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(
                   StudentDesignSystem.config.borderRadius,
                 ),
-                borderSide:
-                    BorderSide(color: StudentDesignSystem.config.colors.error),
+                borderSide: BorderSide(
+                    color: StudentDesignSystem.config.colors.error[300]!),
               ),
               errorStyle:
                   TextStyle(color: StudentDesignSystem.config.colors.error),
@@ -116,6 +116,8 @@ class StudentInputWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(
                   StudentDesignSystem.config.borderRadius,
                 ),
+                borderSide:
+                    BorderSide(color: StudentDesignSystem.config.colors.error),
               ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(
