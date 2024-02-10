@@ -22,6 +22,7 @@ class StudentInputWidget extends StatelessWidget {
   final int? lines;
   final AutovalidateMode? autoValidate;
   final FocusNode? focus;
+  final bool autoFocus;
 
   /// FormInput
   ///
@@ -54,6 +55,7 @@ class StudentInputWidget extends StatelessWidget {
     this.lines,
     this.autoValidate,
     this.focus,
+    this.autoFocus = false,
     Key? key,
   }) : super(key: key);
 
@@ -69,6 +71,7 @@ class StudentInputWidget extends StatelessWidget {
           return TextFormField(
             focusNode: focus ?? _focus,
             validator: validator,
+            autofocus: autoFocus,
             autovalidateMode: autoValidate,
             onChanged: onChanged,
             enabled: isEnabled,
