@@ -7,7 +7,6 @@ enum ButtonType { primary, secundary }
 class StudentButtonWidget extends StatelessWidget {
   final ButtonType type;
   final String title;
-  final bool disabled;
   final bool isLoading;
   final void Function()? onTap;
   final double height;
@@ -35,7 +34,6 @@ class StudentButtonWidget extends StatelessWidget {
   const StudentButtonWidget({
     Key? key,
     required this.title,
-    this.disabled = false,
     this.isLoading = false,
     this.onTap,
     this.height = 56,
@@ -50,7 +48,6 @@ class StudentButtonWidget extends StatelessWidget {
   const StudentButtonWidget.secoundary({
     super.key,
     required this.title,
-    this.disabled = false,
     this.isLoading = false,
     this.onTap,
     this.height = 56,

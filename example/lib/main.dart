@@ -1,7 +1,10 @@
 import 'package:example/home.dart';
 import 'package:example/style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:student_design_system/student_design_system.dart';
+
+import 'question_page.dart';
 
 void main() {
   StudentDesignSystem.init(AppStyle.theme);
@@ -15,10 +18,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: StudentAppTheme.getThemeData(),
-      home: const HomePage(),
+    return ProviderScope(
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: StudentAppTheme.getThemeData(),
+        home: const QuestionWidget(),
+      ),
     );
   }
 }
