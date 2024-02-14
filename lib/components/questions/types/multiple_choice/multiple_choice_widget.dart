@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:student_design_system/components/questions/head_question_widget.dart';
+import 'package:student_design_system/components/questions/shared/head_question_widget.dart';
 import 'package:student_design_system/student_design_system.dart';
 
 import 'item_option_widget.dart';
@@ -8,8 +8,6 @@ class MultipleChoiceQuestionWidget extends StatefulWidget {
   const MultipleChoiceQuestionWidget({
     Key? key,
     required this.options,
-    required this.onSelected,
-    required this.selected,
     required this.file,
     required this.title,
     required this.onAnswer,
@@ -19,8 +17,6 @@ class MultipleChoiceQuestionWidget extends StatefulWidget {
   final String? file;
 
   final List<StudentTaskOptionModel> options;
-  final int? selected;
-  final Function(int id) onSelected;
   final Function(int? id) onAnswer;
 
   @override
@@ -30,6 +26,14 @@ class MultipleChoiceQuestionWidget extends StatefulWidget {
 
 class _MultipleChoiceQuestionWidgetState
     extends State<MultipleChoiceQuestionWidget> {
+  int? selected;
+
+  void onSelected(int id) {
+    setState(() {
+      selected = id;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -43,8 +47,8 @@ class _MultipleChoiceQuestionWidgetState
                 title: widget.title,
               ),
               ...widget.options.map((e) => TaskOptionWidget(
-                    isSelected: e.id == widget.selected,
-                    onTap: () => widget.onSelected(e.id),
+                    isSelected: e.id == selected,
+                    onTap: () => onSelected(e.id),
                     option: e,
                   )),
             ],
@@ -58,9 +62,7 @@ class _MultipleChoiceQuestionWidgetState
           padding: const EdgeInsets.all(24),
           child: StudentButtonWidget(
             title: 'Verificar',
-            onTap: widget.selected == null
-                ? null
-                : () => widget.onAnswer(widget.selected),
+            onTap: selected == null ? null : () => widget.onAnswer(selected),
           ),
         )
       ],

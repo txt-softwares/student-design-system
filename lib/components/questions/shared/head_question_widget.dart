@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:student_design_system/student_design_system.dart';
 
-import 'shared/link_to_file_widget.dart';
+import 'link_to_file_widget.dart';
 
 class HeadQuestionWidget extends StatelessWidget {
   const HeadQuestionWidget({
