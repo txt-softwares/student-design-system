@@ -1,9 +1,11 @@
-import 'dart:async';
-import 'dart:math';
-
 import 'package:audioplayers/audioplayers.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
+import 'package:student_design_system/config/config.dart';
+import 'package:student_design_system/spacing/spacing.dart';
+
+import '../../../typography/box_text.dart';
 
 class LinkToFileContentWidget extends StatelessWidget {
   final String link;
@@ -54,103 +56,73 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
   AudioPlayer audioPlayer = AudioPlayer();
   bool isPlaying = false;
 
-  double _amplitude = 50.0;
-  double _frequency = 1.5;
-  double _animationValue = 0.0;
-
   @override
   void initState() {
     super.initState();
-  }
-
-  void _startAnimation() {
-    Timer.periodic(Duration(milliseconds: 16), (timer) {
+    audioPlayer = AudioPlayer();
+    audioPlayer.onPlayerComplete.listen((event) {
       setState(() {
-        _animationValue += 0.1;
+        isPlaying = false;
       });
     });
   }
 
-  void _stopAnimation() {
-    setState(() {
-      _animationValue = 0.0;
-    });
+  @override
+  void dispose() {
+    audioPlayer.stop();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            width: 200,
-            height: 200,
-            child: CustomPaint(
-              painter: AudioWavePainter(
-                amplitude: _amplitude,
-                frequency: _frequency,
-                animationValue: _animationValue,
-              ),
+      child: isPlaying
+          ? Column(
+              children: [
+                Lottie.asset(
+                  'assets/audio/audio-wave.json',
+                  package: 'student_design_system',
+                  fit: BoxFit.fitHeight,
+                  repeat: true,
+                  width: double.maxFinite,
+                  height: 96,
+                ),
+                const SpaceVertical.x4(),
+                BoxText.bodyLargeSemiBold(
+                  'Ouvindo...',
+                  color: StudentDesignSystem.config.colors.dark[500],
+                ),
+              ],
+            )
+          : Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Center(
+                  child: SizedBox(
+                    height: 80,
+                    width: 80,
+                    child: InkWell(
+                      onTap: () async {
+                        if (!isPlaying) {
+                          await audioPlayer.play(UrlSource(widget.audioUrl));
+                        } else {
+                          audioPlayer.stop();
+                        }
+                        setState(() {
+                          isPlaying = !isPlaying;
+                        });
+                      },
+                      child: Icon(Icons.play_arrow),
+                    ),
+                  ),
+                ),
+                const SpaceVertical.x4(),
+                BoxText.bodyLargeSemiBold(
+                  'Toque para ouvir o áudio',
+                  color: StudentDesignSystem.config.colors.dark[500],
+                ),
+              ],
             ),
-          ),
-          SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: () async {
-              if (!isPlaying) {
-                await audioPlayer.play(UrlSource(widget.audioUrl));
-                _startAnimation();
-              } else {
-                audioPlayer.stop();
-                _stopAnimation();
-              }
-              setState(() {
-                isPlaying = !isPlaying;
-              });
-            },
-            child: Text(isPlaying ? 'Pause Audio' : 'Play Audio'),
-          ),
-        ],
-      ),
     );
-  }
-}
-
-class AudioWavePainter extends CustomPainter {
-  final double amplitude;
-  final double frequency;
-  final double animationValue;
-
-  AudioWavePainter({
-    required this.amplitude,
-    required this.frequency,
-    required this.animationValue,
-  });
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = Colors.blue
-      ..strokeWidth = 2.0
-      ..style = PaintingStyle.stroke;
-
-    final path = Path();
-
-    for (double i = 0; i <= size.width; i++) {
-      final y =
-          sin((i / size.width * frequency * pi) + animationValue) * amplitude;
-      if (i == 0) {
-        path.moveTo(i, size.height / 2 + y);
-      } else {
-        path.lineTo(i, size.height / 2 + y);
-      }
-    }
-
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return true;
   }
 }

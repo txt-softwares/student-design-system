@@ -17,7 +17,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
       appBar: AppBar(),
       body: MultipleChoiceQuestionWidget(
         file:
-            'https://commondatastorage.googleapis.com/codeskulptor-demos/DDR_assets/Kangaroo_MusiQue_-_The_Neverwritten_Role_Playing_Game.mp3',
+            'http://commondatastorage.googleapis.com/codeskulptor-assets/sounddogs/thrust.mp3',
         onAnswer: (id) {
           setState(() {
             selected = id;

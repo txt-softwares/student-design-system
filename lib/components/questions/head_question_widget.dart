@@ -26,6 +26,7 @@ class HeadQuestionWidget extends StatelessWidget {
         const SpaceVertical.x6(),
         if (file != null)
           Container(
+            width: double.maxFinite,
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(
