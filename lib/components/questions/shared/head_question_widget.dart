@@ -16,6 +16,7 @@ class HeadQuestionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (title != null) BoxText.heading4(title!),
         const SpaceVertical.x6(),
@@ -30,9 +31,9 @@ class HeadQuestionWidget extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(
-                  StudentDesignSystem.config.borderRadius),
+                StudentDesignSystem.config.borderRadius,
+              ),
               border: Border.all(
-                width: 1,
                 color: StudentDesignSystem.config.colors.dark[200]!,
               ),
             ),
