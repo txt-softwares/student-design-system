@@ -46,11 +46,13 @@ class _MultipleChoiceQuestionWidgetState
                 file: widget.file,
                 title: widget.title,
               ),
-              ...widget.options.map((e) => TaskOptionWidget(
-                    isSelected: e.id == selected,
-                    onTap: () => onSelected(e.id),
-                    option: e,
-                  )),
+              ...widget.options.map(
+                (e) => TaskOptionWidget(
+                  isSelected: e.id == selected,
+                  onTap: () => onSelected(e.id),
+                  option: e,
+                ),
+              ),
             ],
           ),
         ),
@@ -64,7 +66,7 @@ class _MultipleChoiceQuestionWidgetState
             title: 'Verificar',
             onTap: selected == null ? null : () => widget.onAnswer(selected),
           ),
-        )
+        ),
       ],
     );
   }
