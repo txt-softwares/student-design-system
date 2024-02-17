@@ -8,32 +8,34 @@ class QuestionsPercentIndicatorWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dsColor = StudentDesignSystem.config.colors;
-    return Column(
-      children: [
-        Row(
-          children: [
-            InkWell(
-              onTap: () {},
-              child: Icon(
-                Icons.close_rounded,
-                color: dsColor.dark,
-              ),
+    return Padding(
+      padding: const EdgeInsets.only(
+        left: 24,
+        right: 24,
+        bottom: 40,
+      ),
+      child: Row(
+        children: [
+          InkWell(
+            onTap: () {},
+            child: Icon(
+              Icons.close_rounded,
+              color: dsColor.dark,
             ),
-            Expanded(
-              child: LinearPercentIndicator(
-                lineHeight: 12,
-                percent: 0.1,
-                backgroundColor: dsColor.dark[100],
-                progressColor: dsColor.primaryPurple,
-                barRadius: const Radius.circular(50),
-                padding: const EdgeInsets.symmetric(horizontal: 30),
-              ),
+          ),
+          Expanded(
+            child: LinearPercentIndicator(
+              lineHeight: 12,
+              percent: 0.1,
+              backgroundColor: dsColor.dark[100],
+              progressColor: dsColor.primaryPurple,
+              barRadius: const Radius.circular(50),
+              padding: const EdgeInsets.symmetric(horizontal: 30),
             ),
-            BoxText.bodyLargeBold('1/10'),
-          ],
-        ),
-        const SpaceVertical.x10(),
-      ],
+          ),
+          BoxText.bodyLargeBold('1/10'),
+        ],
+      ),
     );
   }
 }
