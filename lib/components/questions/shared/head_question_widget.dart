@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:student_design_system/student_design_system.dart';
+import '../../../widgets/percent_indicator/questions_percent_indicator_widget.dart';
 import 'link_to_file_widget.dart';
 
 class HeadQuestionWidget extends StatelessWidget {
@@ -15,13 +16,10 @@ class HeadQuestionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dsColor = StudentDesignSystem.config.colors;
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildPercentIndicator(dsColor),
-        const SpaceVertical.x10(),
+        const QuestionsPercentIndicatorWidget(),
         if (title != null) BoxText.heading4(title!),
         const SpaceVertical.x6(),
         Divider(
