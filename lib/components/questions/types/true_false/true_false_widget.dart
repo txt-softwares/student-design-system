@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:student_design_system/components/questions/types/true_false/head_true_or_false_widget.dart';
 import 'package:student_design_system/student_design_system.dart';
 import '../../../../widgets/percent_indicator/questions_percent_indicator_widget.dart';
-import '../multiple_choice/item_option_widget.dart';
+import 'true_or_false_option_widget.dart';
 
 class TrueFalseQuestionTypeWidget extends StatefulWidget {
   const TrueFalseQuestionTypeWidget({
@@ -51,23 +51,18 @@ class _TrueFalseQuestionTypeWidgetState
                 title: widget.title!,
                 image: widget.image,
               ),
-              ...[
-                StudentTaskOptionModel(
-                  content: 'Verdadeiro',
-                  correct: true,
-                  id: 1,
-                ),
-                StudentTaskOptionModel(
-                  content: 'Falso',
-                  correct: false,
-                  id: 1,
-                ),
-              ].map(
-                (e) => TaskOptionWidget(
-                  isSelected: selected == e.id,
-                  onTap: () => onSelected(e.id),
-                  option: e,
-                ),
+              Row(
+                children: [
+                  TrueOrFalseOptionWidget(
+                    isTrue: true,
+                    onTap: () {},
+                  ),
+                  const SpaceHorizontal.x4(),
+                  TrueOrFalseOptionWidget(
+                    isTrue: false,
+                    onTap: () {},
+                  ),
+                ],
               ),
             ],
           ),
