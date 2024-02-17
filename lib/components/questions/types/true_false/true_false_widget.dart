@@ -55,12 +55,14 @@ class _TrueFalseQuestionTypeWidgetState
                 children: [
                   TrueOrFalseOptionWidget(
                     isTrue: true,
-                    onTap: () {},
+                    onTap: () => onSelected(1),
+                    isSelected: selected == 1,
                   ),
                   const SpaceHorizontal.x4(),
                   TrueOrFalseOptionWidget(
                     isTrue: false,
-                    onTap: () {},
+                    onTap: () => onSelected(2),
+                    isSelected: selected == 2,
                   ),
                 ],
               ),
