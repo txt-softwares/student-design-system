@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:student_design_system/components/questions/shared/head_question_widget.dart';
+import 'package:student_design_system/components/questions/types/true_false/head_true_or_false_widget.dart';
 import 'package:student_design_system/student_design_system.dart';
-
+import '../../../../widgets/percent_indicator/questions_percent_indicator_widget.dart';
 import '../multiple_choice/item_option_widget.dart';
 
 class TrueFalseQuestionTypeWidget extends StatefulWidget {
@@ -36,13 +36,18 @@ class _TrueFalseQuestionTypeWidgetState
   Widget build(BuildContext context) {
     return Column(
       children: [
+        const QuestionsPercentIndicatorWidget(),
         Expanded(
           child: ListView(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
+            padding: const EdgeInsets.only(
+              top: 108,
+              right: 24,
+              left: 24,
+            ),
             children: [
-              HeadQuestionWidget(
-                file: widget.file,
-                title: widget.title,
+              HeadTrueOrFalseWidget(
+                title: widget.title!,
+                image: 'assets/images/teste.png',
               ),
               ...[
                 StudentTaskOptionModel(
@@ -55,11 +60,13 @@ class _TrueFalseQuestionTypeWidgetState
                   correct: false,
                   id: 1,
                 ),
-              ].map((e) => TaskOptionWidget(
-                    isSelected: selected == e.id,
-                    onTap: () => onSelected(e.id),
-                    option: e,
-                  )),
+              ].map(
+                (e) => TaskOptionWidget(
+                  isSelected: selected == e.id,
+                  onTap: () => onSelected(e.id),
+                  option: e,
+                ),
+              ),
             ],
           ),
         ),
@@ -73,7 +80,7 @@ class _TrueFalseQuestionTypeWidgetState
             title: 'Verificar',
             onTap: selected == null ? null : () => widget.onAnswer(selected),
           ),
-        )
+        ),
       ],
     );
   }
