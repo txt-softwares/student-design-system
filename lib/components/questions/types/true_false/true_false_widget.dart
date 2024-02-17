@@ -10,10 +10,12 @@ class TrueFalseQuestionTypeWidget extends StatefulWidget {
     required this.file,
     required this.title,
     required this.onAnswer,
+    required this.image,
   }) : super(key: key);
 
   final String? title;
   final String? file;
+  final String image;
 
   final Function(int? id) onAnswer;
 
@@ -47,7 +49,7 @@ class _TrueFalseQuestionTypeWidgetState
             children: [
               HeadTrueOrFalseWidget(
                 title: widget.title!,
-                image: 'assets/images/teste.png',
+                image: widget.image,
               ),
               ...[
                 StudentTaskOptionModel(
