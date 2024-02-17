@@ -13,27 +13,9 @@ class TrueOrFalseOptionWidget extends StatelessWidget {
   final Function() onTap;
   final bool isSelected;
 
-  Color changeColor() {
-    final dsColor = StudentDesignSystem.config.colors;
-    switch (isTrue) {
-      case true:
-        if (isSelected) {
-          return dsColor.secondaryGreen[500]!;
-        } else {
-          return dsColor.secondaryGreen[50]!;
-        }
-
-      case false:
-        if (isSelected) {
-          return dsColor.primaryRed;
-        } else {
-          return dsColor.transparentRed;
-        }
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
+    final dsColor = StudentDesignSystem.config.colors;
     return Expanded(
       child: SizedBox(
         height: 224,
@@ -41,7 +23,13 @@ class TrueOrFalseOptionWidget extends StatelessWidget {
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
             elevation: 0,
-            backgroundColor: changeColor(),
+            backgroundColor: isTrue
+                ? isSelected
+                    ? dsColor.secondaryGreen[500]!
+                    : dsColor.secondaryGreen[50]!
+                : isSelected
+                    ? dsColor.primaryRed
+                    : dsColor.transparentRed,
           ),
           onPressed: onTap,
           child: Column(
