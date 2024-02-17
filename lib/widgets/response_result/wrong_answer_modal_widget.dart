@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../student_design_system.dart';
+import '../../student_design_system.dart';
 
 class WrongAnswerModalWidget extends StatelessWidget {
   const WrongAnswerModalWidget({super.key});
@@ -7,12 +7,12 @@ class WrongAnswerModalWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 264,
+      height: 256,
       padding: const EdgeInsets.only(
         top: 26,
         left: 26,
         right: 26,
-        bottom: 16,
+        bottom: 37,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
