@@ -3,7 +3,7 @@ description: "A new Flutter package project."
 version: 0.0.1
 
 environment:
-  sdk: '>=3.2.3 <4.0.0'
+  sdk: ">=3.2.3 <4.0.0"
   flutter: ">=1.17.0"
 
 dependencies:
@@ -32,15 +32,14 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-
-
-   fonts:
+  fonts:
     - family: IconlyBold
       fonts:
-       - asset: fonts/IconlyBold.ttf
-   assets:
+        - asset: fonts/IconlyBold.ttf
+  assets:
     - assets/audio/
-    
+    - assets/images/
+
   #
   # For details regarding assets in packages, see
   # https://flutter.dev/assets-and-images/#from-packages
