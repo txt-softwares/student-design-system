@@ -22,14 +22,20 @@ class TrueOrFalseOptionWidget extends StatelessWidget {
         width: 100,
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+              side: isSelected
+                  ? BorderSide(
+                      color: isTrue
+                          ? dsColor.secondaryGreen[500]!
+                          : dsColor.primaryRed,
+                      width: 3,
+                    )
+                  : BorderSide.none,
+            ),
             elevation: 0,
-            backgroundColor: isTrue
-                ? isSelected
-                    ? dsColor.secondaryGreen[500]!
-                    : dsColor.secondaryGreen[50]!
-                : isSelected
-                    ? dsColor.primaryRed
-                    : dsColor.transparentRed,
+            backgroundColor:
+                isTrue ? dsColor.secondaryGreen[50]! : dsColor.transparentRed,
           ),
           onPressed: onTap,
           child: Column(
