@@ -4,6 +4,7 @@ import 'package:student_design_system/components/questions/shared/head_question_
 import 'package:student_design_system/components/questions/types/combine/match_item_widget.dart';
 import 'package:student_design_system/student_design_system.dart';
 import '../../../../widgets/percent_indicator/questions_percent_indicator_widget.dart';
+import 'match_mixin.dart';
 
 class MatchWidget extends StatefulWidget {
   const MatchWidget({
@@ -17,20 +18,17 @@ class MatchWidget extends StatefulWidget {
   final String? title;
   final String? file;
   final List<MatchModel> match;
-  final Function(int? contentId, int? matchId) onAnswer;
+  final Function(int totalAnswers) onAnswer;
 
   @override
   State<MatchWidget> createState() => _MatchWidgetState();
 }
 
-class _MatchWidgetState extends State<MatchWidget> {
-  int? contentSelected;
-  int? matchSelected;
-
-  void onSelected(bool isContent, int id) {
-    setState(() {
-      isContent ? contentSelected = id : matchSelected = id;
-    });
+class _MatchWidgetState extends State<MatchWidget> with MatchMixin {
+  @override
+  void initState() {
+    super.initState();
+    shuffleNumbers(widget.match);
   }
 
   @override
@@ -50,32 +48,42 @@ class _MatchWidgetState extends State<MatchWidget> {
               Row(
                 children: [
                   Expanded(
-                    child: Column(
-                      children: [
-                        ...widget.match.map(
-                          (e) => MatchItemWidget(
-                            isContent: true,
-                            isSelected: e.id == contentSelected,
-                            onTap: () => onSelected(true, e.id),
-                            match: e,
-                          ),
+                    child: ListView.separated(
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) => MatchItemWidget(
+                        isAnswered: answers.any(
+                          (element) => element.id == contentList[index].id,
                         ),
-                      ],
+                        selectdItem: contentSelected,
+                        isCorrect: isCorrect,
+                        isContent: true,
+                        isSelected: contentList[index].id == contentSelected,
+                        onTap: () => onSelected(true, contentList[index]),
+                        match: contentList[index],
+                      ),
+                      separatorBuilder: (context, index) =>
+                          const SpaceVertical.x6(),
+                      itemCount: contentList.length,
                     ),
                   ),
                   const SpaceHorizontal.x4(),
                   Expanded(
-                    child: Column(
-                      children: [
-                        ...widget.match.map(
-                          (e) => MatchItemWidget(
-                            isContent: false,
-                            isSelected: e.id == matchSelected,
-                            onTap: () => onSelected(false, e.id),
-                            match: e,
-                          ),
+                    child: ListView.separated(
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) => MatchItemWidget(
+                        isAnswered: answers.any(
+                          (element) => element.id == matchList[index].id,
                         ),
-                      ],
+                        selectdItem: matchSelected,
+                        isCorrect: isCorrect,
+                        isContent: false,
+                        isSelected: matchList[index].id == matchSelected,
+                        onTap: () => onSelected(false, matchList[index]),
+                        match: matchList[index],
+                      ),
+                      separatorBuilder: (context, index) =>
+                          const SpaceVertical.x6(),
+                      itemCount: matchList.length,
                     ),
                   ),
                 ],
@@ -91,12 +99,9 @@ class _MatchWidgetState extends State<MatchWidget> {
           padding: const EdgeInsets.all(24),
           child: StudentButtonWidget(
             title: 'Continuar',
-            onTap: contentSelected == null || matchSelected == null
+            onTap: answers.length < widget.match.length
                 ? null
-                : () => widget.onAnswer(
-                      contentSelected,
-                      matchSelected,
-                    ),
+                : () => widget.onAnswer(totalAnswers),
           ),
         ),
       ],
