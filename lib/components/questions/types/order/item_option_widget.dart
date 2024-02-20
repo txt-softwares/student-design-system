@@ -22,14 +22,24 @@ class ReorderOptionWidget extends StatelessWidget {
           Container(
             height: 56,
             width: 56,
-            decoration: _buildBoxDecoration(dsColor),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              color: dsColor.transparentPurple,
+              border: Border.all(color: dsColor.primaryPurple[100]!),
+            ),
             child: Center(child: BoxText.bodyXLargeBold('${index + 1}')),
           ),
           const SpaceHorizontal.x4(),
           Expanded(
-            child: ElevatedButton(
-              onPressed: () {},
-              style: _buildButtonStyle(dsColor),
+            child: Container(
+              height: 56,
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(
+                  StudentDesignSystem.config.borderRadius,
+                ),
+                border: Border.all(color: dsColor.dark[200]!),
+              ),
               child: Row(
                 children: [
                   Expanded(
@@ -45,31 +55,6 @@ class ReorderOptionWidget extends StatelessWidget {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  BoxDecoration _buildBoxDecoration(StudentDSColors dsColor) {
-    return BoxDecoration(
-      borderRadius: BorderRadius.circular(12),
-      color: dsColor.transparentPurple,
-      border: Border.all(color: dsColor.primaryPurple[100]!),
-    );
-  }
-
-  ButtonStyle _buildButtonStyle(StudentDSColors dsColor) {
-    return ElevatedButton.styleFrom(
-      elevation: 0,
-      padding: const EdgeInsets.symmetric(
-        vertical: 16,
-        horizontal: 20,
-      ),
-      backgroundColor: dsColor.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(
-          StudentDesignSystem.config.borderRadius,
-        ),
-        side: BorderSide(color: dsColor.dark[200]!),
       ),
     );
   }

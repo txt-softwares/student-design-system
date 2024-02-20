@@ -54,7 +54,7 @@ class _OrderQuestionTypeWidgetState extends State<ReorderQuestionTypeWidget> {
                 title: widget.title,
               ),
               BoxText.bodyLargeSemiBold(
-                'Segure e arreste para reordenar',
+                'Segure e arraste para reordenar',
                 color: StudentDesignSystem.config.colors.dark[500],
               ),
               const SpaceVertical.x6(),
