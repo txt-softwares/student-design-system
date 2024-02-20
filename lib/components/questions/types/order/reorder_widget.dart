@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-
-import '../../../../config/ds_config.dart';
-import '../../../../widgets/button/button_widget.dart';
+import 'package:student_design_system/student_design_system.dart';
 import '../../shared/head_question_widget.dart';
-import '../../models/option_model.dart';
 import 'item_option_widget.dart';
 
 class ReorderQuestionTypeWidget extends StatefulWidget {
@@ -56,12 +53,18 @@ class _OrderQuestionTypeWidgetState extends State<ReorderQuestionTypeWidget> {
                 file: widget.file,
                 title: widget.title,
               ),
+              BoxText.bodyLargeSemiBold(
+                'Segure e arreste para reordenar',
+                color: StudentDesignSystem.config.colors.dark[500],
+              ),
+              const SpaceVertical.x6(),
               ReorderableListView.builder(
                 itemCount: reorderedItems.length,
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
                   return ReorderOptionWidget(
                     option: reorderedItems[index],
+                    index: index,
                     key: Key(reorderedItems[index].id.toString()),
                   );
                 },
