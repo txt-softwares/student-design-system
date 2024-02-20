@@ -5,30 +5,71 @@ class ReorderOptionWidget extends StatelessWidget {
   const ReorderOptionWidget({
     Key? key,
     required this.option,
+    required this.index,
   }) : super(key: key);
 
   final StudentTaskOptionModel option;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
+    final dsColor = StudentDesignSystem.config.colors;
+
     return Padding(
-      padding: const EdgeInsets.only(bottom: 16.0),
-      child: ElevatedButton(
-        onPressed: () {},
-        style: ElevatedButton.styleFrom(
-          elevation: 0,
-          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-          backgroundColor: StudentDesignSystem.config.colors.white,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(
-                StudentDesignSystem.config.borderRadius,
+      padding: const EdgeInsets.only(bottom: 16),
+      child: Row(
+        children: [
+          Container(
+            height: 56,
+            width: 56,
+            decoration: _buildBoxDecoration(dsColor),
+            child: Center(child: BoxText.bodyXLargeBold('${index + 1}')),
+          ),
+          const SpaceHorizontal.x4(),
+          Expanded(
+            child: ElevatedButton(
+              onPressed: () {},
+              style: _buildButtonStyle(dsColor),
+              child: Row(
+                children: [
+                  Expanded(
+                    child:
+                        Center(child: BoxText.bodyXLargeBold(option.content)),
+                  ),
+                  Icon(
+                    Icons.drag_handle_rounded,
+                    color: dsColor.dark[500],
+                  ),
+                ],
               ),
-              side: BorderSide(
-                color: StudentDesignSystem.config.colors.dark[200]!,
-                width: 1,
-              )),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  BoxDecoration _buildBoxDecoration(StudentDSColors dsColor) {
+    return BoxDecoration(
+      borderRadius: BorderRadius.circular(12),
+      color: dsColor.transparentPurple,
+      border: Border.all(color: dsColor.primaryPurple[100]!),
+    );
+  }
+
+  ButtonStyle _buildButtonStyle(StudentDSColors dsColor) {
+    return ElevatedButton.styleFrom(
+      elevation: 0,
+      padding: const EdgeInsets.symmetric(
+        vertical: 16,
+        horizontal: 20,
+      ),
+      backgroundColor: dsColor.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(
+          StudentDesignSystem.config.borderRadius,
         ),
-        child: Center(child: BoxText.bodyXLargeBold(option.content)),
+        side: BorderSide(color: dsColor.dark[200]!),
       ),
     );
   }
