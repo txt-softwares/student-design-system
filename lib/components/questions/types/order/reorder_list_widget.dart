@@ -51,9 +51,7 @@ class ReorderListWidget extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(
-                    StudentDesignSystem.config.borderRadius,
-                  ),
+                  borderRadius: BorderRadius.circular(12),
                   border: Border.all(
                     color: StudentDesignSystem.config.colors.dark[200]!,
                   ),
