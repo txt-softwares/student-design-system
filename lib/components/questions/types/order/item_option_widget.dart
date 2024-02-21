@@ -11,24 +11,28 @@ class ReorderOptionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dsColor = StudentDesignSystem.config.colors;
+
     return Padding(
-      padding: const EdgeInsets.only(bottom: 16.0),
-      child: ElevatedButton(
-        onPressed: () {},
-        style: ElevatedButton.styleFrom(
-          elevation: 0,
-          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-          backgroundColor: StudentDesignSystem.config.colors.white,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(
-                StudentDesignSystem.config.borderRadius,
-              ),
-              side: BorderSide(
-                color: StudentDesignSystem.config.colors.dark[200]!,
-                width: 1,
-              )),
+      padding: const EdgeInsets.only(bottom: 16),
+      child: Container(
+        height: 56,
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: dsColor.dark[200]!),
         ),
-        child: Center(child: BoxText.bodyXLargeBold(option.content)),
+        child: Row(
+          children: [
+            Expanded(
+              child: Center(child: BoxText.bodyXLargeBold(option.content)),
+            ),
+            Icon(
+              Icons.drag_handle_rounded,
+              color: dsColor.dark[500],
+            ),
+          ],
+        ),
       ),
     );
   }

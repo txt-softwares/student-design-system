@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-
-import '../../../../config/ds_config.dart';
-import '../../../../widgets/button/button_widget.dart';
+import 'package:student_design_system/components/questions/types/order/index_list_widget.dart';
+import 'package:student_design_system/student_design_system.dart';
 import '../../shared/head_question_widget.dart';
-import '../../models/option_model.dart';
-import 'item_option_widget.dart';
+import 'reorder_list_widget.dart';
 
 class ReorderQuestionTypeWidget extends StatefulWidget {
   const ReorderQuestionTypeWidget({
@@ -56,17 +54,20 @@ class _OrderQuestionTypeWidgetState extends State<ReorderQuestionTypeWidget> {
                 file: widget.file,
                 title: widget.title,
               ),
-              ReorderableListView.builder(
-                itemCount: reorderedItems.length,
-                physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) {
-                  return ReorderOptionWidget(
-                    option: reorderedItems[index],
-                    key: Key(reorderedItems[index].id.toString()),
-                  );
-                },
-                shrinkWrap: true,
-                onReorder: onReorder,
+              BoxText.bodyLargeSemiBold(
+                'Segure e arraste para reordenar',
+                color: StudentDesignSystem.config.colors.dark[500],
+              ),
+              const SpaceVertical.x6(),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  IndexListWidget(reorderedItems: reorderedItems),
+                  ReorderListWidget(
+                    reorderedItems: reorderedItems,
+                    onReorder: onReorder,
+                  ),
+                ],
               ),
             ],
           ),
