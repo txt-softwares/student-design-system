@@ -43,6 +43,8 @@ class _OrderQuestionTypeWidgetState extends State<ReorderQuestionTypeWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final dsColor = StudentDesignSystem.config.colors;
+
     return Column(
       children: [
         Expanded(
@@ -58,18 +60,36 @@ class _OrderQuestionTypeWidgetState extends State<ReorderQuestionTypeWidget> {
                 color: StudentDesignSystem.config.colors.dark[500],
               ),
               const SpaceVertical.x6(),
-              ReorderableListView.builder(
-                itemCount: reorderedItems.length,
-                physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) {
-                  return ReorderOptionWidget(
-                    option: reorderedItems[index],
-                    index: index,
-                    key: Key(reorderedItems[index].id.toString()),
-                  );
-                },
-                shrinkWrap: true,
-                onReorder: onReorder,
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 72,
+                    child: ListView.separated(
+                      shrinkWrap: true,
+                      padding: const EdgeInsets.only(right: 16),
+                      itemBuilder: (context, index) =>
+                          _buildItemBuilder(dsColor, index),
+                      separatorBuilder: (context, index) =>
+                          const SpaceVertical.x4(),
+                      itemCount: reorderedItems.length,
+                    ),
+                  ),
+                  Expanded(
+                    child: ReorderableListView.builder(
+                      itemCount: reorderedItems.length,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return ReorderOptionWidget(
+                          option: reorderedItems[index],
+                          key: Key(reorderedItems[index].id.toString()),
+                        );
+                      },
+                      shrinkWrap: true,
+                      onReorder: onReorder,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -87,6 +107,20 @@ class _OrderQuestionTypeWidgetState extends State<ReorderQuestionTypeWidget> {
           ),
         )
       ],
+    );
+  }
+
+  Container _buildItemBuilder(StudentDSColors dsColor, int index) {
+    return Container(
+      height: 56,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        color: dsColor.transparentPurple,
+        border: Border.all(
+          color: dsColor.primaryPurple[100]!,
+        ),
+      ),
+      child: Center(child: BoxText.bodyXLargeBold('${index + 1}')),
     );
   }
 }
