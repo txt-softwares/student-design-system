@@ -15,28 +15,34 @@ class TaskOptionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dsColor = StudentDesignSystem.config.colors;
+
     return Padding(
-      padding: const EdgeInsets.only(bottom: 16.0),
+      padding: const EdgeInsets.only(bottom: 16),
       child: ElevatedButton(
         onPressed: onTap,
         style: ElevatedButton.styleFrom(
           elevation: 0,
-          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-          backgroundColor: (isSelected)
-              ? StudentDesignSystem.config.colors.primaryPurple[50]!
-              : StudentDesignSystem.config.colors.white,
+          padding: const EdgeInsets.symmetric(
+            vertical: 16,
+            horizontal: 20,
+          ),
+          backgroundColor:
+              (isSelected) ? dsColor.primaryPurple[50]! : dsColor.white,
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(
-                StudentDesignSystem.config.borderRadius,
-              ),
-              side: BorderSide(
-                color: (isSelected)
-                    ? StudentDesignSystem.config.colors.primaryPurple[500]!
-                    : StudentDesignSystem.config.colors.dark[200]!,
-                width: 1,
-              )),
+            borderRadius: BorderRadius.circular(
+              StudentDesignSystem.config.borderRadius,
+            ),
+            side: BorderSide(
+              color: (isSelected)
+                  ? dsColor.primaryPurple[500]!
+                  : dsColor.dark[200]!,
+            ),
+          ),
         ),
-        child: Center(child: BoxText.bodyXLargeBold(option.content)),
+        child: Center(
+          child: BoxText.bodyXLargeBold(option.content),
+        ),
       ),
     );
   }
