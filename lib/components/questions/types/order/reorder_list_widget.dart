@@ -38,31 +38,41 @@ class ReorderListWidget extends StatelessWidget {
     return AnimatedBuilder(
       animation: animation,
       builder: (BuildContext context, Widget? child) {
-        return Card(
-          elevation: 0,
-          color: Colors.white,
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(
-                StudentDesignSystem.config.borderRadius,
-              ),
-              border: Border.all(
-                  color: StudentDesignSystem.config.colors.dark[200]!),
-            ),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Center(
-                    child:
-                        BoxText.bodyXLargeBold(reorderedItems[index].content),
+        final tilt = Curves.easeInOut.transform(animation.value) * 5;
+        final verticalShift = Curves.easeInOut.transform(animation.value) * 20;
+
+        return Transform(
+          transform: Matrix4.rotationZ(-tilt * 0.01),
+          child: Transform.translate(
+            offset: Offset(-2, verticalShift),
+            child: Card(
+              elevation: 0,
+              color: Colors.white,
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(
+                    StudentDesignSystem.config.borderRadius,
+                  ),
+                  border: Border.all(
+                    color: StudentDesignSystem.config.colors.dark[200]!,
                   ),
                 ),
-                Icon(
-                  Icons.drag_handle_rounded,
-                  color: StudentDesignSystem.config.colors.dark[500],
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Center(
+                        child: BoxText.bodyXLargeBold(
+                            reorderedItems[index].content),
+                      ),
+                    ),
+                    Icon(
+                      Icons.drag_handle_rounded,
+                      color: StudentDesignSystem.config.colors.dark[500],
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
         );
