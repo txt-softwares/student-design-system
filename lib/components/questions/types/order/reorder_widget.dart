@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:student_design_system/components/questions/types/order/index_list_widget.dart';
 import 'package:student_design_system/student_design_system.dart';
 import '../../shared/head_question_widget.dart';
 import 'reorder_list_widget.dart';
@@ -43,8 +44,6 @@ class _OrderQuestionTypeWidgetState extends State<ReorderQuestionTypeWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final dsColor = StudentDesignSystem.config.colors;
-
     return Column(
       children: [
         Expanded(
@@ -63,18 +62,7 @@ class _OrderQuestionTypeWidgetState extends State<ReorderQuestionTypeWidget> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(
-                    width: 72,
-                    child: ListView.separated(
-                      shrinkWrap: true,
-                      padding: const EdgeInsets.only(right: 16),
-                      itemBuilder: (context, index) =>
-                          _buildItemBuilder(dsColor, index),
-                      separatorBuilder: (context, index) =>
-                          const SpaceVertical.x4(),
-                      itemCount: reorderedItems.length,
-                    ),
-                  ),
+                  IndexListWidget(reorderedItems: reorderedItems),
                   ReorderListWidget(
                     reorderedItems: reorderedItems,
                     onReorder: onReorder,
@@ -97,20 +85,6 @@ class _OrderQuestionTypeWidgetState extends State<ReorderQuestionTypeWidget> {
           ),
         )
       ],
-    );
-  }
-
-  Container _buildItemBuilder(StudentDSColors dsColor, int index) {
-    return Container(
-      height: 56,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        color: dsColor.transparentPurple,
-        border: Border.all(
-          color: dsColor.primaryPurple[100]!,
-        ),
-      ),
-      child: Center(child: BoxText.bodyXLargeBold('${index + 1}')),
     );
   }
 }
