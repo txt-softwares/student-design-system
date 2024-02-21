@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:student_design_system/student_design_system.dart';
 import '../../shared/head_question_widget.dart';
-import 'item_option_widget.dart';
+import 'reorder_list_widget.dart';
 
 class ReorderQuestionTypeWidget extends StatefulWidget {
   const ReorderQuestionTypeWidget({
@@ -75,19 +75,9 @@ class _OrderQuestionTypeWidgetState extends State<ReorderQuestionTypeWidget> {
                       itemCount: reorderedItems.length,
                     ),
                   ),
-                  Expanded(
-                    child: ReorderableListView.builder(
-                      itemCount: reorderedItems.length,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        return ReorderOptionWidget(
-                          option: reorderedItems[index],
-                          key: Key(reorderedItems[index].id.toString()),
-                        );
-                      },
-                      shrinkWrap: true,
-                      onReorder: onReorder,
-                    ),
+                  ReorderListWidget(
+                    reorderedItems: reorderedItems,
+                    onReorder: onReorder,
                   ),
                 ],
               ),
