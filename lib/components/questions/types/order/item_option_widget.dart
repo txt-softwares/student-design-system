@@ -19,9 +19,7 @@ class ReorderOptionWidget extends StatelessWidget {
         height: 56,
         padding: const EdgeInsets.symmetric(horizontal: 20),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(
-            StudentDesignSystem.config.borderRadius,
-          ),
+          borderRadius: BorderRadius.circular(12),
           border: Border.all(color: dsColor.dark[200]!),
         ),
         child: Row(
