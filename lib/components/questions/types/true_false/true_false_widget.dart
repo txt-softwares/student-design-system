@@ -38,7 +38,10 @@ class _TrueFalseQuestionTypeWidgetState
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const QuestionsPercentIndicatorWidget(),
+        const QuestionsPercentIndicatorWidget(
+          finishedQuestions: 1,
+          totalQuestions: 10,
+        ),
         Expanded(
           child: ListView(
             padding: const EdgeInsets.only(

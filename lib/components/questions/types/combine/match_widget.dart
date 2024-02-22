@@ -35,7 +35,10 @@ class _MatchWidgetState extends State<MatchWidget> with MatchMixin {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const QuestionsPercentIndicatorWidget(),
+        const QuestionsPercentIndicatorWidget(
+          finishedQuestions: 1,
+          totalQuestions: 10,
+        ),
         Expanded(
           child: ListView(
             padding: const EdgeInsets.symmetric(horizontal: 24),

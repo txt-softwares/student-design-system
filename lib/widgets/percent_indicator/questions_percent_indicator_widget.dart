@@ -3,7 +3,13 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 import '../../student_design_system.dart';
 
 class QuestionsPercentIndicatorWidget extends StatelessWidget {
-  const QuestionsPercentIndicatorWidget({super.key});
+  const QuestionsPercentIndicatorWidget({
+    super.key,
+    required this.totalQuestions,
+    required this.finishedQuestions,
+  });
+  final int totalQuestions;
+  final int finishedQuestions;
 
   @override
   Widget build(BuildContext context) {
@@ -26,14 +32,14 @@ class QuestionsPercentIndicatorWidget extends StatelessWidget {
           Expanded(
             child: LinearPercentIndicator(
               lineHeight: 12,
-              percent: 0.1,
+              percent: finishedQuestions / totalQuestions,
               backgroundColor: dsColor.dark[100],
               progressColor: dsColor.primaryPurple,
               barRadius: const Radius.circular(50),
               padding: const EdgeInsets.symmetric(horizontal: 30),
             ),
           ),
-          BoxText.bodyLargeBold('1/10'),
+          BoxText.bodyLargeBold('$finishedQuestions/$totalQuestions'),
         ],
       ),
     );
