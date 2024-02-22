@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:student_design_system/components/questions/types/order/index_list_widget.dart';
 import 'package:student_design_system/student_design_system.dart';
-import '../../../../widgets/percent_indicator/questions_percent_indicator_widget.dart';
 import '../../shared/head_question_widget.dart';
 import 'reorder_list_widget.dart';
 
@@ -47,10 +46,6 @@ class _OrderQuestionTypeWidgetState extends State<ReorderQuestionTypeWidget> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const QuestionsPercentIndicatorWidget(
-          finishedQuestions: 1,
-          totalQuestions: 10,
-        ),
         Expanded(
           child: ListView(
             padding: const EdgeInsets.symmetric(horizontal: 24),

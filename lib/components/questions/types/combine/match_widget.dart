@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:student_design_system/components/questions/models/match_model.dart';
 import 'package:student_design_system/components/questions/shared/head_question_widget.dart';
 import 'package:student_design_system/components/questions/types/combine/match_item_widget.dart';
 import 'package:student_design_system/student_design_system.dart';
-import '../../../../widgets/percent_indicator/questions_percent_indicator_widget.dart';
 import 'match_mixin.dart';
 
 class MatchWidget extends StatefulWidget {
@@ -35,10 +33,6 @@ class _MatchWidgetState extends State<MatchWidget> with MatchMixin {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const QuestionsPercentIndicatorWidget(
-          finishedQuestions: 1,
-          totalQuestions: 10,
-        ),
         Expanded(
           child: ListView(
             padding: const EdgeInsets.symmetric(horizontal: 24),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:student_design_system/components/questions/shared/head_question_widget.dart';
 import 'package:student_design_system/student_design_system.dart';
-import '../../../../widgets/percent_indicator/questions_percent_indicator_widget.dart';
 import 'item_option_widget.dart';
 
 class MultipleChoiceQuestionWidget extends StatefulWidget {
@@ -38,10 +37,6 @@ class _MultipleChoiceQuestionWidgetState
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const QuestionsPercentIndicatorWidget(
-          finishedQuestions: 1,
-          totalQuestions: 10,
-        ),
         Expanded(
           child: ListView(
             padding: const EdgeInsets.symmetric(horizontal: 24),

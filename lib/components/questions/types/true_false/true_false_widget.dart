@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:student_design_system/components/questions/types/true_false/head_true_or_false_widget.dart';
 import 'package:student_design_system/student_design_system.dart';
-import '../../../../widgets/percent_indicator/questions_percent_indicator_widget.dart';
 import 'true_or_false_option_widget.dart';
 
 class TrueFalseQuestionTypeWidget extends StatefulWidget {
@@ -38,10 +37,6 @@ class _TrueFalseQuestionTypeWidgetState
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const QuestionsPercentIndicatorWidget(
-          finishedQuestions: 1,
-          totalQuestions: 10,
-        ),
         Expanded(
           child: ListView(
             padding: const EdgeInsets.only(
