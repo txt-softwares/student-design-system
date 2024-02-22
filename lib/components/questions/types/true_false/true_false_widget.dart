@@ -16,7 +16,7 @@ class TrueFalseQuestionTypeWidget extends StatefulWidget {
   final String? file;
   final String image;
 
-  final Function(int? id) onAnswer;
+  final Function(bool answer) onAnswer;
 
   @override
   State<TrueFalseQuestionTypeWidget> createState() =>
@@ -25,11 +25,11 @@ class TrueFalseQuestionTypeWidget extends StatefulWidget {
 
 class _TrueFalseQuestionTypeWidgetState
     extends State<TrueFalseQuestionTypeWidget> {
-  int? selected;
+  bool? selected;
 
-  void onSelected(int id) {
+  void onSelected(bool answer) {
     setState(() {
-      selected = id;
+      selected = answer;
     });
   }
 
@@ -53,14 +53,14 @@ class _TrueFalseQuestionTypeWidgetState
                 children: [
                   TrueOrFalseOptionWidget(
                     isTrue: true,
-                    onTap: () => onSelected(1),
-                    isSelected: selected == 1,
+                    onTap: () => onSelected(true),
+                    isSelected: selected == true,
                   ),
                   const SpaceHorizontal.x4(),
                   TrueOrFalseOptionWidget(
                     isTrue: false,
-                    onTap: () => onSelected(2),
-                    isSelected: selected == 2,
+                    onTap: () => onSelected(false),
+                    isSelected: selected == false,
                   ),
                 ],
               ),
@@ -75,7 +75,7 @@ class _TrueFalseQuestionTypeWidgetState
           padding: const EdgeInsets.all(24),
           child: StudentButtonWidget(
             title: 'Verificar',
-            onTap: selected == null ? null : () => widget.onAnswer(selected),
+            onTap: selected == null ? null : () => widget.onAnswer(selected!),
           ),
         ),
       ],
