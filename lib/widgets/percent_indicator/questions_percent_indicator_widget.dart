@@ -19,6 +19,7 @@ class QuestionsPercentIndicatorWidget extends StatelessWidget {
         left: 24,
         right: 24,
         bottom: 40,
+        top: 76,
       ),
       child: Row(
         children: [
