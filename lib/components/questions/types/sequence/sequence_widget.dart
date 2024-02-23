@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:student_design_system/student_design_system.dart';
 
 import '../../../../config/ds_config.dart';
 import '../../../../widgets/button/button_widget.dart';
@@ -30,13 +31,11 @@ class _OrderSentenceTypeWidgetState extends State<OrderSentenceTypeWidget> {
 
   void setWordAnswer(String item) {
     selectedWords.add(item);
-    allAvaliableWords.removeWhere((element) => element == item);
     setState(() {});
   }
 
   void removeWordAnswer(String item) {
     selectedWords.remove(item);
-    allAvaliableWords.add(item);
     setState(() {});
   }
 
@@ -66,42 +65,38 @@ class _OrderSentenceTypeWidgetState extends State<OrderSentenceTypeWidget> {
                 title: widget.title,
               ),
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Center(
-                    child: Wrap(
-                      alignment: WrapAlignment.center,
-                      children: List<Widget>.generate(
-                        selectedWords.length,
-                        (index) {
-                          final option = selectedWords[index];
-                          return _buildItem(option, false);
-                        },
-                      ),
+                  const SizedBox(height: 16),
+                  Wrap(
+                    alignment: WrapAlignment.start,
+                    children: List<Widget>.generate(
+                      selectedWords.length,
+                      (index) {
+                        final option = selectedWords[index];
+                        return _buildItem(option, false);
+                      },
                     ),
                   ),
-                  const SizedBox(
-                    height: 40,
-                  ),
+                  SizedBox(height: selectedWords.isNotEmpty ? 0 : 63),
                   Divider(
                     color: StudentDesignSystem.config.colors.darkblue[200],
                     height: 1,
                   ),
-                  const SizedBox(
-                    height: 40,
-                  ),
-                  Wrap(
-                    alignment: WrapAlignment.center,
-                    children: List<Widget>.generate(
-                      allAvaliableWords.length,
-                      (index) {
-                        final option = allAvaliableWords[index];
-                        return _buildItem(option, true);
-                      },
+                  const SizedBox(height: 44),
+                  Center(
+                    child: Wrap(
+                      alignment: WrapAlignment.center,
+                      children: List<Widget>.generate(
+                        allAvaliableWords.length,
+                        (index) {
+                          final option = allAvaliableWords[index];
+                          return _buildItem(option, true);
+                        },
+                      ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 40,
-                  ),
+                  const SizedBox(height: 40),
                 ],
               ),
             ],
@@ -115,7 +110,7 @@ class _OrderSentenceTypeWidgetState extends State<OrderSentenceTypeWidget> {
           padding: const EdgeInsets.all(24),
           child: StudentButtonWidget(
             title: 'Verificar',
-            onTap: allAvaliableWords.isEmpty
+            onTap: allAvaliableWords.length == selectedWords.length
                 ? () => widget.onAnswer(
                       selectedWords.fold(
                           '',
@@ -131,29 +126,50 @@ class _OrderSentenceTypeWidgetState extends State<OrderSentenceTypeWidget> {
 
   Widget _buildItem(String item, bool toAdd) {
     return Container(
-      margin: const EdgeInsets.only(right: 20, bottom: 10),
+      margin: const EdgeInsets.only(
+        right: 6,
+        left: 6,
+        bottom: 12,
+      ),
       child: ElevatedButton(
-        onPressed: () {
-          if (toAdd) {
-            setWordAnswer(item);
-          } else {
-            removeWordAnswer(item);
-          }
-        },
-        style: ButtonStyle(
-          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(7.0),
+        onPressed: toAdd &&
+                selectedWords.contains(item) &&
+                allAvaliableWords.contains(item)
+            ? null
+            : () {
+                if (toAdd) {
+                  setWordAnswer(item);
+                } else {
+                  removeWordAnswer(item);
+                }
+              },
+        style: ElevatedButton.styleFrom(
+          elevation: 0,
+          disabledBackgroundColor: toAdd &&
+                  selectedWords.contains(item) &&
+                  allAvaliableWords.contains(item)
+              ? StudentDesignSystem.config.colors.dark[200]
+              : null,
+          backgroundColor: StudentDesignSystem.config.colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(100),
+            side: BorderSide(
+              color: StudentDesignSystem.config.colors.dark[200]!,
             ),
           ),
-          padding: MaterialStateProperty.all<EdgeInsets>(
-            const EdgeInsets.symmetric(
-              vertical: 15,
-              horizontal: 25,
-            ),
+          padding: const EdgeInsets.symmetric(
+            vertical: 15,
+            horizontal: 25,
           ),
         ),
-        child: Text(item),
+        child: BoxText.bodyXLargeBold(
+          item,
+          color: toAdd &&
+                  selectedWords.contains(item) &&
+                  allAvaliableWords.contains(item)
+              ? StudentDesignSystem.config.colors.dark[200]
+              : null,
+        ),
       ),
     );
   }
