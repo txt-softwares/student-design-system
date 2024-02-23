@@ -65,6 +65,7 @@ class _TrueFalseQuestionTypeWidgetState
                   ),
                 ],
               ),
+              const SpaceVertical.x5(),
             ],
           ),
         ),
