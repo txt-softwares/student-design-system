@@ -45,30 +45,33 @@ class ReorderListWidget extends StatelessWidget {
           transform: Matrix4.rotationZ(-tilt * 0.01),
           child: Transform.translate(
             offset: Offset(-2, verticalShift),
-            child: Card(
-              elevation: 0,
-              color: Colors.white,
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(
-                    color: StudentDesignSystem.config.colors.dark[200]!,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 6),
+              child: Card(
+                elevation: 0,
+                color: Colors.white,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: StudentDesignSystem.config.colors.dark[200]!,
+                    ),
                   ),
-                ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Center(
-                        child: BoxText.bodyXLargeBold(
-                            reorderedItems[index].content),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Center(
+                          child: BoxText.bodyXLargeBold(
+                              reorderedItems[index].content),
+                        ),
                       ),
-                    ),
-                    Icon(
-                      Icons.drag_handle_rounded,
-                      color: StudentDesignSystem.config.colors.dark[500],
-                    ),
-                  ],
+                      Icon(
+                        Icons.drag_handle_rounded,
+                        color: StudentDesignSystem.config.colors.dark[500],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
