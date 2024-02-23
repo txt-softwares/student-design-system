@@ -110,7 +110,7 @@ class _OrderSentenceTypeWidgetState extends State<OrderSentenceTypeWidget> {
           padding: const EdgeInsets.all(24),
           child: StudentButtonWidget(
             title: 'Verificar',
-            onTap: allAvaliableWords.isEmpty
+            onTap: allAvaliableWords.length == selectedWords.length
                 ? () => widget.onAnswer(
                       selectedWords.fold(
                           '',
