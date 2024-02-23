@@ -87,14 +87,16 @@ class StudentButtonWidget extends StatelessWidget {
       onPressed: !isLoading ? onTap : null,
       child: !isLoading
           ? _buildContent()
-          : const Center(
+          : Center(
               child: SizedBox(
                 height: 8,
                 width: 48,
                 child: LoadingIndicator(
                   indicatorType: Indicator.ballPulse,
                   colors: [
-                    Colors.white,
+                    (color == Colors.white)
+                        ? StudentDesignSystem.config.colors.primaryRed
+                        : Colors.white,
                   ],
                   strokeWidth: 1,
                 ),

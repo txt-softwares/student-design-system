@@ -7,11 +7,13 @@ class CorrectAnswerModalWidget extends StatelessWidget {
     required this.title,
     required this.buttonClick,
     this.onContinue,
+    this.isLoading = false,
   });
 
   final String title;
   final String buttonClick;
   final Function()? onContinue;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +38,7 @@ class CorrectAnswerModalWidget extends StatelessWidget {
           const Spacer(),
           StudentButtonWidget(
             title: 'Continuar',
+            isLoading: isLoading,
             color: Colors.white,
             textColor: StudentDesignSystem.config.colors.dark,
             onTap: onContinue,

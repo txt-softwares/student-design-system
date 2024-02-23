@@ -9,6 +9,7 @@ class WrongAnswerModalWidget extends StatelessWidget {
     required this.rightAnswerMessage,
     required this.buttonTitle,
     this.onContinue,
+    this.isLoading = false,
   });
 
   final String title;
@@ -16,6 +17,7 @@ class WrongAnswerModalWidget extends StatelessWidget {
   final String rightAnswerMessage;
   final String buttonTitle;
   final Function()? onContinue;
+  final bool isLoading;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -56,6 +58,7 @@ class WrongAnswerModalWidget extends StatelessWidget {
           StudentButtonWidget(
             title: buttonTitle,
             color: Colors.white,
+            isLoading: isLoading,
             textColor: StudentDesignSystem.config.colors.dark,
             onTap: onContinue,
           ),
