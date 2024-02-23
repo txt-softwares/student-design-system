@@ -47,6 +47,7 @@ class _MatchWidgetState extends State<MatchWidget> with MatchMixin {
                   Expanded(
                     child: ListView.separated(
                       shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) => MatchItemWidget(
                         isAnswered: answers.any(
                           (element) => element.id == contentList[index].id,
@@ -66,6 +67,7 @@ class _MatchWidgetState extends State<MatchWidget> with MatchMixin {
                   const SpaceHorizontal.x4(),
                   Expanded(
                     child: ListView.separated(
+                      physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemBuilder: (context, index) => MatchItemWidget(
                         isAnswered: answers.any(
@@ -85,6 +87,7 @@ class _MatchWidgetState extends State<MatchWidget> with MatchMixin {
                   ),
                 ],
               ),
+              const SpaceVertical.x5(),
             ],
           ),
         ),
