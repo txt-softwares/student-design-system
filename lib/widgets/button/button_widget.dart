@@ -95,7 +95,7 @@ class StudentButtonWidget extends StatelessWidget {
                   indicatorType: Indicator.ballPulse,
                   colors: [
                     (color == Colors.white)
-                        ? StudentDesignSystem.config.colors.primaryRed
+                        ? StudentDesignSystem.config.colors.primaryPurple
                         : Colors.white,
                   ],
                   strokeWidth: 1,
