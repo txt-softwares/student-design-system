@@ -2,8 +2,20 @@ import 'package:flutter/material.dart';
 import '../../student_design_system.dart';
 
 class WrongAnswerModalWidget extends StatelessWidget {
-  const WrongAnswerModalWidget({super.key});
+  const WrongAnswerModalWidget({
+    super.key,
+    required this.title,
+    required this.correctAnswer,
+    required this.rightAnswerMessage,
+    required this.buttonTitle,
+    this.onContinue,
+  });
 
+  final String title;
+  final String correctAnswer;
+  final String rightAnswerMessage;
+  final String buttonTitle;
+  final Function()? onContinue;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,27 +37,27 @@ class WrongAnswerModalWidget extends StatelessWidget {
               ),
               const SpaceHorizontal.x4(),
               BoxText.heading4(
-                'Errou :(',
+                title,
                 color: Colors.white,
               ),
             ],
           ),
           const Spacer(),
           BoxText.heading4(
-            'Resposta correta:',
+            rightAnswerMessage,
             color: Colors.white,
           ),
           const SpaceVertical.x2(),
           BoxText.bodyLargeSemiBold(
-            'The restaurant',
+            correctAnswer,
             color: Colors.white,
           ),
           const Spacer(),
           StudentButtonWidget(
-            title: 'Entendi',
+            title: buttonTitle,
             color: Colors.white,
             textColor: StudentDesignSystem.config.colors.dark,
-            onTap: () {},
+            onTap: onContinue,
           ),
         ],
       ),

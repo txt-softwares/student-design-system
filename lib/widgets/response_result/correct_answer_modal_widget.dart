@@ -2,7 +2,16 @@ import 'package:flutter/material.dart';
 import '../../student_design_system.dart';
 
 class CorrectAnswerModalWidget extends StatelessWidget {
-  const CorrectAnswerModalWidget({super.key});
+  const CorrectAnswerModalWidget({
+    super.key,
+    required this.title,
+    required this.buttonClick,
+    this.onContinue,
+  });
+
+  final String title;
+  final String buttonClick;
+  final Function()? onContinue;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +30,7 @@ class CorrectAnswerModalWidget extends StatelessWidget {
             children: [
               const Icon(IconlyBold.tickSquare),
               const SpaceHorizontal.x4(),
-              BoxText.heading4('Uhul! Correto!'),
+              BoxText.heading4(title),
             ],
           ),
           const Spacer(),
@@ -29,7 +38,7 @@ class CorrectAnswerModalWidget extends StatelessWidget {
             title: 'Continuar',
             color: Colors.white,
             textColor: StudentDesignSystem.config.colors.dark,
-            onTap: () {},
+            onTap: onContinue,
           ),
         ],
       ),
