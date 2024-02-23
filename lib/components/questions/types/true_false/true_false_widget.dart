@@ -48,6 +48,7 @@ class _TrueFalseQuestionTypeWidgetState
               HeadTrueOrFalseWidget(
                 title: widget.title!,
                 image: widget.image,
+                file: widget.file,
               ),
               Row(
                 children: [
