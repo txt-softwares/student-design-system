@@ -3,8 +3,6 @@ import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 import 'package:student_design_system/student_design_system.dart';
 
-import '../../../../config/ds_config.dart';
-import '../../../../widgets/button/button_widget.dart';
 import '../../shared/head_question_widget.dart';
 
 class DiscursiveTypeWidget extends StatefulWidget {

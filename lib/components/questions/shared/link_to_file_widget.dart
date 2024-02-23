@@ -46,7 +46,7 @@ class LinkToFileContentWidget extends StatelessWidget {
 class AudioPlayerWidget extends StatefulWidget {
   final String audioUrl;
 
-  AudioPlayerWidget({super.key, required this.audioUrl});
+  const AudioPlayerWidget({super.key, required this.audioUrl});
 
   @override
   State<AudioPlayerWidget> createState() => _AudioPlayerWidgetState();
@@ -112,7 +112,7 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
                           isPlaying = !isPlaying;
                         });
                       },
-                      child: Icon(Icons.play_arrow),
+                      child: const Icon(Icons.play_arrow),
                     ),
                   ),
                 ),

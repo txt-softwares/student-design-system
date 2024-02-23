@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:student_design_system/components/questions/models/match_model.dart';
 import 'package:student_design_system/student_design_system.dart';
 
 class MatchItemWidget extends StatelessWidget {
