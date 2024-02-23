@@ -24,7 +24,9 @@ class QuestionsPercentIndicatorWidget extends StatelessWidget {
       child: Row(
         children: [
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.pop(context);
+            },
             child: Icon(
               Icons.close_rounded,
               color: dsColor.dark,
