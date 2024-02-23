@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:student_design_system/student_design_system.dart';
 
 import '../../shared/link_to_file_widget.dart';
@@ -25,9 +26,9 @@ class HeadTrueOrFalseWidget extends StatelessWidget {
           package: 'student_design_system',
         ),
         const SizedBox(height: 48),
-        BoxText.heading5(
+        HtmlWidget(
           title,
-          align: TextAlign.center,
+          textStyle: TextStyles.heading5,
         ),
         if (file != null)
           Column(
