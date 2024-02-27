@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:student_design_system/student_design_system.dart';
 
-import '../../../../config/ds_config.dart';
-import '../../../../widgets/button/button_widget.dart';
 import '../../shared/head_question_widget.dart';
 
 class OrderSentenceTypeWidget extends StatefulWidget {

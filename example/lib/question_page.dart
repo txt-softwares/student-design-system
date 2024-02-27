@@ -26,7 +26,14 @@ class _QuestionWidgetState extends State<QuestionWidget> {
         ],
         file: null,
         title: 'Unscramble the words to form sentences',
-        onAnswer: (list) {},
+        onAnswer: (list) {
+          StudentSnackBar.show(
+              text: 'text',
+              context: context,
+              icon: Icon(Icons.cancel),
+              bgColor: StudentDesignSystem.config.colors.error[50]!,
+              mainColor: StudentDesignSystem.config.colors.error[500]!);
+        },
       ),
       // body: MatchWidget(
       //   file: null,
