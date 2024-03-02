@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:student_design_system/components/questions/types/discursive/complete_question_widget.dart';
 import 'package:student_design_system/student_design_system.dart';
 
 class QuestionWidget extends StatefulWidget {
