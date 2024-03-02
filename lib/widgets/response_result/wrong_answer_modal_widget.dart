@@ -32,6 +32,7 @@ class WrongAnswerModalWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Icon(
                 IconlyBold.closeSquare,
