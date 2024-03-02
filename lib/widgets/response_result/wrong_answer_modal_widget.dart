@@ -13,7 +13,7 @@ class WrongAnswerModalWidget extends StatelessWidget {
   });
 
   final String title;
-  final String correctAnswer;
+  final String? correctAnswer;
   final String rightAnswerMessage;
   final String buttonTitle;
   final Function()? onContinue;
@@ -50,10 +50,11 @@ class WrongAnswerModalWidget extends StatelessWidget {
             color: Colors.white,
           ),
           const SpaceVertical.x2(),
-          BoxText.bodyLargeSemiBold(
-            correctAnswer,
-            color: Colors.white,
-          ),
+          if (correctAnswer != null)
+            BoxText.bodyLargeSemiBold(
+              correctAnswer!,
+              color: Colors.white,
+            ),
           const Spacer(),
           StudentButtonWidget(
             title: buttonTitle,
