@@ -10,12 +10,17 @@ import '../../shared/head_question_widget.dart';
 class DiscursiveTypeWidget extends StatefulWidget {
   const DiscursiveTypeWidget({
     Key? key,
-    required this.title,
+    required this.expectedAnswer,
     required this.onAnswer,
     required this.onCantSpeakNow,
+    required this.content,
+    this.file,
   }) : super(key: key);
 
-  final String? title;
+  final String expectedAnswer;
+  final String content;
+  final String? file;
+
   final Function(String answer) onAnswer;
   final Function() onCantSpeakNow;
 
@@ -40,7 +45,10 @@ class _DiscursiveTypeWidgetState extends State<DiscursiveTypeWidget> {
 
   /// Each time to start a speech recognition session
   void _startListening() async {
-    await _speechToText.listen(onResult: _onSpeechResult);
+    var locales = await _speechToText.locales();
+    final usa = locales.firstWhere((element) => element.localeId == 'en_US');
+    await _speechToText.listen(
+        onResult: _onSpeechResult, localeId: usa.localeId);
     setState(() {});
   }
 
@@ -115,11 +123,11 @@ class _DiscursiveTypeWidgetState extends State<DiscursiveTypeWidget> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24.0),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: HeadQuestionWidget(
-            file: null,
-            title: 'Speak this sentence',
+            file: widget.file,
+            title: widget.content,
           ),
         ),
         Padding(
@@ -155,7 +163,7 @@ class _DiscursiveTypeWidgetState extends State<DiscursiveTypeWidget> {
                     ),
                   ),
                   child: RichText(
-                    text: highlightWords(widget.title!, _lastWords),
+                    text: highlightWords(widget.expectedAnswer, _lastWords),
                   ),
                 ),
               ),
@@ -232,9 +240,7 @@ class _DiscursiveTypeWidgetState extends State<DiscursiveTypeWidget> {
           padding: const EdgeInsets.all(24),
           child: StudentButtonWidget.secoundary(
             title: 'Não posso falar agora',
-            onTap: () {
-              widget.onCantSpeakNow();
-            },
+            onTap: widget.onCantSpeakNow,
           ),
         )
       ],

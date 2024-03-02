@@ -103,7 +103,7 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
                   child: SizedBox(
                     height: 80,
                     width: 80,
-                    child: InkWell(
+                    child: GestureDetector(
                       onTap: () async {
                         if (!isPlaying) {
                           await audioPlayer.play(UrlSource(widget.audioUrl));

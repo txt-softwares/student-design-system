@@ -1,4 +1,6 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+
 import 'package:student_design_system/student_design_system.dart';
 
 import '../../shared/head_question_widget.dart';
@@ -8,9 +10,14 @@ class OrderSentenceTypeWidget extends StatefulWidget {
     Key? key,
     required this.content,
     required this.onAnswer,
+    required this.expectedAnswer,
+    this.file,
   }) : super(key: key);
 
   final String content;
+  final String expectedAnswer;
+  final String? file;
+
   final Function(String orderedSetence) onAnswer;
 
   @override
@@ -18,17 +25,26 @@ class OrderSentenceTypeWidget extends StatefulWidget {
       _OrderSentenceTypeWidgetState();
 }
 
+class Word {
+  int id;
+  String text;
+  Word({
+    required this.id,
+    required this.text,
+  });
+}
+
 class _OrderSentenceTypeWidgetState extends State<OrderSentenceTypeWidget> {
-  List<String> selectedWords = [];
+  List<Word> selectedWords = [];
 
-  List<String> allAvaliableWords = [];
+  List<Word> allAvaliableWords = [];
 
-  void setWordAnswer(String item) {
+  void setWordAnswer(Word item) {
     selectedWords.add(item);
     setState(() {});
   }
 
-  void removeWordAnswer(String item) {
+  void removeWordAnswer(Word item) {
     selectedWords.remove(item);
     setState(() {});
   }
@@ -37,9 +53,12 @@ class _OrderSentenceTypeWidgetState extends State<OrderSentenceTypeWidget> {
   void initState() {
     Future.microtask(() {
       setState(() {
-        final items = widget.content.split(" ");
+        final items = widget.expectedAnswer.split(" ");
         items.shuffle();
-        allAvaliableWords = List.from(items);
+
+        for (int i = 0; i < items.length; i++) {
+          allAvaliableWords.add(Word(id: i, text: items[i]));
+        }
       });
     });
 
@@ -54,9 +73,9 @@ class _OrderSentenceTypeWidgetState extends State<OrderSentenceTypeWidget> {
           child: ListView(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             children: [
-              const HeadQuestionWidget(
-                file: null,
-                title: 'Unscramble the words to form sentences',
+              HeadQuestionWidget(
+                file: widget.file,
+                title: widget.content,
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -118,7 +137,7 @@ class _OrderSentenceTypeWidgetState extends State<OrderSentenceTypeWidget> {
     );
   }
 
-  Widget _buildItem(String item, bool toAdd) {
+  Widget _buildItem(Word item, bool toAdd) {
     return Container(
       margin: const EdgeInsets.only(
         right: 6,
@@ -157,7 +176,7 @@ class _OrderSentenceTypeWidgetState extends State<OrderSentenceTypeWidget> {
           ),
         ),
         child: BoxText.bodyXLargeBold(
-          item,
+          item.text,
           color: toAdd &&
                   selectedWords.contains(item) &&
                   allAvaliableWords.contains(item)
