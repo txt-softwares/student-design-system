@@ -30,6 +30,7 @@ class WrongAnswerModalWidget extends StatelessWidget {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -52,6 +53,7 @@ class WrongAnswerModalWidget extends StatelessWidget {
               color: Colors.white,
             ),
           const SpaceVertical.x2(),
+          if (correctAnswer == null) const SpaceVertical.x8(),
           if (correctAnswer != null)
             BoxText.bodyLargeSemiBold(
               correctAnswer!,
