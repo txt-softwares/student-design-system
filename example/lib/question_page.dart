@@ -12,29 +12,35 @@ class _QuestionWidgetState extends State<QuestionWidget> {
   int? selected;
   bool? isSelected;
 
+  bool canSpeak = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: ReorderQuestionTypeWidget(
-        options: [
-          StudentTaskOptionModel(content: 'students', correct: false, id: 1),
-          StudentTaskOptionModel(content: 'the', correct: false, id: 2),
-          StudentTaskOptionModel(content: 'to', correct: false, id: 3),
-          StudentTaskOptionModel(content: 'call', correct: false, id: 4),
-          StudentTaskOptionModel(content: 'him', correct: false, id: 5),
-        ],
-        title: 'Unscramble the words to form sentences',
+      body: WritterQuestionTypeWidget(
+        canSpeak: canSpeak,
+        onCantSpeakNow: () => setState(() {
+          canSpeak = false;
+        }),
+        // options: [
+        //   StudentTaskOptionModel(content: 'students', correct: false, id: 1),
+        //   StudentTaskOptionModel(content: 'the', correct: false, id: 2),
+        //   StudentTaskOptionModel(content: 'to', correct: false, id: 3),
+        //   StudentTaskOptionModel(content: 'call', correct: false, id: 4),
+        //   StudentTaskOptionModel(content: 'him', correct: false, id: 5),
+        // ],
+        expectedAnswer: 'How are you?',
         onAnswer: (list) {
           StudentSnackBar.show(
               text: 'text',
               context: context,
-              icon: Icon(Icons.cancel),
+              icon: const Icon(Icons.cancel),
               bgColor: StudentDesignSystem.config.colors.error[50]!,
               mainColor: StudentDesignSystem.config.colors.error[500]!);
         },
-        file:
-            'https://cdn.pixabay.com/download/audio/2024/01/04/audio_a103e3fddf.mp3?filename=biodynamic-impact-braam-tonal-dark-184276.mp3',
+        // file:
+        //     'https://cdn.pixabay.com/download/audio/2024/01/04/audio_a103e3fddf.mp3?filename=biodynamic-impact-braam-tonal-dark-184276.mp3',
       ),
       // body: MatchWidget(
       //   file: null,

@@ -6,14 +6,10 @@ import '../../shared/head_question_widget.dart';
 class OrderSentenceTypeWidget extends StatefulWidget {
   const OrderSentenceTypeWidget({
     Key? key,
-    required this.title,
     required this.content,
-    required this.file,
     required this.onAnswer,
   }) : super(key: key);
 
-  final String? title;
-  final String? file;
   final String content;
   final Function(String orderedSetence) onAnswer;
 
@@ -58,9 +54,9 @@ class _OrderSentenceTypeWidgetState extends State<OrderSentenceTypeWidget> {
           child: ListView(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             children: [
-              HeadQuestionWidget(
-                file: widget.file,
-                title: widget.title,
+              const HeadQuestionWidget(
+                file: null,
+                title: 'Unscramble the words to form sentences',
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
