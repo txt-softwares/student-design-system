@@ -44,18 +44,19 @@ class WrongAnswerModalWidget extends StatelessWidget {
               ),
             ],
           ),
-          const Spacer(),
-          BoxText.heading4(
-            rightAnswerMessage,
-            color: Colors.white,
-          ),
+          if (correctAnswer != null) const Spacer(),
+          if (correctAnswer != null)
+            BoxText.heading4(
+              rightAnswerMessage,
+              color: Colors.white,
+            ),
           const SpaceVertical.x2(),
           if (correctAnswer != null)
             BoxText.bodyLargeSemiBold(
               correctAnswer!,
               color: Colors.white,
             ),
-          const Spacer(),
+          if (correctAnswer != null) const Spacer(),
           StudentButtonWidget(
             title: buttonTitle,
             color: Colors.white,
