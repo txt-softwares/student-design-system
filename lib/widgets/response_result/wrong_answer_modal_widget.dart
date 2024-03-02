@@ -21,7 +21,7 @@ class WrongAnswerModalWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 256,
+      height: correctAnswer == null ? 186 : 256,
       padding: const EdgeInsets.only(
         top: 26,
         left: 26,
@@ -53,7 +53,7 @@ class WrongAnswerModalWidget extends StatelessWidget {
               color: Colors.white,
             ),
           const SpaceVertical.x2(),
-          if (correctAnswer == null) const SpaceVertical.x8(),
+          if (correctAnswer == null) const SpaceVertical.x4(),
           if (correctAnswer != null)
             BoxText.bodyLargeSemiBold(
               correctAnswer!,
