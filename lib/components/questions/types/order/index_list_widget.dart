@@ -16,6 +16,7 @@ class IndexListWidget extends StatelessWidget {
       width: 72,
       child: ListView.separated(
         shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
         padding: const EdgeInsets.only(right: 16),
         itemBuilder: (context, index) => Container(
           height: 56,
