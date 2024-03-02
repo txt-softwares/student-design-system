@@ -111,7 +111,8 @@ class _CompleteTheSentenceypeWidgetState
           child: StudentButtonWidget(
             title: 'Verificar',
             onTap: _textFieldController.text.isNotEmpty
-                ? () => widget.onAnswer(_textFieldController.text)
+                ? () => widget.onAnswer(
+                    partBefore + _textFieldController.text + (partAfter ?? ''))
                 : null,
           ),
         )
