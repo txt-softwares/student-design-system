@@ -19,17 +19,17 @@ class QuestionsPercentIndicatorWidget extends StatelessWidget {
         left: 24,
         right: 24,
         bottom: 40,
-        top: 76,
+        top: 16,
       ),
       child: Row(
         children: [
-          InkWell(
+          GestureDetector(
             onTap: () {
               Navigator.pop(context);
             },
             child: Icon(
               Icons.close_rounded,
-              color: dsColor.dark,
+              color: dsColor.dark[900],
             ),
           ),
           Expanded(
