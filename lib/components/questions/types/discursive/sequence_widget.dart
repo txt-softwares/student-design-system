@@ -128,7 +128,7 @@ class _OrderSentenceTypeWidgetState extends State<OrderSentenceTypeWidget> {
                       selectedWords.fold(
                           '',
                           (previousValue, element) =>
-                              '$previousValue $element'),
+                              '$previousValue ${element.text}'),
                     )
                 : null,
           ),
