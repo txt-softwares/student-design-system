@@ -27,6 +27,14 @@ class _TrueFalseQuestionTypeWidgetState
     extends State<TrueFalseQuestionTypeWidget> {
   bool? selected;
 
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      selected = null;
+    });
+  }
+
   void onSelected(bool answer) {
     setState(() {
       selected = answer;
