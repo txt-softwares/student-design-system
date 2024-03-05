@@ -44,7 +44,7 @@ class _CardCounterWidgetState extends State<CardCounterWidget> {
             ),
           ),
           const SpaceHorizontal.x2(),
-          labelList[randomIndex],
+          if (widget.showLabel) labelList[randomIndex],
           const SpaceHorizontal.x2(),
           _buildCounterBox(
             widget.counterCardsLearned,
