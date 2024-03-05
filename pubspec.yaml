@@ -11,6 +11,7 @@ dependencies:
   brasil_fields: ^1.14.2
   cached_network_image: ^3.3.1
   dropdown_textfield: ^1.0.8
+  flip_card: ^0.7.0
   flutter:
     sdk: flutter
   flutter_riverpod: ^2.4.10
