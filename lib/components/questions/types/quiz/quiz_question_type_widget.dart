@@ -1,48 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:student_design_system/components/questions/models/quiz_question_model.dart';
 import 'package:swipe_cards/swipe_cards.dart';
-import '../../models/option_model.dart';
 import 'task_flip_card_type_widget.dart';
 
 class QuizQuestionTypeWidget extends StatefulWidget {
   const QuizQuestionTypeWidget({
     Key? key,
-    required this.id,
-    required this.content,
-    required this.file,
-    required this.expectedAnswer,
     required this.showLabel,
-    required this.onStackFinished,
     required this.onAnswer,
     required this.options,
-    required this.leftSwipeAllowed,
+    required this.onFinished,
   }) : super(key: key);
 
-  final int id;
-  final String? content;
-  final String? file;
-  final String expectedAnswer;
   final bool showLabel;
-  final Function() onStackFinished;
   final Function(bool isCorrect, int id) onAnswer;
-  final List<StudentTaskOptionModel> options;
-  final bool leftSwipeAllowed;
+  final List<QuizQuestionModel> options;
+  final Function() onFinished;
 
   @override
   State<QuizQuestionTypeWidget> createState() => _QuizQuestionTypeWidgetState();
 }
 
 class _QuizQuestionTypeWidgetState extends State<QuizQuestionTypeWidget> {
-  final List<SwipeItem> _swipeItems = [];
+  List<SwipeItem> _swipeItems = [];
   MatchEngine? _matchEngine;
   int currentIndex = -1;
 
   @override
   void initState() {
-    for (int i = 0; i < widget.options.length; i++) {
-      _swipeItems.add(
-        SwipeItem(),
-      );
-    }
+    _swipeItems = widget.options.map((e) => SwipeItem(content: e.id)).toList();
     _matchEngine = MatchEngine(swipeItems: _swipeItems);
     super.initState();
   }
@@ -53,17 +39,17 @@ class _QuizQuestionTypeWidgetState extends State<QuizQuestionTypeWidget> {
       matchEngine: _matchEngine!,
       itemBuilder: (BuildContext context, int index) {
         return TaskFlipCardTypeWidget(
-          content: widget.content,
-          file: widget.file,
-          expectedAnswer: widget.expectedAnswer,
+          content: widget.options[index].content,
+          file: widget.options[index].file,
+          expectedAnswer: widget.options[index].expectedAnswer,
           showLabel: widget.showLabel,
         );
       },
+      onStackFinished: widget.onFinished,
       itemChanged: (p0, p1) {
-        widget.onAnswer(p0.decision == Decision.like, widget.id);
+        widget.onAnswer(p0.decision == Decision.like, p0.content);
       },
-      onStackFinished: widget.onStackFinished,
-      leftSwipeAllowed: widget.leftSwipeAllowed,
+      leftSwipeAllowed: true,
       rightSwipeAllowed: true,
       upSwipeAllowed: false,
       fillSpace: true,
