@@ -38,8 +38,8 @@ class _OrderQuestionTypeWidgetState extends State<ReorderQuestionTypeWidget> {
   @override
   void initState() {
     super.initState();
-
-    reorderedItems = widget.options;
+    reorderedItems = List<StudentTaskOptionModel>.from(widget.options);
+    reorderedItems.shuffle();
   }
 
   @override

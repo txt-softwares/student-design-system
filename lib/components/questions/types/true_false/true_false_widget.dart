@@ -27,6 +27,14 @@ class _TrueFalseQuestionTypeWidgetState
     extends State<TrueFalseQuestionTypeWidget> {
   bool? selected;
 
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      selected = null;
+    });
+  }
+
   void onSelected(bool answer) {
     setState(() {
       selected = answer;
@@ -48,6 +56,7 @@ class _TrueFalseQuestionTypeWidgetState
               HeadTrueOrFalseWidget(
                 title: widget.title!,
                 image: widget.image,
+                file: widget.file,
               ),
               Row(
                 children: [
@@ -64,6 +73,7 @@ class _TrueFalseQuestionTypeWidgetState
                   ),
                 ],
               ),
+              const SpaceVertical.x5(),
             ],
           ),
         ),

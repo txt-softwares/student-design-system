@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:student_design_system/student_design_system.dart';
 import 'link_to_file_widget.dart';
 
@@ -17,7 +18,11 @@ class HeadQuestionWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (title != null) BoxText.heading4(title!),
+        if (title != null)
+          HtmlWidget(
+            title!,
+            textStyle: TextStyles.heading4,
+          ),
         const SpaceVertical.x6(),
         Divider(
           color: StudentDesignSystem.config.colors.darkblue[200],

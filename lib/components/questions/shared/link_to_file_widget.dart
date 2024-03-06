@@ -1,11 +1,9 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:lottie/lottie.dart';
-import 'package:student_design_system/config/config.dart';
-import 'package:student_design_system/spacing/spacing.dart';
-
-import '../../../typography/box_text.dart';
+import 'package:student_design_system/student_design_system.dart';
 
 class LinkToFileContentWidget extends StatelessWidget {
   final String link;
@@ -46,7 +44,7 @@ class LinkToFileContentWidget extends StatelessWidget {
 class AudioPlayerWidget extends StatefulWidget {
   final String audioUrl;
 
-  AudioPlayerWidget({super.key, required this.audioUrl});
+  const AudioPlayerWidget({super.key, required this.audioUrl});
 
   @override
   State<AudioPlayerWidget> createState() => _AudioPlayerWidgetState();
@@ -79,13 +77,17 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
       child: isPlaying
           ? Column(
               children: [
-                Lottie.asset(
-                  'assets/audio/audio-wave.json',
-                  package: 'student_design_system',
-                  fit: BoxFit.fitHeight,
-                  repeat: true,
-                  width: double.maxFinite,
-                  height: 96,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Lottie.asset(
+                    'assets/audio/audio-wave.json',
+                    package: 'student_design_system',
+                    fit: BoxFit.fitWidth,
+                    repeat: true,
+                    width: double.maxFinite,
+                    alignment: Alignment.center,
+                    height: 80,
+                  ),
                 ),
                 const SpaceVertical.x4(),
                 BoxText.bodyLargeSemiBold(
@@ -101,7 +103,7 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
                   child: SizedBox(
                     height: 80,
                     width: 80,
-                    child: InkWell(
+                    child: GestureDetector(
                       onTap: () async {
                         if (!isPlaying) {
                           await audioPlayer.play(UrlSource(widget.audioUrl));
@@ -112,7 +114,10 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
                           isPlaying = !isPlaying;
                         });
                       },
-                      child: Icon(Icons.play_arrow),
+                      child: SvgPicture.asset(
+                        'assets/images/play-primary.svg',
+                        package: 'student_design_system',
+                      ),
                     ),
                   ),
                 ),

@@ -2,12 +2,26 @@ import 'package:flutter/material.dart';
 import '../../student_design_system.dart';
 
 class WrongAnswerModalWidget extends StatelessWidget {
-  const WrongAnswerModalWidget({super.key});
+  const WrongAnswerModalWidget({
+    super.key,
+    required this.title,
+    required this.correctAnswer,
+    required this.rightAnswerMessage,
+    required this.buttonTitle,
+    this.onContinue,
+    this.isLoading = false,
+  });
 
+  final String title;
+  final String? correctAnswer;
+  final String rightAnswerMessage;
+  final String buttonTitle;
+  final Function()? onContinue;
+  final bool isLoading;
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 256,
+      height: correctAnswer == null ? 186 : 256,
       padding: const EdgeInsets.only(
         top: 26,
         left: 26,
@@ -16,8 +30,10 @@ class WrongAnswerModalWidget extends StatelessWidget {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
           Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Icon(
                 IconlyBold.closeSquare,
@@ -25,27 +41,31 @@ class WrongAnswerModalWidget extends StatelessWidget {
               ),
               const SpaceHorizontal.x4(),
               BoxText.heading4(
-                'Errou :(',
+                title,
                 color: Colors.white,
               ),
             ],
           ),
-          const Spacer(),
-          BoxText.heading4(
-            'Resposta correta:',
-            color: Colors.white,
-          ),
+          if (correctAnswer != null) const Spacer(),
+          if (correctAnswer != null)
+            BoxText.heading4(
+              rightAnswerMessage,
+              color: Colors.white,
+            ),
           const SpaceVertical.x2(),
-          BoxText.bodyLargeSemiBold(
-            'The restaurant',
-            color: Colors.white,
-          ),
-          const Spacer(),
+          if (correctAnswer == null) const SpaceVertical.x4(),
+          if (correctAnswer != null)
+            BoxText.bodyLargeSemiBold(
+              correctAnswer!,
+              color: Colors.white,
+            ),
+          if (correctAnswer != null) const Spacer(),
           StudentButtonWidget(
-            title: 'Entendi',
+            title: buttonTitle,
             color: Colors.white,
+            isLoading: isLoading,
             textColor: StudentDesignSystem.config.colors.dark,
-            onTap: () {},
+            onTap: onContinue,
           ),
         ],
       ),
