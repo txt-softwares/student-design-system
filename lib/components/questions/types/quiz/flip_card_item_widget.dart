@@ -12,11 +12,6 @@ class FlipCardItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        margin: const EdgeInsets.only(
-          bottom: 40,
-          left: 24,
-          right: 24,
-        ),
         padding: const EdgeInsets.only(
           top: 32,
           bottom: 32,
