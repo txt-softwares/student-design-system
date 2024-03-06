@@ -51,7 +51,7 @@ class _QuizQuestionTypeWidgetState extends State<QuizQuestionTypeWidget> {
       matchEngine: _matchEngine!,
       itemBuilder: (BuildContext context, int index) {
         return TaskFlipCardTypeWidget(
-          content: widget.options[index].content,
+          content: widget.content,
           file: widget.file,
           expectedAnswer: widget.expectedAnswer,
           showLabel: widget.showLabel,

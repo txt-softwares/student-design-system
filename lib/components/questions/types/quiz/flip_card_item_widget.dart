@@ -19,18 +19,19 @@ class FlipCardItemWidget extends StatelessWidget {
           right: 16,
         ),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(
-              color: StudentDesignSystem.config.colors.dark[200]!,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+            color: StudentDesignSystem.config.colors.dark[200]!,
+          ),
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 10,
+              spreadRadius: 1,
+              color: StudentDesignSystem.config.colors.dark[100]!,
             ),
-            boxShadow: [
-              BoxShadow(
-                blurRadius: 10,
-                spreadRadius: 1,
-                color: StudentDesignSystem.config.colors.dark[100]!,
-              ),
-            ],
-            color: StudentDesignSystem.config.colors.white),
+          ],
+          color: StudentDesignSystem.config.colors.white,
+        ),
         child: Center(
           child: child,
         ),
