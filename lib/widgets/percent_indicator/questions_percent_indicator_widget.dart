@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import '../../student_design_system.dart';
 
@@ -18,18 +19,18 @@ class QuestionsPercentIndicatorWidget extends StatelessWidget {
       padding: const EdgeInsets.only(
         left: 24,
         right: 24,
-        bottom: 40,
-        top: 76,
+        bottom: 0,
+        top: 16,
       ),
       child: Row(
         children: [
-          InkWell(
+          GestureDetector(
             onTap: () {
               Navigator.pop(context);
             },
-            child: Icon(
-              Icons.close_rounded,
-              color: dsColor.dark,
+            child: SvgPicture.asset(
+              'assets/images/back.svg',
+              package: 'student_design_system',
             ),
           ),
           Expanded(
