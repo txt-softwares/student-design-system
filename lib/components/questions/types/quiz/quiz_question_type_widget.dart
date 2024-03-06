@@ -28,7 +28,17 @@ class _QuizQuestionTypeWidgetState extends State<QuizQuestionTypeWidget> {
 
   @override
   void initState() {
-    _swipeItems = widget.options.map((e) => SwipeItem(content: e.id)).toList();
+    _swipeItems = widget.options
+        .map((e) => SwipeItem(
+              content: e.id,
+              likeAction: () {
+                widget.onAnswer(true, e.id);
+              },
+              nopeAction: () {
+                widget.onAnswer(false, e.id);
+              },
+            ))
+        .toList();
     _matchEngine = MatchEngine(swipeItems: _swipeItems);
     super.initState();
   }
@@ -46,9 +56,6 @@ class _QuizQuestionTypeWidgetState extends State<QuizQuestionTypeWidget> {
         );
       },
       onStackFinished: widget.onFinished,
-      itemChanged: (p0, p1) {
-        widget.onAnswer(p0.decision == Decision.like, p0.content);
-      },
       leftSwipeAllowed: true,
       rightSwipeAllowed: true,
       upSwipeAllowed: false,
