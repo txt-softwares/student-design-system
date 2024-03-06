@@ -55,7 +55,7 @@ class _TaskFlipCardTypeWidgetState extends State<TaskFlipCardTypeWidget> {
               if (widget.showLabel)
                 Positioned(
                   bottom: 70,
-                  left: MediaQuery.of(context).size.width / 4,
+                  left: MediaQuery.of(context).size.width / 5,
                   child: BoxText.bodyLargeMedium(
                     'Toque no cartão para virar',
                     color: StudentDesignSystem.config.colors.dark[500],
