@@ -6,6 +6,7 @@ import 'task_flip_card_type_widget.dart';
 class QuizQuestionTypeWidget extends StatefulWidget {
   const QuizQuestionTypeWidget({
     Key? key,
+    required this.id,
     required this.content,
     required this.file,
     required this.expectedAnswer,
@@ -16,12 +17,13 @@ class QuizQuestionTypeWidget extends StatefulWidget {
     required this.leftSwipeAllowed,
   }) : super(key: key);
 
+  final int id;
   final String? content;
   final String? file;
   final String expectedAnswer;
   final bool showLabel;
   final Function() onStackFinished;
-  final Function(SwipeItem, int)? onAnswer;
+  final Function(bool isCorrect, int id) onAnswer;
   final List<StudentTaskOptionModel> options;
   final bool leftSwipeAllowed;
 
@@ -57,7 +59,9 @@ class _QuizQuestionTypeWidgetState extends State<QuizQuestionTypeWidget> {
           showLabel: widget.showLabel,
         );
       },
-      itemChanged: widget.onAnswer,
+      itemChanged: (p0, p1) {
+        widget.onAnswer(p0.decision == Decision.like, widget.id);
+      },
       onStackFinished: widget.onStackFinished,
       leftSwipeAllowed: widget.leftSwipeAllowed,
       rightSwipeAllowed: true,
