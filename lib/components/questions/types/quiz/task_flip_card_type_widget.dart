@@ -1,5 +1,6 @@
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:student_design_system/components/questions/types/quiz/flip_card_item_widget.dart';
 import 'package:student_design_system/student_design_system.dart';
 
@@ -40,9 +41,13 @@ class _TaskFlipCardTypeWidgetState extends State<TaskFlipCardTypeWidget> {
                           borderRadius: BorderRadius.circular(8),
                           child: Image.network(widget.file!),
                         )
-                      : BoxText.heading4(
-                          widget.content!,
-                          align: TextAlign.center,
+                      : HtmlWidget(
+                          ' <center>${widget.content!}</center>',
+                          textStyle: TextStyle(
+                            color: StudentDesignSystem.config.colors.dark[900],
+                            fontSize: 24,
+                            fontWeight: FontWeight.w700,
+                          ),
                         ),
                 ),
                 back: FlipCardItemWidget(
