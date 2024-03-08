@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
-import 'package:student_design_system/components/questions/types/quiz/flip_card_item_widget.dart';
+import 'package:student_design_system/components/questions/types/quiz/card/flip_card_item_widget.dart';
 import 'package:student_design_system/student_design_system.dart';
 
 class TaskFlipCardTypeWidget extends StatefulWidget {
