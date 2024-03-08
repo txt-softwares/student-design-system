@@ -10,31 +10,29 @@ class FlipCardItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        padding: const EdgeInsets.only(
-          top: 32,
-          bottom: 32,
-          left: 16,
-          right: 16,
+    return Container(
+      padding: const EdgeInsets.only(
+        top: 32,
+        bottom: 32,
+        left: 16,
+        right: 16,
+      ),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: StudentDesignSystem.config.colors.dark[200]!,
         ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(
-            color: StudentDesignSystem.config.colors.dark[200]!,
+        boxShadow: [
+          BoxShadow(
+            blurRadius: 10,
+            spreadRadius: 1,
+            color: StudentDesignSystem.config.colors.dark[100]!,
           ),
-          boxShadow: [
-            BoxShadow(
-              blurRadius: 10,
-              spreadRadius: 1,
-              color: StudentDesignSystem.config.colors.dark[100]!,
-            ),
-          ],
-          color: StudentDesignSystem.config.colors.white,
-        ),
-        child: Center(
-          child: child,
-        ),
+        ],
+        color: StudentDesignSystem.config.colors.white,
+      ),
+      child: Center(
+        child: child,
       ),
     );
   }
