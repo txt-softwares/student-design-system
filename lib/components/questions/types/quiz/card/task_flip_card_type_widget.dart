@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
@@ -39,10 +40,10 @@ class _TaskFlipCardTypeWidgetState extends State<TaskFlipCardTypeWidget> {
                   child: widget.file != null
                       ? ClipRRect(
                           borderRadius: BorderRadius.circular(8),
-                          child: Image.network(widget.file!),
+                          child: CachedNetworkImage(imageUrl: widget.file!),
                         )
                       : HtmlWidget(
-                          ' <center>${widget.content!}</center>',
+                          '<center>${widget.content!}</center>',
                           textStyle: TextStyle(
                             color: StudentDesignSystem.config.colors.dark[900],
                             fontSize: 24,
