@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:student_design_system/components/questions/models/quiz_question_model.dart';
 import 'package:student_design_system/student_design_system.dart';
 
 class QuestionWidget extends StatefulWidget {
@@ -18,21 +19,24 @@ class _QuestionWidgetState extends State<QuestionWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: WritterQuestionTypeWidget(
-        canSpeak: canSpeak,
-        onCantSpeakNow: () => setState(() {
-          canSpeak = false;
-        }),
+      body: EvaluateQuestionTypeWidget(
+        correctItem: QuizQuestionModel(
+            id: 1, content: 'content', file: null, expectedAnswer: 'asdfas'),
+        options: [
+          QuizQuestionModel(
+            content: 'adsfasd',
+            expectedAnswer: 'sadas',
+            file: null,
+            id: 1,
+          ),
+          QuizQuestionModel(
+            content: 'adsfasd',
+            expectedAnswer: 'sadas',
+            file: null,
+            id: 2,
+          )
+        ],
 
-        content: 'Complete these sentences with the verb in the negative',
-        // options: [
-        //   StudentTaskOptionModel(content: 'students', correct: false, id: 1),
-        //   StudentTaskOptionModel(content: 'the', correct: false, id: 2),
-        //   StudentTaskOptionModel(content: 'to', correct: false, id: 3),
-        //   StudentTaskOptionModel(content: 'call', correct: false, id: 4),
-        //   StudentTaskOptionModel(content: 'him', correct: false, id: 5),
-        // ],
-        expectedAnswer: '''I saw Barbara but I didn't see Jane.''',
         onAnswer: (list) {
           StudentSnackBar.show(
               text: 'text',
@@ -41,7 +45,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
               bgColor: StudentDesignSystem.config.colors.error[50]!,
               mainColor: StudentDesignSystem.config.colors.error[500]!);
         },
-        file: null,
+
         //     'https://cdn.pixabay.com/download/audio/2024/01/04/audio_a103e3fddf.mp3?filename=biodynamic-impact-braam-tonal-dark-184276.mp3',
       ),
       // body: MatchWidget(
