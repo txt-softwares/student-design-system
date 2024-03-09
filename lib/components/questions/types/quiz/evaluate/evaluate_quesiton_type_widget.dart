@@ -35,6 +35,10 @@ class _EvaluateQuestionTypeWidgetState
     await Future.delayed(const Duration(milliseconds: 400));
 
     widget.onAnswer(id);
+
+    setState(() {
+      selected = null;
+    });
   }
 
   @override
