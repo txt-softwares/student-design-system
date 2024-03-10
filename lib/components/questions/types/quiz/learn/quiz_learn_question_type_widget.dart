@@ -26,6 +26,8 @@ class _QuizLearnQuestionTypeWidgetState
   final textConroller = TextEditingController();
   bool isAvaliable = false;
 
+  final _focusNode = FocusNode();
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -42,6 +44,7 @@ class _QuizLearnQuestionTypeWidgetState
           ),
           const SpaceVertical.x6(),
           StudentInputWidget(
+            focus: _focusNode,
             controller: textConroller,
             hintText: 'Digite o texto aqui',
             onChanged: (value) {
@@ -59,8 +62,13 @@ class _QuizLearnQuestionTypeWidgetState
                     title: 'Verificar',
                     onTap: textConroller.text.isEmpty
                         ? null
-                        : () => widget.onAnswer(
-                            textConroller.text, widget.option.id),
+                        : () {
+                            _focusNode.unfocus();
+                            widget.onAnswer(
+                              textConroller.text,
+                              widget.option.id,
+                            );
+                          },
                   ),
                 ),
                 const SpaceHorizontal.x3(),
