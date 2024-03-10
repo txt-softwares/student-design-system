@@ -3,8 +3,8 @@ import 'package:student_design_system/components/questions/models/quiz_question_
 import 'package:swipe_cards/swipe_cards.dart';
 import 'task_flip_card_type_widget.dart';
 
-class QuizQuestionTypeWidget extends StatefulWidget {
-  const QuizQuestionTypeWidget({
+class FlipCardQuestionTypeWidget extends StatefulWidget {
+  const FlipCardQuestionTypeWidget({
     Key? key,
     required this.showLabel,
     required this.onAnswer,
@@ -18,10 +18,12 @@ class QuizQuestionTypeWidget extends StatefulWidget {
   final Function() onFinished;
 
   @override
-  State<QuizQuestionTypeWidget> createState() => _QuizQuestionTypeWidgetState();
+  State<FlipCardQuestionTypeWidget> createState() =>
+      _FlipCardQuestionTypeWidgetState();
 }
 
-class _QuizQuestionTypeWidgetState extends State<QuizQuestionTypeWidget> {
+class _FlipCardQuestionTypeWidgetState
+    extends State<FlipCardQuestionTypeWidget> {
   List<SwipeItem> _swipeItems = [];
   MatchEngine? _matchEngine;
   int currentIndex = -1;
@@ -49,9 +51,7 @@ class _QuizQuestionTypeWidgetState extends State<QuizQuestionTypeWidget> {
       matchEngine: _matchEngine!,
       itemBuilder: (BuildContext context, int index) {
         return TaskFlipCardTypeWidget(
-          content: widget.options[index].content,
-          file: widget.options[index].file,
-          expectedAnswer: widget.options[index].expectedAnswer,
+          item: widget.options[index],
           showLabel: widget.showLabel,
         );
       },
