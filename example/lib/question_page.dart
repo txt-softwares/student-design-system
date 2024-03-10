@@ -19,34 +19,46 @@ class _QuestionWidgetState extends State<QuestionWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: EvaluateQuestionTypeWidget(
-        correctItem: QuizQuestionModel(
-            id: 1, content: 'content', file: null, expectedAnswer: 'asdfas'),
-        options: [
-          QuizQuestionModel(
-            content: 'adsfasd',
-            expectedAnswer: 'sadas',
-            file: null,
-            id: 1,
-          ),
-          QuizQuestionModel(
-            content: 'adsfasd',
-            expectedAnswer: 'sadas',
-            file: null,
-            id: 2,
-          )
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(18.0),
+        child: Column(
+          children: [
+            EvaluateErrorQuestionWidget(
+              item: QuizQuestionModel(
+                id: 1,
+                content: 'content',
+                file:
+                    'https://post.healthline.com/wp-content/uploads/2020/06/gardening-soil-digging-dirt-mom-1296x728-header.jpg',
+                expectedAnswer: 'asdfas',
+              ),
+              // options: [
+              //   QuizQuestionModel(
+              //     content: 'adsfasd',
+              //     expectedAnswer: 'sadas',
+              //     file: null,
+              //     id: 1,
+              //   ),
+              //   QuizQuestionModel(
+              //     content: 'adsfasd',
+              //     expectedAnswer: 'sadas',
+              //     file: null,
+              //     id: 2,
+              //   )
+              // ],
 
-        onAnswer: (list) {
-          StudentSnackBar.show(
-              text: 'text',
-              context: context,
-              icon: const Icon(Icons.cancel),
-              bgColor: StudentDesignSystem.config.colors.error[50]!,
-              mainColor: StudentDesignSystem.config.colors.error[500]!);
-        },
+              // onAnswer: (list) {
+              //   StudentSnackBar.show(
+              //       text: 'text',
+              //       context: context,
+              //       icon: const Icon(Icons.cancel),
+              //       bgColor: StudentDesignSystem.config.colors.error[50]!,
+              //       mainColor: StudentDesignSystem.config.colors.error[500]!);
+              // },
 
-        //     'https://cdn.pixabay.com/download/audio/2024/01/04/audio_a103e3fddf.mp3?filename=biodynamic-impact-braam-tonal-dark-184276.mp3',
+              //     'https://cdn.pixabay.com/download/audio/2024/01/04/audio_a103e3fddf.mp3?filename=biodynamic-impact-braam-tonal-dark-184276.mp3',
+            ),
+          ],
+        ),
       ),
       // body: MatchWidget(
       //   file: null,
