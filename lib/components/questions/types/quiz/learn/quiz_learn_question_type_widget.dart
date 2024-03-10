@@ -69,6 +69,9 @@ class _QuizLearnQuestionTypeWidgetState
                               widget.option.id,
                             );
                             textConroller.clear();
+                            setState(() {
+                              isAvaliable = false;
+                            });
                           },
                   ),
                 ),
