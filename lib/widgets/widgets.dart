@@ -7,3 +7,4 @@ export 'image/image.dart';
 export 'input/input_widget.dart';
 export 'snack_bar/snack_bar.dart';
 export 'text_button/text_button_widget.dart';
+export 'percent_indicator/questions_percent_indicator_widget.dart';
