@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:student_design_system/components/questions/types/quiz/content_question_widget.dart';
 import 'package:student_design_system/components/questions/types/quiz/learn/quiz_learn_modal_widget.dart';
 import 'package:student_design_system/student_design_system.dart';
-import '../../../models/quiz_question_model.dart';
 
 class QuizLearnQuestionTypeWidget extends StatefulWidget {
   const QuizLearnQuestionTypeWidget({

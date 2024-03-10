@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:student_design_system/student_design_system.dart';
 
-import '../../../models/quiz_question_model.dart';
-
 class EvaluateOptionWidget extends StatelessWidget {
   const EvaluateOptionWidget({
     Key? key,

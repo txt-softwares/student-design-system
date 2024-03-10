@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:student_design_system/components/questions/models/quiz_question_model.dart';
 
-mixin MatchMixin<T extends StatefulWidget> on State<T> {
-  int? contentSelected;
-  int? matchSelected;
+import 'combine_quesiton_widget.dart';
+
+mixin MatchMixin<T extends CombineQuizQuestionWidget> on State<T> {
+  QuizQuestionModel? firstSelected;
+  QuizQuestionModel? secondSelected;
   bool? isCorrect;
   int totalAnswers = 0;
   List<QuizQuestionModel> contentList = [];
   List<QuizQuestionModel> answers = [];
+
+  late DateTime startAt;
 
   void shuffleNumbers(List<QuizQuestionModel> items) {
     contentList = List<QuizQuestionModel>.from(items);
@@ -17,21 +21,21 @@ mixin MatchMixin<T extends StatefulWidget> on State<T> {
     contentList.shuffle();
   }
 
-  void onSelected(bool isContent, QuizQuestionModel match) async {
+  void onSelected(QuizQuestionModel match) async {
     if (isCorrect != null) {
       return;
     }
     setState(() {
-      if (isContent) {
-        contentSelected = match.id;
+      if (firstSelected != null) {
+        secondSelected = match;
       } else {
-        matchSelected = match.id;
+        firstSelected = match;
       }
     });
 
-    if (contentSelected != null && matchSelected != null) {
+    if (firstSelected != null && secondSelected != null) {
       setState(() {
-        isCorrect = contentSelected == matchSelected;
+        isCorrect = secondSelected?.id == firstSelected?.id;
       });
       await Future.delayed(const Duration(seconds: 1));
       setState(() {
@@ -41,10 +45,14 @@ mixin MatchMixin<T extends StatefulWidget> on State<T> {
           answers.add(match);
         }
 
-        contentSelected = null;
-        matchSelected = null;
+        firstSelected = null;
+        secondSelected = null;
         isCorrect = null;
       });
+
+      if (answers.length >= widget.questions.length) {
+        widget.onAnswer(totalAnswers, startAt.difference(DateTime.now()));
+      }
     }
   }
 }

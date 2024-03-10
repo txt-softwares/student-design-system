@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:student_design_system/student_design_system.dart';
 
-import '../../../models/quiz_question_model.dart';
 import '../content_question_widget.dart';
 import 'evaluate_option_widget.dart';
 

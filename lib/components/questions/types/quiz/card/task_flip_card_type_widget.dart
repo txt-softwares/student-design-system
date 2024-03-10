@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
-import 'package:student_design_system/components/questions/models/quiz_question_model.dart';
 import 'package:student_design_system/student_design_system.dart';
 
 import 'flip_card_item_widget.dart';

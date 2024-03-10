@@ -3,8 +3,8 @@ import 'package:student_design_system/components/questions/types/quiz/combine/co
 import '../../../models/quiz_question_model.dart';
 import 'combine_mixin.dart';
 
-class CombineQuestionWidget extends StatefulWidget {
-  const CombineQuestionWidget({
+class CombineQuizQuestionWidget extends StatefulWidget {
+  const CombineQuizQuestionWidget({
     Key? key,
     required this.questions,
     required this.onAnswer,
@@ -14,48 +14,45 @@ class CombineQuestionWidget extends StatefulWidget {
   final Function(int totalAnswers, Duration duration) onAnswer;
 
   @override
-  State<CombineQuestionWidget> createState() => _CombineQuestionWidgetState();
+  State<CombineQuizQuestionWidget> createState() =>
+      _CombineQuizQuestionWidgetState();
 }
 
-class _CombineQuestionWidgetState extends State<CombineQuestionWidget>
+class _CombineQuizQuestionWidgetState extends State<CombineQuizQuestionWidget>
     with MatchMixin {
   @override
   void initState() {
     super.initState();
     shuffleNumbers(widget.questions);
+    startAt = DateTime.now();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-            child: ListView(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                children: [
-              GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3, // number of items in each row
-                  mainAxisSpacing: 8.0, // spacing between rows
-                  crossAxisSpacing: 8.0, // spacing between columns
-                ),
-                padding: const EdgeInsets.all(8.0), // padding around the grid
-                itemCount: contentList.length, // total number of items
-                itemBuilder: (context, index) {
-                  return CombineItemWidget(
-                    match: contentList[index],
-                    onTap: () => onSelected(false, contentList[index]),
-                    isSelected: contentList[index].id == matchSelected,
-                    isCorrect: isCorrect,
-                    selectdItem: matchSelected,
-                    isAnswered: answers.any(
-                      (element) => element.id == contentList[index].id,
-                    ),
-                  );
-                },
-              )
-            ])),
-      ],
+    return GridView.builder(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
+        mainAxisSpacing: 10.0,
+        childAspectRatio: 0.6,
+        crossAxisSpacing: 10.0,
+      ),
+      itemCount: contentList.length,
+      itemBuilder: (context, index) {
+        return CombineItemWidget(
+          match: contentList[index],
+          onTap: () => onSelected(contentList[index]),
+          isSelected: (firstSelected?.id == contentList[index].id &&
+                  contentList[index].answerInCombine ==
+                      firstSelected?.answerInCombine) ||
+              (secondSelected?.id == contentList[index].id &&
+                  contentList[index].answerInCombine ==
+                      secondSelected?.answerInCombine),
+          isCorrect: isCorrect,
+          isAnswered: answers.any(
+            (element) => element.id == contentList[index].id,
+          ),
+        );
+      },
     );
   }
 }

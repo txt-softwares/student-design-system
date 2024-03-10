@@ -9,7 +9,6 @@ class MatchItemWidget extends StatelessWidget {
     required this.isSelected,
     required this.isContent,
     required this.isCorrect,
-    required this.selectdItem,
     required this.isAnswered,
   }) : super(key: key);
 
@@ -18,7 +17,6 @@ class MatchItemWidget extends StatelessWidget {
   final bool isSelected;
   final bool isContent;
   final bool? isCorrect;
-  final int? selectdItem;
   final bool isAnswered;
 
   @override
@@ -59,7 +57,7 @@ class MatchItemWidget extends StatelessWidget {
     final dsColor = StudentDesignSystem.config.colors;
     if (isCorrect == null) {
       return isSelected ? dsColor.primaryPurple : dsColor.white;
-    } else if (selectdItem == match.id) {
+    } else if (isSelected) {
       return isCorrect! ? dsColor.secondaryGreen : dsColor.error[500]!;
     } else {
       return dsColor.white;

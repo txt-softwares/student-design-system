@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:student_design_system/components/questions/models/quiz_question_model.dart';
 import 'package:student_design_system/student_design_system.dart';
 
 class QuestionWidget extends StatefulWidget {
@@ -20,20 +19,34 @@ class _QuestionWidgetState extends State<QuestionWidget> {
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
-        padding: const EdgeInsets.all(18.0),
-        child: FlipCardQuestionTypeWidget(
-          options: [
+        padding: const EdgeInsets.all(24.0),
+        child: CombineQuizQuestionWidget(
+          questions: [
             QuizQuestionModel(
               id: 1,
-              content: 'content',
+              content: 'content 1',
               file:
                   'https://post.healthline.com/wp-content/uploads/2020/06/gardening-soil-digging-dirt-mom-1296x728-header.jpg',
-              expectedAnswer: 'asdfas',
+              expectedAnswer: 'asdfas 1',
+            ),
+            QuizQuestionModel(
+              id: 2,
+              content:
+                  'Her mother is funny, but Carrie doesnt like her brother because he is very serious.',
+              file: null,
+              expectedAnswer: 'asdfas 2',
             ),
           ],
-          onAnswer: (isCorrect, id) {},
-          showLabel: true,
-          onFinished: () {},
+          onAnswer: (isCorrect, id) {
+            StudentSnackBar.show(
+                text: 'text',
+                context: context,
+                icon: const Icon(Icons.cancel),
+                bgColor: StudentDesignSystem.config.colors.error[50]!,
+                mainColor: StudentDesignSystem.config.colors.error[500]!);
+          },
+          // showLabel: true,
+          // onFinished: () {},
           // options: [
           //   QuizQuestionModel(
           //     content: 'adsfasd',
