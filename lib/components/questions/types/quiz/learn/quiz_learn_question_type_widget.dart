@@ -13,7 +13,7 @@ class QuizLearnQuestionTypeWidget extends StatefulWidget {
   });
 
   final QuizQuestionModel option;
-  final Function(QuizQuestionModel answer) onAnswer;
+  final Function(String answer, int questionId) onAnswer;
   final bool showButtons;
 
   @override
@@ -43,9 +43,11 @@ class _QuizLearnQuestionTypeWidgetState
           const SpaceVertical.x6(),
           StudentInputWidget(
             controller: textConroller,
-            hintText: 'Digite o texto da imagem',
+            hintText: 'Digite o texto aqui',
             onChanged: (value) {
-              setState(() => isAvaliable = textConroller.text.isNotEmpty);
+              if (!isAvaliable && value.isNotEmpty) {
+                setState(() => isAvaliable = true);
+              }
             },
           ),
           const SpaceVertical.x5(),
@@ -57,7 +59,8 @@ class _QuizLearnQuestionTypeWidgetState
                     title: 'Verificar',
                     onTap: textConroller.text.isEmpty
                         ? null
-                        : () => widget.onAnswer(widget.option),
+                        : () => widget.onAnswer(
+                            textConroller.text, widget.option.id),
                   ),
                 ),
                 const SpaceHorizontal.x3(),
