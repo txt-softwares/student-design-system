@@ -77,7 +77,7 @@ class TextStyles {
   static final bodyLargeSemiBold = TextStyle(
     color: StudentDesignSystem.config.colors.dark[900],
     fontSize: 16,
-    fontWeight: FontWeight.w600,
+    fontWeight: FontWeight.w500,
   );
   static final bodyLargeMedium = TextStyle(
     color: StudentDesignSystem.config.colors.dark[900],

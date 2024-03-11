@@ -18,31 +18,61 @@ class _QuestionWidgetState extends State<QuestionWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: WritterQuestionTypeWidget(
-        canSpeak: canSpeak,
-        onCantSpeakNow: () => setState(() {
-          canSpeak = false;
-        }),
+      body: Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: CombineQuizQuestionWidget(
+          questions: [
+            QuizQuestionModel(
+              id: 1,
+              content: 'content 1',
+              file:
+                  'https://post.healthline.com/wp-content/uploads/2020/06/gardening-soil-digging-dirt-mom-1296x728-header.jpg',
+              expectedAnswer: 'asdfas 1',
+            ),
+            QuizQuestionModel(
+              id: 2,
+              content:
+                  'Her mother is funny, but Carrie doesnt like her brother because he is very serious.',
+              file: null,
+              expectedAnswer: 'asdfas 2',
+            ),
+          ],
+          onAnswer: (isCorrect, id) {
+            StudentSnackBar.show(
+                text: 'text',
+                context: context,
+                icon: const Icon(Icons.cancel),
+                bgColor: StudentDesignSystem.config.colors.error[50]!,
+                mainColor: StudentDesignSystem.config.colors.error[500]!);
+          },
+          // showLabel: true,
+          // onFinished: () {},
+          // options: [
+          //   QuizQuestionModel(
+          //     content: 'adsfasd',
+          //     expectedAnswer: 'sadas',
+          //     file: null,
+          //     id: 1,
+          //   ),
+          //   QuizQuestionModel(
+          //     content: 'adsfasd',
+          //     expectedAnswer: 'sadas',
+          //     file: null,
+          //     id: 2,
+          //   )
+          // ],
 
-        content: 'Complete these sentences with the verb in the negative',
-        // options: [
-        //   StudentTaskOptionModel(content: 'students', correct: false, id: 1),
-        //   StudentTaskOptionModel(content: 'the', correct: false, id: 2),
-        //   StudentTaskOptionModel(content: 'to', correct: false, id: 3),
-        //   StudentTaskOptionModel(content: 'call', correct: false, id: 4),
-        //   StudentTaskOptionModel(content: 'him', correct: false, id: 5),
-        // ],
-        expectedAnswer: '''I saw Barbara but I didn't see Jane.''',
-        onAnswer: (list) {
-          StudentSnackBar.show(
-              text: 'text',
-              context: context,
-              icon: const Icon(Icons.cancel),
-              bgColor: StudentDesignSystem.config.colors.error[50]!,
-              mainColor: StudentDesignSystem.config.colors.error[500]!);
-        },
-        file: null,
-        //     'https://cdn.pixabay.com/download/audio/2024/01/04/audio_a103e3fddf.mp3?filename=biodynamic-impact-braam-tonal-dark-184276.mp3',
+          // onAnswer: (list) {
+          //   StudentSnackBar.show(
+          //       text: 'text',
+          //       context: context,
+          //       icon: const Icon(Icons.cancel),
+          //       bgColor: StudentDesignSystem.config.colors.error[50]!,
+          //       mainColor: StudentDesignSystem.config.colors.error[500]!);
+          // },
+
+          //     'https://cdn.pixabay.com/download/audio/2024/01/04/audio_a103e3fddf.mp3?filename=biodynamic-impact-braam-tonal-dark-184276.mp3',
+        ),
       ),
       // body: MatchWidget(
       //   file: null,

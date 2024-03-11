@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:student_design_system/components/questions/types/quiz/content_question_widget.dart';
 import 'package:student_design_system/components/questions/types/quiz/learn/quiz_learn_modal_widget.dart';
 import 'package:student_design_system/student_design_system.dart';
-import '../../../models/quiz_question_model.dart';
 
 class QuizLearnQuestionTypeWidget extends StatefulWidget {
   const QuizLearnQuestionTypeWidget({
@@ -13,7 +12,7 @@ class QuizLearnQuestionTypeWidget extends StatefulWidget {
   });
 
   final QuizQuestionModel option;
-  final Function(QuizQuestionModel answer) onAnswer;
+  final Function(String answer, int questionId) onAnswer;
   final bool showButtons;
 
   @override
@@ -25,6 +24,8 @@ class _QuizLearnQuestionTypeWidgetState
     extends State<QuizLearnQuestionTypeWidget> {
   final textConroller = TextEditingController();
   bool isAvaliable = false;
+
+  final _focusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -42,10 +43,13 @@ class _QuizLearnQuestionTypeWidgetState
           ),
           const SpaceVertical.x6(),
           StudentInputWidget(
+            focus: _focusNode,
             controller: textConroller,
-            hintText: 'Digite o texto da imagem',
+            hintText: 'Digite o texto aqui',
             onChanged: (value) {
-              setState(() => isAvaliable = textConroller.text.isNotEmpty);
+              if (!isAvaliable && value.isNotEmpty) {
+                setState(() => isAvaliable = true);
+              }
             },
           ),
           const SpaceVertical.x5(),
@@ -57,7 +61,17 @@ class _QuizLearnQuestionTypeWidgetState
                     title: 'Verificar',
                     onTap: textConroller.text.isEmpty
                         ? null
-                        : () => widget.onAnswer(widget.option),
+                        : () {
+                            _focusNode.unfocus();
+                            widget.onAnswer(
+                              textConroller.text,
+                              widget.option.id,
+                            );
+                            textConroller.clear();
+                            setState(() {
+                              isAvaliable = false;
+                            });
+                          },
                   ),
                 ),
                 const SpaceHorizontal.x3(),

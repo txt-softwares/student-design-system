@@ -52,7 +52,6 @@ class _MatchWidgetState extends State<MatchWidget> with MatchMixin {
                         isAnswered: answers.any(
                           (element) => element.id == contentList[index].id,
                         ),
-                        selectdItem: contentSelected,
                         isCorrect: isCorrect,
                         isContent: true,
                         isSelected: contentList[index].id == contentSelected,
@@ -73,7 +72,6 @@ class _MatchWidgetState extends State<MatchWidget> with MatchMixin {
                         isAnswered: answers.any(
                           (element) => element.id == matchList[index].id,
                         ),
-                        selectdItem: matchSelected,
                         isCorrect: isCorrect,
                         isContent: false,
                         isSelected: matchList[index].id == matchSelected,
