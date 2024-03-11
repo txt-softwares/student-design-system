@@ -41,7 +41,10 @@ class EvaluateOptionWidget extends StatelessWidget {
           ),
         ),
         child: Center(
-          child: BoxText.bodyXLargeBold(option.expectedAnswer),
+          child: BoxText.bodyXLargeBold(
+            option.expectedAnswer,
+            align: TextAlign.center,
+          ),
         ),
       ),
     );
