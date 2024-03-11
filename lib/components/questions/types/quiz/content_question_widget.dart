@@ -14,7 +14,7 @@ class ContentQuestionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsetsDirectional.all(file != null ? 16 : 24),
+      padding: const EdgeInsetsDirectional.all(16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: StudentDesignSystem.config.colors.dark[200]!),
@@ -23,9 +23,25 @@ class ContentQuestionWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
         child: file != null
             ? CachedNetworkImage(imageUrl: file!)
-            : Center(
-                child: BoxText.heading3(text ?? ''),
-              ),
+            : _buildWithText(),
+      ),
+    );
+  }
+
+  Container _buildWithText() {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 24,
+        vertical: 48,
+      ),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        color: StudentDesignSystem.config.colors.primaryPurple,
+      ),
+      child: BoxText.heading4(
+        text ?? '',
+        align: TextAlign.center,
+        color: StudentDesignSystem.config.colors.white,
       ),
     );
   }
