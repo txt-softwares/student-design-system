@@ -36,7 +36,9 @@ class ContentQuestionWidget extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color: StudentDesignSystem.config.colors.primaryPurple,
+        color: text != null
+            ? StudentDesignSystem.config.colors.primaryPurple
+            : null,
       ),
       child: BoxText.heading4(
         text ?? '',
