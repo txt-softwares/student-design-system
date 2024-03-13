@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:student_design_system/student_design_system.dart';
-import '../../components/questions/models/task_model.dart';
 
 class StudentQuizAvailabreWidget extends StatelessWidget {
   const StudentQuizAvailabreWidget({
     super.key,
-    required this.data,
+    required this.id,
+    required this.name,
+    required this.releasedAt,
   });
-  final TaskModel data;
+  final int id;
+  final String name;
+  final DateTime? releasedAt;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +27,7 @@ class StudentQuizAvailabreWidget extends StatelessWidget {
           Navigator.pushNamed(
             context,
             '/quiz',
-            arguments: data.id,
+            arguments: id,
           );
         },
         child: Container(
@@ -45,14 +48,14 @@ class StudentQuizAvailabreWidget extends StatelessWidget {
                     color: Colors.white,
                   ),
                   BoxText.bodyMediumMedium(
-                    DateFormat('dd/MM/yyyy').format(data.releasedAt!),
+                    DateFormat('dd/MM/yyyy').format(releasedAt!),
                     color: StudentDesignSystem.config.colors.primaryPurple[100],
                   ),
                 ],
               ),
               const SizedBox(width: 6),
               BoxText.bodyLargeMedium(
-                data.name,
+                name,
                 color: Colors.white,
               ),
             ],
