@@ -5,12 +5,10 @@ import 'package:student_design_system/student_design_system.dart';
 class StudentQuizAvailabreWidget extends StatelessWidget {
   const StudentQuizAvailabreWidget({
     super.key,
-    required this.id,
     required this.name,
     required this.releasedAt,
     required this.onTap,
   });
-  final int id;
   final String name;
   final DateTime? releasedAt;
   final Function() onTap;
