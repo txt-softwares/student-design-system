@@ -8,10 +8,12 @@ class StudentQuizAvailabreWidget extends StatelessWidget {
     required this.id,
     required this.name,
     required this.releasedAt,
+    required this.onTap,
   });
   final int id;
   final String name;
   final DateTime? releasedAt;
+  final Function() onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -23,13 +25,7 @@ class StudentQuizAvailabreWidget extends StatelessWidget {
         left: 24,
       ),
       child: GestureDetector(
-        onTap: () {
-          Navigator.pushNamed(
-            context,
-            '/quiz',
-            arguments: id,
-          );
-        },
+        onTap: onTap,
         child: Container(
           width: double.infinity,
           padding: const EdgeInsets.all(20),
