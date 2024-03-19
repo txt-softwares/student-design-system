@@ -37,6 +37,7 @@ class LinkToFileContentWidget extends StatelessWidget {
   bool _isAudioLink(String link) {
     return link.endsWith('.mp3') ||
         link.endsWith('.wav') ||
+        link.endsWith('webm') ||
         link.endsWith('.ogg');
   }
 }
