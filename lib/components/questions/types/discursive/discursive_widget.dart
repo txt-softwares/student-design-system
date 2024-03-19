@@ -121,7 +121,8 @@ class _DiscursiveTypeWidgetState extends State<DiscursiveTypeWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return ListView(
+      shrinkWrap: true,
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -242,7 +243,7 @@ class _DiscursiveTypeWidgetState extends State<DiscursiveTypeWidget> {
             title: 'Não posso falar agora',
             onTap: widget.onCantSpeakNow,
           ),
-        )
+        ),
       ],
     );
   }
