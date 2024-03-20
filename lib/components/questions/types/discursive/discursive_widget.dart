@@ -121,54 +121,55 @@ class _DiscursiveTypeWidgetState extends State<DiscursiveTypeWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      shrinkWrap: true,
+    return Column(
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: HeadQuestionWidget(
-            file: widget.file,
+            file: null,
             title: widget.content,
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 24),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 24),
-                child: Center(
-                  child: SizedBox(
-                    height: 56,
-                    width: 56,
-                    child: SvgPicture.asset(
-                      'assets/images/audio-primary.svg',
-                      package: 'student_design_system',
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 24),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 24),
+                  child: Center(
+                    child: SizedBox(
+                      height: 56,
+                      width: 56,
+                      child: SvgPicture.asset(
+                        'assets/images/audio-primary.svg',
+                        package: 'student_design_system',
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Expanded(
-                child: Container(
-                  width: double.maxFinite,
-                  margin: const EdgeInsets.all(24)
-                      .copyWith(left: 12, top: 0, bottom: 0),
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(
-                      StudentDesignSystem.config.borderRadius,
+                Expanded(
+                  child: Container(
+                    width: double.maxFinite,
+                    margin: const EdgeInsets.all(24)
+                        .copyWith(left: 12, top: 0, bottom: 0),
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(
+                        StudentDesignSystem.config.borderRadius,
+                      ),
+                      border: Border.all(
+                        color: StudentDesignSystem.config.colors.dark[200]!,
+                      ),
                     ),
-                    border: Border.all(
-                      color: StudentDesignSystem.config.colors.dark[200]!,
+                    child: RichText(
+                      text: highlightWords(widget.expectedAnswer, _lastWords),
                     ),
-                  ),
-                  child: RichText(
-                    text: highlightWords(widget.expectedAnswer, _lastWords),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
         Expanded(
