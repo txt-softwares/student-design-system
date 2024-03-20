@@ -25,8 +25,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
             QuizQuestionModel(
               id: 1,
               content: 'content 1',
-              file:
-                  'https://post.healthline.com/wp-content/uploads/2020/06/gardening-soil-digging-dirt-mom-1296x728-header.jpg',
+              file: 'https://cia-images-adm.s3.amazonaws.com/question/quiz.png',
               expectedAnswer: 'asdfas 1',
             ),
             QuizQuestionModel(

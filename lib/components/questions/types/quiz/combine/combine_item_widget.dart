@@ -40,7 +40,9 @@ class CombineItemWidget extends StatelessWidget {
       child: isAnswered
           ? Container()
           : match.file != null && !match.answerInCombine
-              ? CachedNetworkImage(imageUrl: match.file!)
+              ? CachedNetworkImage(
+                  imageUrl: match.file!,
+                )
               : Center(
                   child: BoxText.bodyLargeSemiBold(
                     match.answerInCombine
