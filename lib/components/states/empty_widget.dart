@@ -24,7 +24,10 @@ class StudentEmptyWidget extends StatelessWidget {
           const SpaceVertical.x5(),
           StudentPictureWidget.asset(image),
           const SpaceVertical.x8(),
-          BoxText.heading4(title),
+          BoxText.heading4(
+            title,
+            align: TextAlign.center,
+          ),
           const SpaceVertical.x5(),
           BoxText.bodyLargeMedium(
             description,
