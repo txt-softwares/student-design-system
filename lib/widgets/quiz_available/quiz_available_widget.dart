@@ -8,14 +8,12 @@ class StudentQuizAvailableWidget extends StatelessWidget {
     required this.name,
     required this.releasedAt,
     required this.onTap,
-    required this.quizavailable,
     required this.postsQuantity,
     required this.icon,
   });
   final String name;
   final DateTime? releasedAt;
   final Function() onTap;
-  final bool quizavailable;
   final int postsQuantity;
   final String icon;
 
@@ -51,55 +49,47 @@ class StudentQuizAvailableWidget extends StatelessWidget {
                         color: Colors.white,
                       ),
                       const Spacer(),
-                      !quizavailable
-                          ? const Icon(
-                              Icons.arrow_forward_ios_rounded,
-                              color: Colors.white,
-                              size: 20,
-                            )
-                          : Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 10,
-                                vertical: 7,
-                              ),
-                              decoration: BoxDecoration(
-                                color:
-                                    StudentDesignSystem.config.colors.dark[900],
-                                borderRadius: BorderRadius.circular(6),
-                              ),
-                              child: BoxText.bodySmallSemiBold(
-                                '$postsQuantity novos posts',
-                                color: Colors.white,
-                              ),
-                            ),
-                    ],
-                  ),
-                  if (quizavailable)
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Divider(height: 24),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            BoxText.heading4(
-                              'Quiz disponível!',
-                              color: Colors.white,
-                            ),
-                            BoxText.bodyMediumMedium(
-                              DateFormat('dd/MM/yyyy').format(releasedAt!),
-                              color: StudentDesignSystem
-                                  .config.colors.primaryPurple[100],
-                            ),
-                          ],
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 7,
                         ),
-                        const SizedBox(width: 6),
-                        BoxText.bodyLargeMedium(
-                          name,
+                        decoration: BoxDecoration(
+                          color: StudentDesignSystem.config.colors.dark[900],
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        child: BoxText.bodySmallSemiBold(
+                          '$postsQuantity novos posts',
                           color: Colors.white,
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Divider(height: 24),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          BoxText.heading4(
+                            'Quiz disponível!',
+                            color: Colors.white,
+                          ),
+                          BoxText.bodyMediumMedium(
+                            DateFormat('dd/MM/yyyy').format(releasedAt!),
+                            color: StudentDesignSystem
+                                .config.colors.primaryPurple[100],
+                          ),
+                        ],
+                      ),
+                      const SizedBox(width: 6),
+                      BoxText.bodyLargeMedium(
+                        name,
+                        color: Colors.white,
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
