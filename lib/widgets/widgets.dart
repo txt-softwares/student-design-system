@@ -9,4 +9,4 @@ export 'snack_bar/snack_bar.dart';
 export 'text_button/text_button_widget.dart';
 export 'percent_indicator/questions_percent_indicator_widget.dart';
 export 'app_bar/pop_bar_widget.dart';
-export 'quiz_available/quiz_availabre_widget.dart';
+export 'quiz_available/quiz_available_widget.dart';
