@@ -10,11 +10,13 @@ class StudentDropDownWidget extends StatefulWidget {
     required this.list,
     required this.hintText,
     this.onChanged,
+    this.validator,
   });
   final SingleValueDropDownController controller;
   final List<DropDownValueModel> list;
   final String hintText;
   final Function(dynamic)? onChanged;
+  final String? Function(String?)? validator;
 
   @override
   State<StudentDropDownWidget> createState() => _StudentDropDownWidgetState();
@@ -28,12 +30,7 @@ class _StudentDropDownWidgetState extends State<StudentDropDownWidget> {
   @override
   Widget build(BuildContext context) {
     return DropDownTextField(
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return 'Selecione um valor';
-        }
-        return null;
-      },
+      validator: widget.validator,
       textStyle: const TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.w400,

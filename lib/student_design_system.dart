@@ -7,3 +7,4 @@ export 'typography/typography.dart';
 export 'components/components.dart';
 export 'widgets/widgets.dart';
 export 'icons/iconly_bold_icons.dart';
+export 'package:dropdown_textfield/dropdown_textfield.dart';
