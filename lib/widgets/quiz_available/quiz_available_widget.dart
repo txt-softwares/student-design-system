@@ -7,14 +7,14 @@ class StudentQuizAvailableWidget extends StatelessWidget {
     super.key,
     required this.name,
     required this.releasedAt,
-    required this.onTap,
-    required this.postsQuantity,
+    required this.openQuiz,
+    required this.openMural,
     required this.icon,
   });
   final String name;
   final DateTime? releasedAt;
-  final Function() onTap;
-  final int postsQuantity;
+  final Function() openQuiz;
+  final Function() openMural;
   final String icon;
 
   @override
@@ -26,21 +26,21 @@ class StudentQuizAvailableWidget extends StatelessWidget {
         right: 24,
         left: 24,
       ),
-      child: GestureDetector(
-        onTap: onTap,
-        child: Column(
-          children: [
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: color.primaryPurple[500],
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
+      child: Column(
+        children: [
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: color.primaryPurple[500],
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                GestureDetector(
+                  onTap: openMural,
+                  child: Row(
                     children: [
                       StudentPictureWidget.asset(icon),
                       const SizedBox(width: 6),
@@ -49,23 +49,17 @@ class StudentQuizAvailableWidget extends StatelessWidget {
                         color: Colors.white,
                       ),
                       const Spacer(),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 10,
-                          vertical: 7,
-                        ),
-                        decoration: BoxDecoration(
-                          color: StudentDesignSystem.config.colors.dark[900],
-                          borderRadius: BorderRadius.circular(6),
-                        ),
-                        child: BoxText.bodySmallSemiBold(
-                          '$postsQuantity novos posts',
-                          color: Colors.white,
-                        ),
+                      const Icon(
+                        Icons.arrow_forward_ios_rounded,
+                        color: Colors.white,
+                        size: 20,
                       ),
                     ],
                   ),
-                  Column(
+                ),
+                GestureDetector(
+                  onTap: openQuiz,
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Divider(height: 24),
@@ -90,11 +84,11 @@ class StudentQuizAvailableWidget extends StatelessWidget {
                       ),
                     ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
