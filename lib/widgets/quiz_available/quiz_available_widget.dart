@@ -38,7 +38,7 @@ class StudentQuizAvailableWidget extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                GestureDetector(
+                InkWell(
                   onTap: openMural,
                   child: Row(
                     children: [
@@ -57,7 +57,7 @@ class StudentQuizAvailableWidget extends StatelessWidget {
                     ],
                   ),
                 ),
-                GestureDetector(
+                InkWell(
                   onTap: openQuiz,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
