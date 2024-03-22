@@ -31,12 +31,14 @@ class _QuizLearnQuestionTypeWidgetState
   Widget build(BuildContext context) {
     return Center(
       child: ListView(
-        shrinkWrap: true,
         padding: const EdgeInsets.only(
           left: 24,
           right: 24,
         ),
         children: [
+          const SpaceVertical.x10(),
+          const SpaceVertical.x10(),
+          const SpaceVertical.x10(),
           ContentQuestionWidget(
             file: widget.option.file,
             text: widget.option.content,
@@ -44,6 +46,19 @@ class _QuizLearnQuestionTypeWidgetState
           const SpaceVertical.x6(),
           StudentInputWidget(
             focus: _focusNode,
+            action: TextInputAction.done,
+            autoFocus: true,
+            onSubmitted: (p0) {
+              _focusNode.unfocus();
+              widget.onAnswer(
+                textConroller.text,
+                widget.option.id,
+              );
+              textConroller.clear();
+              setState(() {
+                isAvaliable = false;
+              });
+            },
             controller: textConroller,
             hintText: 'Digite o texto aqui',
             onChanged: (value) {
@@ -89,6 +104,8 @@ class _QuizLearnQuestionTypeWidgetState
                 ),
               ],
             ),
+          const SpaceVertical.x10(),
+          const SpaceVertical.x10(),
         ],
       ),
     );

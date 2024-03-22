@@ -11,7 +11,7 @@ class QuizLearnModalWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 320,
+      height: 300,
       padding: const EdgeInsets.only(
         top: 8,
         left: 24,
@@ -20,30 +20,36 @@ class QuizLearnModalWidget extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Container(
-            height: 3,
-            width: 38,
-            decoration: BoxDecoration(
-              color: StudentDesignSystem.config.colors.dark[300],
-              borderRadius: BorderRadius.circular(10),
+          Expanded(
+            child: Column(
+              children: [
+                Container(
+                  height: 3,
+                  width: 38,
+                  decoration: BoxDecoration(
+                    color: StudentDesignSystem.config.colors.dark[300],
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                const SpaceVertical.x8(),
+                BoxText.heading4(
+                  'A resposta é:',
+                  color: StudentDesignSystem.config.colors.primaryRed,
+                ),
+                const SpaceVertical.x6(),
+                Divider(
+                  height: 0,
+                  color: StudentDesignSystem.config.colors.dark[300],
+                ),
+                const SpaceVertical.x6(),
+                BoxText.bodyXLargeSemiBold(
+                  content,
+                  align: TextAlign.center,
+                ),
+                const SpaceVertical.x6(),
+              ],
             ),
           ),
-          const SpaceVertical.x8(),
-          BoxText.heading4(
-            'A resposta é:',
-            color: StudentDesignSystem.config.colors.primaryRed,
-          ),
-          const SpaceVertical.x6(),
-          Divider(
-            height: 0,
-            color: StudentDesignSystem.config.colors.dark[300],
-          ),
-          const SpaceVertical.x6(),
-          BoxText.bodyXLargeSemiBold(
-            content,
-            align: TextAlign.center,
-          ),
-          const SpaceVertical.x6(),
           StudentButtonWidget(
             title: 'Ok, entendi!',
             onTap: () async {
