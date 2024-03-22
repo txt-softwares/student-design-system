@@ -29,7 +29,7 @@ class SimpleStudentFailureWidget extends StatelessWidget {
               height: 80,
               child: StudentPictureWidget.asset(image!),
             ),
-          if (image != null) const SpaceVertical.x8(),
+          const SpaceVertical.x8(),
           BoxText.heading4(
             title,
             align: TextAlign.center,
