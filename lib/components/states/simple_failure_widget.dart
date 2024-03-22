@@ -7,12 +7,12 @@ class SimpleStudentFailureWidget extends StatelessWidget {
     required this.title,
     required this.description,
     required this.reload,
-    required this.image,
+    this.image,
     required this.reloadMessage,
   });
   final String title;
   final String description;
-  final String image;
+  final String? image;
   final Function() reload;
   final String reloadMessage;
 
@@ -24,17 +24,18 @@ class SimpleStudentFailureWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(
-            height: 50,
-            child: StudentPictureWidget.asset(image),
-          ),
-          const SpaceVertical.x8(),
+          if (image != null)
+            SizedBox(
+              height: 80,
+              child: StudentPictureWidget.asset(image!),
+            ),
+          if (image != null) const SpaceVertical.x8(),
           BoxText.heading4(
             title,
             align: TextAlign.center,
           ),
           const SpaceVertical.x5(),
-          BoxText.bodySmallMidium(
+          BoxText.bodyMediumMedium(
             description,
             align: TextAlign.center,
           ),
