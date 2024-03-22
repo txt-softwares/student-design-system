@@ -46,7 +46,11 @@ class _EvaluateQuestionTypeWidgetState
       children: [
         Expanded(
           child: ListView(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
+            padding: const EdgeInsets.only(
+              top: 60,
+              right: 24,
+              left: 24,
+            ),
             children: [
               ContentQuestionWidget(
                 file: widget.correctItem.file,
