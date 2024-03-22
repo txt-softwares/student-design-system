@@ -24,7 +24,7 @@ class SimpleStudentFailureWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          //    StudentPictureWidget.asset(image),
+          StudentPictureWidget.asset(image),
           const SpaceVertical.x8(),
           const SpaceVertical.x8(),
           BoxText.heading3(title),
