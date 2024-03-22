@@ -1,14 +1,14 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lottie/lottie.dart';
-import 'package:speech_to_text/speech_recognition_result.dart';
-import 'package:speech_to_text/speech_to_text.dart';
 import 'package:student_design_system/student_design_system.dart';
 
 import '../../shared/head_question_widget.dart';
+import 'speak_mixin.dart';
 
-class DiscursiveTypeWidget extends StatefulWidget {
-  const DiscursiveTypeWidget({
+class SpeakTypeWidget extends StatefulWidget {
+  const SpeakTypeWidget({
     Key? key,
     required this.expectedAnswer,
     required this.onAnswer,
@@ -25,53 +25,14 @@ class DiscursiveTypeWidget extends StatefulWidget {
   final Function() onCantSpeakNow;
 
   @override
-  State<DiscursiveTypeWidget> createState() => _DiscursiveTypeWidgetState();
+  State<SpeakTypeWidget> createState() => _SpeakTypeWidgetState();
 }
 
-class _DiscursiveTypeWidgetState extends State<DiscursiveTypeWidget> {
-  final SpeechToText _speechToText = SpeechToText();
-  String _lastWords = '';
-
+class _SpeakTypeWidgetState extends State<SpeakTypeWidget> with SpeakMixin {
   @override
   void initState() {
     super.initState();
-    _initSpeech();
-  }
-
-  void _initSpeech() async {
-    await _speechToText.initialize();
-    setState(() {});
-  }
-
-  /// Each time to start a speech recognition session
-  void _startListening() async {
-    var locales = await _speechToText.locales();
-    final usa = locales.firstWhere((element) => element.localeId == 'en_US');
-    await _speechToText.listen(
-        onResult: _onSpeechResult, localeId: usa.localeId);
-    setState(() {});
-  }
-
-  /// Manually stop the active speech recognition session
-  /// Note that there are also timeouts that each platform enforces
-  /// and the SpeechToText plugin supports setting timeouts on the
-  /// listen method.
-  void _stopListening() async {
-    await _speechToText.stop();
-    widget.onAnswer(_lastWords);
-    setState(() {});
-  }
-
-  /// This is the callback that the SpeechToText plugin calls when
-  /// the platform returns recognized words.
-  void _onSpeechResult(SpeechRecognitionResult result) {
-    setState(() {
-      _lastWords = result.recognizedWords;
-    });
-
-    if (result.finalResult) {
-      widget.onAnswer(_lastWords);
-    }
+    initSpeech();
   }
 
   String removeSpecialCharacters(String input) {
@@ -135,24 +96,15 @@ class _DiscursiveTypeWidgetState extends State<DiscursiveTypeWidget> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 24),
-                child: Center(
-                  child: SizedBox(
-                    height: 56,
-                    width: 56,
-                    child: SvgPicture.asset(
-                      'assets/images/audio-primary.svg',
-                      package: 'student_design_system',
-                    ),
-                  ),
+              if (widget.file != null)
+                PlayAudio(
+                  audioUrl: widget.file!,
                 ),
-              ),
               Expanded(
                 child: Container(
                   width: double.maxFinite,
-                  margin: const EdgeInsets.all(24)
-                      .copyWith(left: 12, top: 0, bottom: 0),
+                  margin: const EdgeInsets.all(24).copyWith(
+                      left: widget.file != null ? 12 : 24, top: 0, bottom: 0),
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(
@@ -163,7 +115,7 @@ class _DiscursiveTypeWidgetState extends State<DiscursiveTypeWidget> {
                     ),
                   ),
                   child: RichText(
-                    text: highlightWords(widget.expectedAnswer, _lastWords),
+                    text: highlightWords(widget.expectedAnswer, lastWords),
                   ),
                 ),
               ),
@@ -172,8 +124,7 @@ class _DiscursiveTypeWidgetState extends State<DiscursiveTypeWidget> {
         ),
         Expanded(
           child: GestureDetector(
-            onTap:
-                _speechToText.isNotListening ? _startListening : _stopListening,
+            onTap: speech.isNotListening ? startListening : stopListening,
             child: Container(
               width: double.maxFinite,
               margin: const EdgeInsets.all(24).copyWith(top: 0),
@@ -186,7 +137,7 @@ class _DiscursiveTypeWidgetState extends State<DiscursiveTypeWidget> {
                   color: StudentDesignSystem.config.colors.dark[200]!,
                 ),
               ),
-              child: !_speechToText.isNotListening
+              child: !speech.isNotListening
                   ? Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -244,6 +195,67 @@ class _DiscursiveTypeWidgetState extends State<DiscursiveTypeWidget> {
           ),
         ),
       ],
+    );
+  }
+}
+
+class PlayAudio extends StatefulWidget {
+  const PlayAudio({
+    super.key,
+    required this.audioUrl,
+  });
+  final String audioUrl;
+  @override
+  State<PlayAudio> createState() => _PlayAudioState();
+}
+
+class _PlayAudioState extends State<PlayAudio> {
+  AudioPlayer audioPlayer = AudioPlayer();
+  bool isPlaying = false;
+
+  @override
+  void initState() {
+    super.initState();
+    audioPlayer = AudioPlayer();
+    audioPlayer.onPlayerComplete.listen((event) {
+      setState(() {
+        isPlaying = false;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    audioPlayer.stop();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 24),
+      child: Center(
+        child: GestureDetector(
+          onTap: () async {
+            if (!isPlaying) {
+              await audioPlayer.play(UrlSource(widget.audioUrl));
+            } else {
+              audioPlayer.stop();
+            }
+            setState(() {
+              isPlaying = !isPlaying;
+            });
+          },
+          child: SizedBox(
+            height: 56,
+            width: 56,
+            child: SvgPicture.asset(
+              'assets/images/audio-primary.svg',
+              package: 'student_design_system',
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

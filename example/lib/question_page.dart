@@ -17,62 +17,55 @@ class _QuestionWidgetState extends State<QuestionWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       body: Padding(
-        padding: const EdgeInsets.all(24.0),
-        child: CombineQuizQuestionWidget(
-          questions: [
-            QuizQuestionModel(
-              id: 1,
-              content: 'content 1',
-              file: 'https://cia-images-adm.s3.amazonaws.com/question/quiz.png',
-              expectedAnswer: 'asdfas 1',
+        padding: const EdgeInsets.only(
+          top: 60,
+        ),
+        child: Column(
+          children: [
+            QuestionsPercentIndicatorWidget(
+              totalQuestions: 5,
+              finishedQuestions: 1,
             ),
-            QuizQuestionModel(
-              id: 2,
-              content:
-                  'Her mother is funny, but Carrie doesnt like her brother because he is very serious.',
-              file: null,
-              expectedAnswer: 'asdfas 2',
+            Expanded(
+              child: WritterQuestionTypeWidget(
+                canSpeak: true,
+                content: 'Question content',
+                expectedAnswer: 'resposta',
+                file: '',
+                onCantSpeakNow: () {},
+                onAnswer: (id) {
+                  StudentSnackBar.show(
+                      text: 'text',
+                      context: context,
+                      icon: const Icon(Icons.cancel),
+                      bgColor: StudentDesignSystem.config.colors.error[50]!,
+                      mainColor: StudentDesignSystem.config.colors.error[500]!);
+                },
+                // questions: [
+                //   QuizQuestionModel(
+                //     id: 1,
+                //     content: 'content 1',
+                //     file: null,
+                //     // file:
+                //     //     'https://cia-images-adm.s3.amazonaws.com/question/quiz.png',
+                //     expectedAnswer: 'asdfas 1',
+                //   ),
+                //   QuizQuestionModel(
+                //     id: 2,
+                //     content: 'content 2',
+                //     file: null,
+                //     // file:
+                //     //     'https://cia-images-adm.s3.amazonaws.com/question/quiz.png',
+                //     expectedAnswer: 'asdfas 2',
+                //   ),
+                // ],
+              ),
             ),
           ],
-          onAnswer: (isCorrect, id) {
-            StudentSnackBar.show(
-                text: 'text',
-                context: context,
-                icon: const Icon(Icons.cancel),
-                bgColor: StudentDesignSystem.config.colors.error[50]!,
-                mainColor: StudentDesignSystem.config.colors.error[500]!);
-          },
-          // showLabel: true,
-          // onFinished: () {},
-          // options: [
-          //   QuizQuestionModel(
-          //     content: 'adsfasd',
-          //     expectedAnswer: 'sadas',
-          //     file: null,
-          //     id: 1,
-          //   ),
-          //   QuizQuestionModel(
-          //     content: 'adsfasd',
-          //     expectedAnswer: 'sadas',
-          //     file: null,
-          //     id: 2,
-          //   )
-          // ],
-
-          // onAnswer: (list) {
-          //   StudentSnackBar.show(
-          //       text: 'text',
-          //       context: context,
-          //       icon: const Icon(Icons.cancel),
-          //       bgColor: StudentDesignSystem.config.colors.error[50]!,
-          //       mainColor: StudentDesignSystem.config.colors.error[500]!);
-          // },
-
-          //     'https://cdn.pixabay.com/download/audio/2024/01/04/audio_a103e3fddf.mp3?filename=biodynamic-impact-braam-tonal-dark-184276.mp3',
         ),
       ),
+
       // body: MatchWidget(
       //   file: null,
 

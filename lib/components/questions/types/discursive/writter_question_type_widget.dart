@@ -33,7 +33,7 @@ class WritterQuestionTypeWidget extends StatelessWidget {
       );
     }
     if (canSpeak) {
-      return DiscursiveTypeWidget(
+      return SpeakTypeWidget(
         content: content,
         file: file,
         expectedAnswer: expectedAnswer,
