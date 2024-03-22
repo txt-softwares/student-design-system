@@ -22,7 +22,7 @@ class SimpleStudentFailureWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           StudentPictureWidget.asset(image),
           const SpaceVertical.x8(),
