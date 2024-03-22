@@ -24,12 +24,22 @@ class ContentQuestionWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
         child: file != null
             ? CachedNetworkImage(imageUrl: file!)
-            : _buildWithText(),
+            : QuizTextAnswerWidget(text: text),
       ),
     );
   }
+}
 
-  Container _buildWithText() {
+class QuizTextAnswerWidget extends StatelessWidget {
+  const QuizTextAnswerWidget({
+    super.key,
+    required this.text,
+  });
+
+  final String? text;
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(
         horizontal: 24,
@@ -42,7 +52,7 @@ class ContentQuestionWidget extends StatelessWidget {
             : null,
       ),
       child: HtmlWidget(
-        text ?? '',
+        '<center>${text ?? ''}</center>',
         textStyle: TextStyle(
           color: StudentDesignSystem.config.colors.white,
           fontSize: 24,

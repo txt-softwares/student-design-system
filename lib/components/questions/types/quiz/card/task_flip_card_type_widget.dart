@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:student_design_system/student_design_system.dart';
 
+import '../content_question_widget.dart';
 import 'flip_card_item_widget.dart';
 
 class TaskFlipCardTypeWidget extends StatefulWidget {
@@ -35,13 +35,8 @@ class _TaskFlipCardTypeWidgetState extends State<TaskFlipCardTypeWidget> {
                 borderRadius: BorderRadius.circular(8),
                 child: CachedNetworkImage(imageUrl: widget.item.file!),
               )
-            : HtmlWidget(
-                '<center>${widget.item.content!}</center>',
-                textStyle: TextStyle(
-                  color: StudentDesignSystem.config.colors.dark[900],
-                  fontSize: 24,
-                  fontWeight: FontWeight.w700,
-                ),
+            : QuizTextAnswerWidget(
+                text: widget.item.content!,
               ),
       ),
       back: FlipCardItemWidget(
