@@ -23,7 +23,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
         ),
         child: Column(
           children: [
-            QuestionsPercentIndicatorWidget(
+            const QuestionsPercentIndicatorWidget(
               totalQuestions: 5,
               finishedQuestions: 1,
             ),
