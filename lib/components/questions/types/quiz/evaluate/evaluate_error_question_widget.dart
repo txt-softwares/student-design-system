@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 
 import '../../../../../config/ds_config.dart';
+import '../../../../../student_design_system.dart';
 import '../../../../../typography/box_text.dart';
 import '../../../models/quiz_question_model.dart';
 
@@ -33,7 +35,10 @@ class EvaluateErrorQuestionWidget extends StatelessWidget {
                       child: CachedNetworkImage(imageUrl: item.file!),
                     )
                   : Center(
-                      child: BoxText.heading4(item.content ?? ''),
+                      child: HtmlWidget(
+                        '<center>${item.content}</center>',
+                        textStyle: TextStyles.heading4,
+                      ),
                     ),
             ),
           ),
