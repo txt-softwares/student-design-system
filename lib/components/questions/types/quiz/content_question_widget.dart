@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:student_design_system/student_design_system.dart';
 
 class ContentQuestionWidget extends StatelessWidget {
@@ -40,10 +41,13 @@ class ContentQuestionWidget extends StatelessWidget {
             ? StudentDesignSystem.config.colors.primaryPurple
             : null,
       ),
-      child: BoxText.heading4(
+      child: HtmlWidget(
         text ?? '',
-        align: TextAlign.center,
-        color: StudentDesignSystem.config.colors.white,
+        textStyle: TextStyle(
+          color: StudentDesignSystem.config.colors.white,
+          fontSize: 24,
+          fontWeight: FontWeight.w700,
+        ),
       ),
     );
   }
