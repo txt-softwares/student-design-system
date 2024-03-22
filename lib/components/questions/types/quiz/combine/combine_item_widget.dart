@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:student_design_system/student_design_system.dart';
 
 class CombineItemWidget extends StatelessWidget {
@@ -44,13 +45,10 @@ class CombineItemWidget extends StatelessWidget {
                   imageUrl: match.file!,
                 )
               : Center(
-                  child: BoxText.bodyLargeSemiBold(
-                    match.answerInCombine
-                        ? match.expectedAnswer
-                        : match.content ?? '',
-                    align: TextAlign.center,
-                  ),
-                ),
+                  child: HtmlWidget(
+                  '<center>${match.answerInCombine ? match.expectedAnswer : match.content ?? ''}</center>',
+                  textStyle: TextStyles.bodyLargeSemiBold,
+                )),
     );
   }
 

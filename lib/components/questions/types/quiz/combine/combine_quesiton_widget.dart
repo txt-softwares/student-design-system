@@ -33,7 +33,7 @@ class _CombineQuizQuestionWidgetState extends State<CombineQuizQuestionWidget>
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
         mainAxisSpacing: 10.0,
-        childAspectRatio: 0.6,
+        childAspectRatio: 0.68,
         crossAxisSpacing: 10.0,
       ),
       itemCount: contentList.length,
