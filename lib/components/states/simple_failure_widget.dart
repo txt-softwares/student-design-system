@@ -24,13 +24,20 @@ class SimpleStudentFailureWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          StudentPictureWidget.asset(image),
+          SizedBox(
+            height: 50,
+            child: StudentPictureWidget.asset(image),
+          ),
           const SpaceVertical.x8(),
-          const SpaceVertical.x8(),
-          BoxText.heading3(title),
+          BoxText.heading4(
+            title,
+            align: TextAlign.center,
+          ),
           const SpaceVertical.x5(),
-          BoxText.bodyXLargeMedium(description),
-          const SpaceVertical.x8(),
+          BoxText.bodySmallMidium(
+            description,
+            align: TextAlign.center,
+          ),
           const SpaceVertical.x8(),
           StudentButtonWidget(
             title: reloadMessage,
