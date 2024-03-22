@@ -36,6 +36,7 @@ class _CombineQuizQuestionWidgetState extends State<CombineQuizQuestionWidget>
         childAspectRatio: 0.68,
         crossAxisSpacing: 10.0,
       ),
+      padding: const EdgeInsets.only(bottom: 24),
       itemCount: contentList.length,
       itemBuilder: (context, index) {
         return CombineItemWidget(
