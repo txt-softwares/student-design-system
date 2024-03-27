@@ -30,6 +30,12 @@ class _StudentReorderTutorialWidgetState
   }
 
   @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final dsColors = StudentDesignSystem.config.colors;
 
