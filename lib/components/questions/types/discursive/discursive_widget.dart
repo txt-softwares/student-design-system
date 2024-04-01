@@ -35,49 +35,10 @@ class _SpeakTypeWidgetState extends State<SpeakTypeWidget> with SpeakMixin {
     initSpeech();
   }
 
-  String removeSpecialCharacters(String input) {
-    RegExp regex = RegExp(r"[^a-zA-Z0-9]");
-    return input.toLowerCase().replaceAll(regex, "");
-  }
-
-  TextSpan highlightWords(String baseString, String compareString) {
-    List<String> baseWords = baseString.split(' ');
-    List<String> compareWords = compareString.split(' ');
-
-    List<TextSpan> spans = [];
-
-    int maxLength = baseWords.length > compareWords.length
-        ? baseWords.length
-        : compareWords.length;
-
-    for (int i = 0; i < maxLength; i++) {
-      String baseWord = i < baseWords.length ? baseWords[i] : "";
-      String compareWord = i < compareWords.length ? compareWords[i] : "";
-
-      if (removeSpecialCharacters(baseWord) ==
-          removeSpecialCharacters(compareWord)) {
-        spans.add(
-          TextSpan(
-            text: '$baseWord ',
-            style: TextStyles.bodyXLargeSemiBold.copyWith(
-              color: StudentDesignSystem.config.colors.secondaryGreen,
-            ),
-          ),
-        );
-      } else {
-        spans.add(
-          TextSpan(
-            text: '$baseWord ',
-            style: TextStyles.bodyXLargeSemiBold.copyWith(
-                color: compareWord.isEmpty
-                    ? StudentDesignSystem.config.colors.black
-                    : StudentDesignSystem.config.colors.error),
-          ),
-        );
-      }
-    }
-
-    return TextSpan(children: spans);
+  @override
+  void dispose() {
+    super.dispose();
+    speech.cancel();
   }
 
   @override

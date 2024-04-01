@@ -27,14 +27,7 @@ mixin SpeakMixin<T extends SpeakTypeWidget> on State<T> {
       final permission = await askPermission();
 
       if (!permission) {
-        StudentSnackBar.show(
-          // ignore: use_build_context_synchronously
-          context: context,
-          text:
-              'Você não habilitou as permissões necessárias para utilizar essa função',
-          bgColor: StudentDesignSystem.config.colors.error[50]!,
-          mainColor: StudentDesignSystem.config.colors.error[500]!,
-        );
+        widget.onCantSpeakNow();
         return;
       }
 
@@ -53,6 +46,7 @@ mixin SpeakMixin<T extends SpeakTypeWidget> on State<T> {
         bgColor: StudentDesignSystem.config.colors.error[50]!,
         mainColor: StudentDesignSystem.config.colors.error[500]!,
       );
+      widget.onCantSpeakNow();
     }
   }
 
@@ -63,6 +57,7 @@ mixin SpeakMixin<T extends SpeakTypeWidget> on State<T> {
       bgColor: StudentDesignSystem.config.colors.error[50]!,
       mainColor: StudentDesignSystem.config.colors.error[500]!,
     );
+    widget.onCantSpeakNow();
   }
 
   /// Each time to start a speech recognition session
@@ -98,5 +93,50 @@ mixin SpeakMixin<T extends SpeakTypeWidget> on State<T> {
     if (result.finalResult) {
       widget.onAnswer(lastWords);
     }
+  }
+
+  String removeSpecialCharacters(String input) {
+    RegExp regex = RegExp(r"[^a-zA-Z0-9]");
+    return input.toLowerCase().replaceAll(regex, "");
+  }
+
+  TextSpan highlightWords(String baseString, String compareString) {
+    List<String> baseWords = baseString.split(' ');
+    List<String> compareWords = compareString.split(' ');
+
+    List<TextSpan> spans = [];
+
+    int maxLength = baseWords.length > compareWords.length
+        ? baseWords.length
+        : compareWords.length;
+
+    for (int i = 0; i < maxLength; i++) {
+      String baseWord = i < baseWords.length ? baseWords[i] : "";
+      String compareWord = i < compareWords.length ? compareWords[i] : "";
+
+      if (removeSpecialCharacters(baseWord) ==
+          removeSpecialCharacters(compareWord)) {
+        spans.add(
+          TextSpan(
+            text: '$baseWord ',
+            style: TextStyles.bodyXLargeSemiBold.copyWith(
+              color: StudentDesignSystem.config.colors.secondaryGreen,
+            ),
+          ),
+        );
+      } else {
+        spans.add(
+          TextSpan(
+            text: '$baseWord ',
+            style: TextStyles.bodyXLargeSemiBold.copyWith(
+                color: compareWord.isEmpty
+                    ? StudentDesignSystem.config.colors.black
+                    : StudentDesignSystem.config.colors.error),
+          ),
+        );
+      }
+    }
+
+    return TextSpan(children: spans);
   }
 }
