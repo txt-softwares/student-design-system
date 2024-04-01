@@ -49,7 +49,7 @@ class _StudentReorderTutorialWidgetState
             ListView(
               shrinkWrap: true,
               padding: const EdgeInsets.only(
-                top: 100,
+                top: 102,
                 right: 24,
                 left: 24,
                 bottom: 0,
@@ -77,9 +77,25 @@ class _StudentReorderTutorialWidgetState
                           children: [
                             Container(
                               height: 56,
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(12),
                                 color: dsColors.white,
+                              ),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: Center(
+                                      child: BoxText.bodyXLargeBold('Student'),
+                                    ),
+                                  ),
+                                  Icon(
+                                    Icons.drag_handle_rounded,
+                                    color: StudentDesignSystem
+                                        .config.colors.dark[500],
+                                  ),
+                                ],
                               ),
                             ),
                             Positioned(
