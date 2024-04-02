@@ -62,22 +62,25 @@ mixin SpeakMixin<T extends SpeakTypeWidget> on State<T> {
 
   /// Each time to start a speech recognition session
   void startListening() async {
-    lastWords = '';
+    setState(() {
+      lastWords = '';
+    });
 
     final options = SpeechListenOptions(
-        onDevice: false,
-        listenMode: ListenMode.confirmation,
-        cancelOnError: true,
-        partialResults: true,
-        autoPunctuation: true,
-        enableHapticFeedback: true);
+      onDevice: false,
+      listenMode: ListenMode.confirmation,
+      cancelOnError: true,
+      partialResults: true,
+      autoPunctuation: true,
+      enableHapticFeedback: true,
+    );
 
     speech.listen(
+      listenFor: const Duration(seconds: 30),
       onResult: resultListener,
       localeId: currentLocaleId,
       listenOptions: options,
     );
-    setState(() {});
   }
 
   void stopListening() async {

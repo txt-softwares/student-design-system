@@ -32,7 +32,8 @@ class _QuestionWidgetState extends State<QuestionWidget> {
                 canSpeak: true,
                 content: 'Question content',
                 expectedAnswer: 'resposta',
-                file: '',
+                file:
+                    'https://cia-images-adm.s3.amazonaws.com/question/86325.webm',
                 onCantSpeakNow: () {},
                 onAnswer: (id) {
                   StudentSnackBar.show(
