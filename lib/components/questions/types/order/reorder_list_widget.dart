@@ -15,7 +15,7 @@ class ReorderListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: ReorderableListView.builder(
-        buildDefaultDragHandles: false,
+        buildDefaultDragHandles: true,
         proxyDecorator: _buildProxyDecorator,
         itemCount: reorderedItems.length,
         physics: const NeverScrollableScrollPhysics(),
