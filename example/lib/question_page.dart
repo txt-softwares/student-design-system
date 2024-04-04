@@ -28,43 +28,29 @@ class _QuestionWidgetState extends State<QuestionWidget> {
               finishedQuestions: 1,
             ),
             Expanded(
-              child: WritterQuestionTypeWidget(
-                canSpeak: canSpeak,
-                content: 'Question content',
-                expectedAnswer: 'my name is william',
+              child: MultipleChoiceQuestionWidget(
+                title: 'Question content',
+                // expectedAnswer: 'my name is william',
                 file:
                     'https://cia-images-adm.s3.amazonaws.com/question/86325.webm',
-                onCantSpeakNow: () {
-                  setState(() {
-                    canSpeak = !canSpeak;
-                  });
-                },
-                onAnswer: (id) {
-                  StudentSnackBar.show(
-                      text: id,
-                      context: context,
-                      icon: const Icon(Icons.cancel),
-                      bgColor: StudentDesignSystem.config.colors.error[50]!,
-                      mainColor: StudentDesignSystem.config.colors.error[500]!);
-                },
-                // questions: [
-                //   QuizQuestionModel(
-                //     id: 1,
-                //     content: 'content 1',
-                //     file: null,
-                //     // file:
-                //     //     'https://cia-images-adm.s3.amazonaws.com/question/quiz.png',
-                //     expectedAnswer: 'asdfas 1',
-                //   ),
-                //   QuizQuestionModel(
-                //     id: 2,
-                //     content: 'content 2',
-                //     file: null,
-                //     // file:
-                //     //     'https://cia-images-adm.s3.amazonaws.com/question/quiz.png',
-                //     expectedAnswer: 'asdfas 2',
-                //   ),
-                // ],
+                // onCantSpeakNow: () {
+                //   setState(() {
+                //     canSpeak = !canSpeak;
+                //   });
+                // },
+                onAnswer: (id) {},
+                options: [
+                  StudentTaskOptionModel(
+                    id: 1,
+                    content: 'I want to sleep',
+                    correct: true,
+                  ),
+                  StudentTaskOptionModel(
+                    id: 2,
+                    content: 'I went to slept',
+                    correct: false,
+                  ),
+                ],
               ),
             ),
           ],

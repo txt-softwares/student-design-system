@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:student_design_system/components/questions/shared/head_question_widget.dart';
 import 'package:student_design_system/student_design_system.dart';
+import 'package:student_design_system/utils/text_to_speech.dart';
 import 'item_option_widget.dart';
 
 class MultipleChoiceQuestionWidget extends StatefulWidget {
@@ -27,10 +28,27 @@ class _MultipleChoiceQuestionWidgetState
     extends State<MultipleChoiceQuestionWidget> {
   int? selected;
 
+  TextEditingController controller = TextEditingController();
+
+  final tts = StudentTTS();
+
   void onSelected(int id) {
+    tts.speak(widget.options.firstWhere((element) => element.id == id).content);
     setState(() {
       selected = id;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    tts.init();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    tts.stop();
   }
 
   @override
@@ -63,7 +81,12 @@ class _MultipleChoiceQuestionWidgetState
           padding: const EdgeInsets.all(24),
           child: StudentButtonWidget(
             title: 'Verificar',
-            onTap: selected == null ? null : () => widget.onAnswer(selected),
+            onTap: selected == null
+                ? null
+                : () {
+                    tts.stop();
+                    widget.onAnswer(selected);
+                  },
           ),
         ),
       ],

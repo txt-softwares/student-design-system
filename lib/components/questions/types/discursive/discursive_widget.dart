@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:lottie/lottie.dart';
 import 'package:student_design_system/student_design_system.dart';
 
+import '../../../../utils/text_to_speech.dart';
 import '../../shared/head_question_widget.dart';
 import 'speak_mixin.dart';
 
@@ -60,6 +61,10 @@ class _SpeakTypeWidgetState extends State<SpeakTypeWidget> with SpeakMixin {
               if (widget.file != null)
                 PlayAudio(
                   audioUrl: widget.file!,
+                )
+              else
+                PlayAudioTTS(
+                  answer: widget.expectedAnswer,
                 ),
               Expanded(
                 child: Container(
@@ -202,6 +207,64 @@ class _PlayAudioState extends State<PlayAudio> {
               await audioPlayer.play(UrlSource(widget.audioUrl));
             } else {
               audioPlayer.stop();
+            }
+            setState(() {
+              isPlaying = !isPlaying;
+            });
+          },
+          child: SizedBox(
+            height: 56,
+            width: 56,
+            child: SvgPicture.asset(
+              'assets/images/audio-primary.svg',
+              package: 'student_design_system',
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class PlayAudioTTS extends StatefulWidget {
+  const PlayAudioTTS({
+    super.key,
+    required this.answer,
+  });
+  final String answer;
+  @override
+  State<PlayAudioTTS> createState() => _PlayAudioTTSState();
+}
+
+class _PlayAudioTTSState extends State<PlayAudioTTS> {
+  bool isPlaying = false;
+
+  final tts = StudentTTS();
+
+  @override
+  void initState() {
+    super.initState();
+    tts.init();
+  }
+
+  @override
+  void dispose() {
+    tts.stop();
+
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 24),
+      child: Center(
+        child: GestureDetector(
+          onTap: () async {
+            if (!isPlaying) {
+              tts.speak(widget.answer);
+            } else {
+              tts.stop();
             }
             setState(() {
               isPlaying = !isPlaying;
