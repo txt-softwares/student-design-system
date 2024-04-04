@@ -8,7 +8,7 @@ class StudentTTS {
   List<String>? languages;
   double volume = 1.0;
   double pitch = 1.0;
-  double speechRate = 0.0;
+  double speechRate = 0.5;
   static const String langCode = "en-US";
 
   void init({String lang = langCode}) async {
@@ -17,14 +17,15 @@ class StudentTTS {
     if (Platform.isIOS) {
       await flutterTts.setSharedInstance(true);
       await flutterTts.setIosAudioCategory(
-          IosTextToSpeechAudioCategory.playback,
-          [
-            IosTextToSpeechAudioCategoryOptions.allowBluetooth,
-            IosTextToSpeechAudioCategoryOptions.allowBluetoothA2DP,
-            IosTextToSpeechAudioCategoryOptions.mixWithOthers,
-            IosTextToSpeechAudioCategoryOptions.defaultToSpeaker
-          ],
-          IosTextToSpeechAudioMode.defaultMode);
+        IosTextToSpeechAudioCategory.playback,
+        [
+          IosTextToSpeechAudioCategoryOptions.allowBluetooth,
+          IosTextToSpeechAudioCategoryOptions.allowBluetoothA2DP,
+          IosTextToSpeechAudioCategoryOptions.mixWithOthers,
+          IosTextToSpeechAudioCategoryOptions.defaultToSpeaker
+        ],
+        IosTextToSpeechAudioMode.defaultMode,
+      );
     }
     initSetting(lang);
   }
