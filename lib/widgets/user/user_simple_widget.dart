@@ -22,7 +22,7 @@ class UserSimpleWidget extends StatelessWidget {
             height: 26,
             width: 26,
           ),
-        if (imageUrl != null) const SizedBox(width: 10),
+        if (imageUrl != null) const SpaceHorizontal.x3(),
         BoxText.bodyLargeSemiBold(
           name,
           align: TextAlign.start,
