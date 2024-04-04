@@ -4,11 +4,18 @@ import 'package:lottie/lottie.dart';
 
 class StudentPictureWidget {
   StudentPictureWidget._();
-  static Widget asset(String image,
-      {Color? color, AnimationController? animationController, BoxFit? fit}) {
+  static Widget asset(
+    String image, {
+    BoxFit? fit,
+    double? width,
+    double? height,
+    bool? repeatAnimation,
+  }) {
     if (image.contains('.svg')) {
       return SvgPicture.asset(
         image,
+        width: width,
+        height: height,
         fit: fit ?? BoxFit.contain,
       );
     }
@@ -16,13 +23,16 @@ class StudentPictureWidget {
     if (image.contains('.json')) {
       return Lottie.asset(
         image,
-        package: 'design_system',
+        width: width,
+        height: height,
+        repeat: repeatAnimation,
       );
     }
     return Image.asset(
       image,
-      fit: BoxFit.contain,
-      color: color,
+      width: width,
+      height: height,
+      fit: fit ?? BoxFit.contain,
     );
   }
 
