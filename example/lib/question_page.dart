@@ -29,15 +29,19 @@ class _QuestionWidgetState extends State<QuestionWidget> {
             ),
             Expanded(
               child: WritterQuestionTypeWidget(
-                canSpeak: true,
+                canSpeak: canSpeak,
                 content: 'Question content',
-                expectedAnswer: 'resposta',
+                expectedAnswer: 'my name is william',
                 file:
                     'https://cia-images-adm.s3.amazonaws.com/question/86325.webm',
-                onCantSpeakNow: () {},
+                onCantSpeakNow: () {
+                  setState(() {
+                    canSpeak = !canSpeak;
+                  });
+                },
                 onAnswer: (id) {
                   StudentSnackBar.show(
-                      text: 'text',
+                      text: id,
                       context: context,
                       icon: const Icon(Icons.cancel),
                       bgColor: StudentDesignSystem.config.colors.error[50]!,

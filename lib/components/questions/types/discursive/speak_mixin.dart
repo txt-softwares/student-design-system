@@ -76,7 +76,6 @@ mixin SpeakMixin<T extends SpeakTypeWidget> on State<T> {
     );
 
     speech.listen(
-      listenFor: const Duration(seconds: 30),
       onResult: resultListener,
       localeId: currentLocaleId,
       listenOptions: options,
@@ -85,16 +84,17 @@ mixin SpeakMixin<T extends SpeakTypeWidget> on State<T> {
 
   void stopListening() async {
     await speech.stop();
+    speech.cancel();
     widget.onAnswer(lastWords);
-    setState(() {});
   }
 
   void resultListener(SpeechRecognitionResult result) {
     setState(() {
       lastWords = result.recognizedWords;
     });
+
     if (result.finalResult) {
-      widget.onAnswer(lastWords);
+      stopListening();
     }
   }
 

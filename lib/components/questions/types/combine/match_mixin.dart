@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../models/match_model.dart';
+import 'package:student_design_system/components/components.dart';
 
-mixin MatchMixin<T extends StatefulWidget> on State<T> {
+mixin MatchMixin<T extends MatchWidget> on State<T> {
   int? contentSelected;
   int? matchSelected;
   bool? isCorrect;
@@ -39,6 +39,10 @@ mixin MatchMixin<T extends StatefulWidget> on State<T> {
 
         if (isCorrect!) {
           answers.add(match);
+
+          if (answers.length == widget.match.length) {
+            widget.onAnswer(totalAnswers);
+          }
         }
 
         contentSelected = null;
