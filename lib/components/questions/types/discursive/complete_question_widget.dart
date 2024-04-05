@@ -27,6 +27,12 @@ class _CompleteTheSentenceypeWidgetState
   final _textFieldController = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    _textFieldController.clear();
+  }
+
+  @override
   Widget build(BuildContext context) {
     RegExp regExp = RegExp(r"{([^}]+)}");
     Match? match = regExp.firstMatch(widget.expectedAnswer);
@@ -36,6 +42,7 @@ class _CompleteTheSentenceypeWidgetState
     String? partAfter =
         match?.end != null ? widget.expectedAnswer.substring(match!.end) : null;
     return Column(
+      key: Key(widget.expectedAnswer),
       children: [
         Expanded(
           child: ListView(
