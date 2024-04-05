@@ -30,6 +30,7 @@ class _TaskFlipCardTypeWidgetState extends State<TaskFlipCardTypeWidget> {
       side: CardSide.FRONT,
       front: FlipCardItemWidget(
         showLabel: widget.showLabel,
+        answer: widget.item.expectedAnswer,
         child: widget.item.file != null
             ? ClipRRect(
                 borderRadius: BorderRadius.circular(8),
