@@ -13,3 +13,4 @@ export 'quiz_available/quiz_available_widget.dart';
 export 'tutorial/flash_card_tutorial_widget.dart';
 export 'tutorial/reorder_tutorial_widget.dart';
 export 'user/user_simple_widget.dart';
+export 'modal/student_modal_widget.dart';
