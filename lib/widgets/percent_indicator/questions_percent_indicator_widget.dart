@@ -32,12 +32,12 @@ class QuestionsPercentIndicatorWidget extends StatelessWidget {
                   title: 'Sair da atividade',
                   description:
                       'Ei! Você vai perder o seu progresso se sair agora.',
-                  buttonTitle: 'Continuar',
-                  onTap: () {
+                  confirmTitle: 'Continuar',
+                  onConfirm: () {
                     Navigator.pop(context);
                   },
-                  secondaryButtonTitle: 'Sair',
-                  secondaryOnTap: () {
+                  cancelTitle: 'Sair',
+                  onCancel: () {
                     Navigator.pop(context);
                     Navigator.pop(context);
                   },

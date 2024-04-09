@@ -6,18 +6,18 @@ class StudentModalWidget extends StatelessWidget {
     super.key,
     required this.title,
     required this.description,
-    required this.buttonTitle,
-    this.secondaryButtonTitle,
-    required this.onTap,
-    this.secondaryOnTap,
+    required this.confirmTitle,
+    this.cancelTitle,
+    required this.onConfirm,
+    this.onCancel,
     this.titleColor,
   });
   final String title;
   final String description;
-  final String buttonTitle;
-  final String? secondaryButtonTitle;
-  final Function() onTap;
-  final Function()? secondaryOnTap;
+  final String confirmTitle;
+  final String? cancelTitle;
+  final Function() onConfirm;
+  final Function()? onCancel;
   final Color? titleColor;
 
   @override
@@ -58,13 +58,13 @@ class StudentModalWidget extends StatelessWidget {
           const SpaceVertical.x6(),
           Row(
             children: [
-              if (secondaryButtonTitle != null)
+              if (cancelTitle != null)
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.only(right: 12),
                     child: StudentButtonWidget(
-                      title: secondaryButtonTitle ?? '',
-                      onTap: secondaryOnTap,
+                      title: cancelTitle ?? '',
+                      onTap: onCancel,
                       color: StudentDesignSystem.config.colors.primaryRed[50],
                       textColor: StudentDesignSystem.config.colors.primaryRed,
                     ),
@@ -72,8 +72,8 @@ class StudentModalWidget extends StatelessWidget {
                 ),
               Expanded(
                 child: StudentButtonWidget(
-                  title: buttonTitle,
-                  onTap: onTap,
+                  title: confirmTitle,
+                  onTap: onConfirm,
                 ),
               ),
             ],
