@@ -17,7 +17,7 @@ class StudentQuizAvailableWidget extends StatelessWidget {
   final Function() openQuiz;
   final Function() openMural;
   final String icon;
-  final int? postsAmount;
+  final int postsAmount;
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +51,7 @@ class StudentQuizAvailableWidget extends StatelessWidget {
                         color: Colors.white,
                       ),
                       const Spacer(),
-                      postsAmount != null
+                      postsAmount > 0
                           ? Container(
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 10,
@@ -62,7 +62,7 @@ class StudentQuizAvailableWidget extends StatelessWidget {
                                 color: color.dark,
                               ),
                               child: BoxText.bodySmallSemiBold(
-                                postsAmount! > 1
+                                postsAmount > 1
                                     ? '$postsAmount novos posts'
                                     : '$postsAmount novo post',
                                 color: color.white,
