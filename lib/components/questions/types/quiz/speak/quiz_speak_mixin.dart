@@ -25,21 +25,21 @@ mixin QuizSpeakMixin<T extends QuizSpeakWidget> on State<T> {
     try {
       final permission = await askPermission();
 
-      // if (!permission) {
-      //   widget.onCantSpeakNow();
-      //   return;
-      // }
+      if (!permission) {
+        widget.onCantSpeakNow();
+        return;
+      }
 
       var hasSpeech = await speech.initialize(
         onError: _onError,
       );
-      // if (!hasSpeech) {
-      //   widget.onCantSpeakNow();
-      // }
+      if (!hasSpeech) {
+        widget.onCantSpeakNow();
+      }
       if (!mounted) return;
     } catch (e) {
       _onError;
-      // widget.onCantSpeakNow();
+      widget.onCantSpeakNow();
     }
   }
 
@@ -50,7 +50,7 @@ mixin QuizSpeakMixin<T extends QuizSpeakWidget> on State<T> {
       bgColor: StudentDesignSystem.config.colors.error[50]!,
       mainColor: StudentDesignSystem.config.colors.error[500]!,
     );
-    // widget.onCantSpeakNow();
+    widget.onCantSpeakNow();
   }
 
   /// Each time to start a speech recognition session
