@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../modal/student_modal_widget.dart';
+
 class PopBarWidget extends StatelessWidget {
   const PopBarWidget({
     super.key,
@@ -21,7 +23,23 @@ class PopBarWidget extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () {
-              Navigator.pop(context);
+              showModalBottomSheet(
+                context: context,
+                builder: (context) => StudentModalWidget(
+                  title: 'Sair da atividade',
+                  description:
+                      'Ei! Você vai perder o seu progresso se sair agora.',
+                  confirmTitle: 'Continuar',
+                  onConfirm: () {
+                    Navigator.pop(context);
+                  },
+                  cancelTitle: 'Sair',
+                  onCancel: () {
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                  },
+                ),
+              );
             },
             child: SvgPicture.asset(
               'assets/images/back.svg',
