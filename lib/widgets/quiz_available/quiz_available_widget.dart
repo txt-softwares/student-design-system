@@ -10,12 +10,14 @@ class StudentQuizAvailableWidget extends StatelessWidget {
     required this.openQuiz,
     required this.openMural,
     required this.icon,
+    required this.postsAmount,
   });
   final String name;
   final DateTime? releasedAt;
   final Function() openQuiz;
   final Function() openMural;
   final String icon;
+  final int? postsAmount;
 
   @override
   Widget build(BuildContext context) {
@@ -49,11 +51,28 @@ class StudentQuizAvailableWidget extends StatelessWidget {
                         color: Colors.white,
                       ),
                       const Spacer(),
-                      const Icon(
-                        Icons.arrow_forward_ios_rounded,
-                        color: Colors.white,
-                        size: 20,
-                      ),
+                      postsAmount != null
+                          ? Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 8,
+                              ),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(6),
+                                color: color.dark,
+                              ),
+                              child: BoxText.bodySmallSemiBold(
+                                postsAmount! > 1
+                                    ? '$postsAmount novos posts'
+                                    : '$postsAmount novo post',
+                                color: color.white,
+                              ),
+                            )
+                          : const Icon(
+                              Icons.arrow_forward_ios_rounded,
+                              color: Colors.white,
+                              size: 20,
+                            ),
                     ],
                   ),
                 ),
