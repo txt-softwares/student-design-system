@@ -94,7 +94,6 @@ class _QuizLearnQuestionTypeWidgetState
                   width: 108,
                   title: 'Não sei',
                   onTap: () {
-                    widget.onAnswer(null, widget.option.id);
                     showModalBottomSheet(
                       context: context,
                       builder: (context) => QuizLearnModalWidget(
