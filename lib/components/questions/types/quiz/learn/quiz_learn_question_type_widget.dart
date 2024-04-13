@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:student_design_system/components/questions/types/quiz/content_question_widget.dart';
+import 'package:student_design_system/components/questions/types/quiz/learn/quiz_learn_modal_widget.dart';
 import 'package:student_design_system/student_design_system.dart';
 
 class QuizLearnQuestionTypeWidget extends StatefulWidget {
@@ -94,6 +95,12 @@ class _QuizLearnQuestionTypeWidgetState
                   title: 'Não sei',
                   onTap: () {
                     widget.onAnswer(null, widget.option.id);
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (context) => QuizLearnModalWidget(
+                        content: widget.option.expectedAnswer,
+                      ),
+                    );
                   },
                 ),
               ],
