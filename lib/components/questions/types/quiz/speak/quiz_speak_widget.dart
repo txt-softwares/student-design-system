@@ -56,14 +56,9 @@ class _QuizSpeakWidgetState extends State<QuizSpeakWidget> with QuizSpeakMixin {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              if (widget.file != null)
-                PlayAudio(
-                  audioUrl: widget.file!,
-                )
-              else
-                PlayAudioTTS(
-                  answer: widget.expectedAnswer,
-                ),
+              PlayAudioTTS(
+                answer: widget.expectedAnswer,
+              ),
               Expanded(
                 child: Container(
                   width: double.maxFinite,
