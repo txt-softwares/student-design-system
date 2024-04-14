@@ -55,7 +55,10 @@ class _FlipCardQuestionTypeWidgetState
           showLabel: widget.showLabel,
         );
       },
-      onStackFinished: widget.onFinished,
+      onStackFinished: () async {
+        await Future.delayed(const Duration(microseconds: 100));
+        widget.onFinished();
+      },
       leftSwipeAllowed: true,
       rightSwipeAllowed: true,
       upSwipeAllowed: false,
