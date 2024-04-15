@@ -15,52 +15,76 @@ class QuestionsPercentIndicatorWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dsColor = StudentDesignSystem.config.colors;
-    return Padding(
-      padding: const EdgeInsets.only(
-        left: 24,
-        right: 24,
-        bottom: 0,
-        top: 16,
-      ),
-      child: Row(
-        children: [
-          GestureDetector(
-            onTap: () {
-              showModalBottomSheet(
-                context: context,
-                builder: (context) => StudentModalWidget(
-                  title: 'Sair da atividade',
-                  description:
-                      'Ei! Você vai perder o seu progresso se sair agora.',
-                  confirmTitle: 'Continuar',
-                  onConfirm: () {
-                    Navigator.pop(context);
-                  },
-                  cancelTitle: 'Sair',
-                  onCancel: () {
-                    Navigator.pop(context);
-                    Navigator.pop(context);
-                  },
-                ),
-              );
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (value) async {
+        if (value) {
+          return;
+        }
+        showModalBottomSheet(
+          context: context,
+          builder: (context) => StudentModalWidget(
+            title: 'Sair da atividade',
+            description: 'Ei! Você vai perder o seu progresso se sair agora.',
+            confirmTitle: 'Continuar',
+            onConfirm: () {
+              Navigator.pop(context);
             },
-            child: SvgPicture.asset(
-              'assets/images/back.svg',
-              package: 'student_design_system',
-            ),
+            cancelTitle: 'Sair',
+            onCancel: () {
+              Navigator.pop(context);
+              Navigator.pop(context);
+            },
           ),
-          Expanded(
-            child: LinearPercentIndicator(
-              lineHeight: 12,
-              percent: finishedQuestions / totalQuestions,
-              backgroundColor: dsColor.dark[100],
-              progressColor: dsColor.primaryPurple,
-              barRadius: const Radius.circular(50),
-              padding: const EdgeInsets.symmetric(horizontal: 30),
+        );
+      },
+      child: Padding(
+        padding: const EdgeInsets.only(
+          left: 24,
+          right: 24,
+          bottom: 0,
+          top: 16,
+        ),
+        child: Row(
+          children: [
+            GestureDetector(
+              onTap: () {
+                showModalBottomSheet(
+                  context: context,
+                  builder: (context) => StudentModalWidget(
+                    title: 'Sair da atividade',
+                    description:
+                        'Ei! Você vai perder o seu progresso se sair agora.',
+                    confirmTitle: 'Continuar',
+                    onConfirm: () {
+                      Navigator.pop(context);
+                    },
+                    cancelTitle: 'Sair',
+                    onCancel: () {
+                      Navigator.pop(context);
+                      Navigator.pop(context);
+                    },
+                  ),
+                );
+              },
+              child: SvgPicture.asset(
+                'assets/images/back.svg',
+                package: 'student_design_system',
+              ),
             ),
-          ),
-          BoxText.bodyLargeBold('$finishedQuestions/$totalQuestions'),
-        ],
+            Expanded(
+              child: LinearPercentIndicator(
+                lineHeight: 12,
+                percent: finishedQuestions / totalQuestions,
+                backgroundColor: dsColor.dark[100],
+                progressColor: dsColor.primaryPurple,
+                barRadius: const Radius.circular(50),
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+              ),
+            ),
+            BoxText.bodyLargeBold('$finishedQuestions/$totalQuestions'),
+          ],
+        ),
       ),
     );
   }
