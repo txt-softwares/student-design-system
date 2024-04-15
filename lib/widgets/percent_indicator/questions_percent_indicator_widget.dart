@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import '../../student_design_system.dart';
 
-class QuestionsPercentIndicatorWidget extends StatelessWidget {
+class QuestionsPercentIndicatorWidget extends StatefulWidget {
   const QuestionsPercentIndicatorWidget({
     super.key,
     required this.totalQuestions,
@@ -13,30 +13,44 @@ class QuestionsPercentIndicatorWidget extends StatelessWidget {
   final int finishedQuestions;
 
   @override
+  State<QuestionsPercentIndicatorWidget> createState() =>
+      _QuestionsPercentIndicatorWidgetState();
+}
+
+class _QuestionsPercentIndicatorWidgetState
+    extends State<QuestionsPercentIndicatorWidget> {
+  bool canPop = false;
+  @override
   Widget build(BuildContext context) {
     final dsColor = StudentDesignSystem.config.colors;
     return PopScope(
-      canPop: false,
+      canPop: canPop,
       onPopInvoked: (value) async {
-        if (value) {
-          return;
+        setState(() {
+          canPop = !value;
+        });
+
+        if (canPop) {
+          showModalBottomSheet(
+            context: context,
+            builder: (context) => StudentModalWidget(
+              title: 'Sair da atividade',
+              description: 'Ei! Você vai perder o seu progresso se sair agora.',
+              confirmTitle: 'Continuar',
+              onConfirm: () {
+                setState(() {
+                  canPop = false;
+                });
+                Navigator.pop(context);
+              },
+              cancelTitle: 'Sair',
+              onCancel: () {
+                Navigator.pop(context);
+                Navigator.pop(context);
+              },
+            ),
+          );
         }
-        showModalBottomSheet(
-          context: context,
-          builder: (context) => StudentModalWidget(
-            title: 'Sair da atividade',
-            description: 'Ei! Você vai perder o seu progresso se sair agora.',
-            confirmTitle: 'Continuar',
-            onConfirm: () {
-              Navigator.pop(context);
-            },
-            cancelTitle: 'Sair',
-            onCancel: () {
-              Navigator.pop(context);
-              Navigator.pop(context);
-            },
-          ),
-        );
       },
       child: Padding(
         padding: const EdgeInsets.only(
@@ -75,14 +89,15 @@ class QuestionsPercentIndicatorWidget extends StatelessWidget {
             Expanded(
               child: LinearPercentIndicator(
                 lineHeight: 12,
-                percent: finishedQuestions / totalQuestions,
+                percent: widget.finishedQuestions / widget.totalQuestions,
                 backgroundColor: dsColor.dark[100],
                 progressColor: dsColor.primaryPurple,
                 barRadius: const Radius.circular(50),
                 padding: const EdgeInsets.symmetric(horizontal: 30),
               ),
             ),
-            BoxText.bodyLargeBold('$finishedQuestions/$totalQuestions'),
+            BoxText.bodyLargeBold(
+                '${widget.finishedQuestions}/${widget.totalQuestions}'),
           ],
         ),
       ),
