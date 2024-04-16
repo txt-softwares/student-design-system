@@ -30,7 +30,7 @@ class HeadQuizSpeakWidget extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8),
               child: file != null
-                  ? Image.network(
+                  ? StudentPictureWidget.network(
                       file!,
                       fit: BoxFit.cover,
                     )
