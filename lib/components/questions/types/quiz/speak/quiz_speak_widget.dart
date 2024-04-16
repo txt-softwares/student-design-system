@@ -74,7 +74,7 @@ class _QuizSpeakWidgetState extends State<QuizSpeakWidget> with QuizSpeakMixin {
                     ),
                   ),
                   child: RichText(
-                    text: highlightWords2(widget.expectedAnswer, lastWords),
+                    text: highlightWords(widget.expectedAnswer, lastWords),
                   ),
                 ),
               ),
