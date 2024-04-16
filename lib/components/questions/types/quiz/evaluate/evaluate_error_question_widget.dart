@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 
@@ -29,7 +28,7 @@ class EvaluateErrorQuestionWidget extends StatelessWidget {
               child: item.file != null
                   ? Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 72),
-                      child: CachedNetworkImage(imageUrl: item.file!),
+                      child: StudentPictureWidget.network(item.file!),
                     )
                   : Center(
                       child: HtmlWidget(

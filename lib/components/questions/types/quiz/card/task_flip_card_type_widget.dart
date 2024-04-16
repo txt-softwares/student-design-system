@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:student_design_system/student_design_system.dart';
@@ -34,7 +33,7 @@ class _TaskFlipCardTypeWidgetState extends State<TaskFlipCardTypeWidget> {
         child: widget.item.file != null
             ? ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: CachedNetworkImage(imageUrl: widget.item.file!),
+                child: StudentPictureWidget.network(widget.item.file!),
               )
             : QuizTextAnswerWidget(
                 text: widget.item.content!,

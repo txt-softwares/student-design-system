@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lottie/lottie.dart';
 
+import '../../config/ds_config.dart';
+
 class StudentPictureWidget {
   StudentPictureWidget._();
   static Widget asset(
@@ -34,6 +36,31 @@ class StudentPictureWidget {
       width: width,
       height: height,
       fit: fit ?? BoxFit.contain,
+    );
+  }
+
+  static Widget network(
+    String url, {
+    double? width,
+    double? height,
+    BoxFit? fit,
+  }) {
+    return CachedNetworkImage(
+      imageUrl: url,
+      placeholder: (context, url) => Center(
+        child: CircularProgressIndicator(
+          color: StudentDesignSystem.config.colors.primaryRed,
+        ),
+      ),
+      errorWidget: (context, url, error) => const Center(
+        child: Text(
+          'Ops! ocorreu um erro\nao carregar a imagem.',
+          textAlign: TextAlign.center,
+        ),
+      ),
+      height: height,
+      width: width,
+      fit: fit,
     );
   }
 

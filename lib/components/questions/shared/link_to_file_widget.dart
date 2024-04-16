@@ -1,5 +1,4 @@
 import 'package:audioplayers/audioplayers.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lottie/lottie.dart';
@@ -15,8 +14,8 @@ class LinkToFileContentWidget extends StatelessWidget {
     if (_isImageLink(link)) {
       return ClipRRect(
         borderRadius: BorderRadius.circular(8.0),
-        child: CachedNetworkImage(
-          imageUrl: link,
+        child: StudentPictureWidget.network(
+          link,
           height: 200,
           fit: BoxFit.fitHeight,
         ),
