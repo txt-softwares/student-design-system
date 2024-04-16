@@ -135,4 +135,40 @@ mixin QuizSpeakMixin<T extends QuizSpeakWidget> on State<T> {
 
     return TextSpan(children: spans);
   }
+
+  TextSpan highlightWords2(String baseString, String compareString) {
+    List<String> baseWords = baseString.split(' ');
+    List<String> compareWords = compareString.split(' ');
+
+    List<TextSpan> spans = [];
+
+    int maxLength = baseWords.length;
+
+    for (int i = 0; i < maxLength; i++) {
+      String baseWord = baseWords[i];
+
+      if (compareWords.any((element) =>
+          removeSpecialCharacters(baseWord) ==
+          removeSpecialCharacters(element))) {
+        spans.add(
+          TextSpan(
+            text: '$baseWord ',
+            style: TextStyles.bodyXLargeSemiBold.copyWith(
+              color: StudentDesignSystem.config.colors.secondaryGreen,
+            ),
+          ),
+        );
+      } else {
+        spans.add(
+          TextSpan(
+            text: '$baseWord ',
+            style: TextStyles.bodyXLargeSemiBold
+                .copyWith(color: StudentDesignSystem.config.colors.black),
+          ),
+        );
+      }
+    }
+
+    return TextSpan(children: spans);
+  }
 }
