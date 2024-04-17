@@ -3,6 +3,8 @@ import 'package:student_design_system/components/questions/types/quiz/content_qu
 import 'package:student_design_system/components/questions/types/quiz/learn/quiz_learn_modal_widget.dart';
 import 'package:student_design_system/student_design_system.dart';
 
+import '../../../../../utils/text_to_speech.dart';
+
 class QuizLearnQuestionTypeWidget extends StatefulWidget {
   const QuizLearnQuestionTypeWidget({
     super.key,
@@ -27,6 +29,14 @@ class _QuizLearnQuestionTypeWidgetState
 
   final _focusNode = FocusNode();
 
+  final tts = StudentTTS();
+
+  @override
+  void initState() {
+    super.initState();
+    tts.init();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -36,7 +46,20 @@ class _QuizLearnQuestionTypeWidgetState
           right: 24,
         ),
         children: [
-          const SpaceVertical.x10(),
+          widget.option.content != null
+              ? Align(
+                  alignment: Alignment.topRight,
+                  child: GestureDetector(
+                    onTap: () {
+                      tts.speak(widget.option.content!);
+                    },
+                    child: const Padding(
+                      padding: EdgeInsets.only(top: 24),
+                      child: Icon(IconlyBold.volumeUp),
+                    ),
+                  ),
+                )
+              : const SpaceVertical.x10(),
           const SpaceVertical.x10(),
           const SpaceVertical.x10(),
           ContentQuestionWidget(
