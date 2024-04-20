@@ -81,11 +81,13 @@ class _QuizSpeakWidgetState extends State<QuizSpeakWidget> with QuizSpeakMixin {
             ],
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(right: 24, left: 24, bottom: 24),
-          child: HeadQuizSpeakWidget(
-            file: widget.file,
-            title: widget.content,
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.only(right: 24, left: 24, bottom: 24),
+            child: HeadQuizSpeakWidget(
+              file: widget.file,
+              title: widget.content,
+            ),
           ),
         ),
         Expanded(
