@@ -37,7 +37,6 @@ class _ContentQuestionWidgetState extends State<ContentQuestionWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 196,
       padding: const EdgeInsetsDirectional.all(16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
@@ -45,11 +44,13 @@ class _ContentQuestionWidgetState extends State<ContentQuestionWidget> {
       ),
       child: Stack(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: widget.file != null
-                ? StudentPictureWidget.network(widget.file!)
-                : QuizTextAnswerWidget(text: widget.text),
+          Center(
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: widget.file != null
+                  ? StudentPictureWidget.network(widget.file!, height: 197)
+                  : QuizTextAnswerWidget(text: widget.text),
+            ),
           ),
           Align(
             alignment: Alignment.topRight,
@@ -58,7 +59,7 @@ class _ContentQuestionWidgetState extends State<ContentQuestionWidget> {
                 tts.speak(widget.answer);
               },
               child: const Padding(
-                padding: EdgeInsets.only(top: 24),
+                padding: EdgeInsets.only(top: 12),
                 child: Icon(IconlyBold.volumeUp),
               ),
             ),
