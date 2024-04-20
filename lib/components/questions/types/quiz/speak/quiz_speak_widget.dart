@@ -32,7 +32,10 @@ class _QuizSpeakWidgetState extends State<QuizSpeakWidget> with QuizSpeakMixin {
   @override
   void initState() {
     super.initState();
-    initSpeech();
+
+    Future.microtask(() {
+      initSpeech();
+    });
   }
 
   @override
