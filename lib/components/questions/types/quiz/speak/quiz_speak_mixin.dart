@@ -21,6 +21,12 @@ mixin QuizSpeakMixin<T extends QuizSpeakWidget> on State<T> {
         .every((element) => element.value == PermissionStatus.granted);
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+    speech.cancel();
+  }
+
   void initSpeech() async {
     try {
       final permission = await askPermission();
@@ -43,7 +49,8 @@ mixin QuizSpeakMixin<T extends QuizSpeakWidget> on State<T> {
     }
   }
 
-  void _onError(SpeechRecognitionError errorNotification) {
+  void _onError(SpeechRecognitionError errorNotification) async {
+    await Future.delayed(const Duration(milliseconds: 199));
     StudentSnackBar.show(
       context: context,
       text: 'Erro ao tentar te ouvir, tente esse formato novamente mais tarde',
@@ -51,6 +58,7 @@ mixin QuizSpeakMixin<T extends QuizSpeakWidget> on State<T> {
       mainColor: StudentDesignSystem.config.colors.error[500]!,
     );
     widget.onCantSpeakNow();
+    stopListening();
   }
 
   /// Each time to start a speech recognition session
