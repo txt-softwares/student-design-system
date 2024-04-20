@@ -14,41 +14,36 @@ class HeadQuizSpeakWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          width: double.maxFinite,
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(
-              color: StudentDesignSystem.config.colors.dark[200]!,
-            ),
-          ),
-          child: Center(
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: file != null
-                  ? StudentPictureWidget.network(
-                      file!,
-                      fit: BoxFit.cover,
-                    )
-                  : Container(
-                      width: double.maxFinite,
-                      color: StudentDesignSystem.config.colors.primaryPurple,
-                      padding: const EdgeInsets.all(16),
-                      child: HtmlWidget(
-                        title!,
-                        textStyle: TextStyles.heading4.copyWith(
-                          color: StudentDesignSystem.config.colors.white,
-                        ),
-                      ),
-                    ),
-            ),
-          ),
+    return Container(
+      width: double.maxFinite,
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: StudentDesignSystem.config.colors.dark[200]!,
         ),
-      ],
+      ),
+      child: Center(
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: file != null
+              ? StudentPictureWidget.network(
+                  file!,
+                  fit: BoxFit.cover,
+                )
+              : Container(
+                  width: double.maxFinite,
+                  color: StudentDesignSystem.config.colors.primaryPurple,
+                  padding: const EdgeInsets.all(16),
+                  child: HtmlWidget(
+                    title!,
+                    textStyle: TextStyles.heading4.copyWith(
+                      color: StudentDesignSystem.config.colors.white,
+                    ),
+                  ),
+                ),
+        ),
+      ),
     );
   }
 }
