@@ -58,10 +58,7 @@ class _ContentQuestionWidgetState extends State<ContentQuestionWidget> {
               onTap: () {
                 tts.speak(widget.answer);
               },
-              child: const Padding(
-                padding: EdgeInsets.only(top: 12),
-                child: Icon(IconlyBold.volumeUp),
-              ),
+              child: const Icon(IconlyBold.volumeUp),
             ),
           ),
         ],
