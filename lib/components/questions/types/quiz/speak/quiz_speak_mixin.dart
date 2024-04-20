@@ -63,9 +63,9 @@ mixin QuizSpeakMixin<T extends QuizSpeakWidget> on State<T> {
       onDevice: false,
       listenMode: ListenMode.confirmation,
       cancelOnError: true,
-      partialResults: false,
+      partialResults: true,
       autoPunctuation: true,
-      enableHapticFeedback: false,
+      enableHapticFeedback: true,
     );
 
     speech.listen(
@@ -85,6 +85,12 @@ mixin QuizSpeakMixin<T extends QuizSpeakWidget> on State<T> {
     setState(() {
       lastWords = result.recognizedWords;
     });
+
+    if (lastWords.split(" ").length >=
+        widget.expectedAnswer.split(' ').length) {
+      stopListening();
+      return;
+    }
 
     if (result.finalResult) {
       stopListening();
