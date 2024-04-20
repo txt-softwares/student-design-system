@@ -86,8 +86,7 @@ mixin QuizSpeakMixin<T extends QuizSpeakWidget> on State<T> {
       lastWords = result.recognizedWords;
     });
 
-    if (lastWords.split(" ").length >=
-        widget.expectedAnswer.split(' ').length) {
+    if (lastWords.split(" ").length > widget.expectedAnswer.split(' ').length) {
       stopListening();
       return;
     }
