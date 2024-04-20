@@ -63,9 +63,9 @@ mixin QuizSpeakMixin<T extends QuizSpeakWidget> on State<T> {
       onDevice: false,
       listenMode: ListenMode.confirmation,
       cancelOnError: true,
-      partialResults: true,
+      partialResults: false,
       autoPunctuation: true,
-      enableHapticFeedback: true,
+      enableHapticFeedback: false,
     );
 
     speech.listen(
