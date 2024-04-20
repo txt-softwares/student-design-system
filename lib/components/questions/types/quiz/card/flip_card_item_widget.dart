@@ -52,8 +52,11 @@ class _FlipCardItemWidgetState extends State<FlipCardItemWidget> {
             ],
             color: StudentDesignSystem.config.colors.white,
           ),
-          child: Center(
-            child: widget.child,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            child: Center(
+              child: widget.child,
+            ),
           ),
         ),
         if (widget.answer != null)

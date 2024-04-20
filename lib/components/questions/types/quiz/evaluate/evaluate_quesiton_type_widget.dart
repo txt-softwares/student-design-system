@@ -55,6 +55,7 @@ class _EvaluateQuestionTypeWidgetState
               ContentQuestionWidget(
                 file: widget.correctItem.file,
                 text: widget.correctItem.content,
+                answer: widget.correctItem.expectedAnswer,
               ),
               const SpaceVertical.x6(),
               ...widget.options.map(
