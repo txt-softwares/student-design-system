@@ -112,7 +112,7 @@ class _QuizSpeakQuestionTypeWidgetState
                   color: StudentDesignSystem.config.colors.dark[200]!,
                 ),
               ),
-              child: speech.isListening
+              child: ref.watch(listenProvider)
                   ? Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

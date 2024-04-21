@@ -14,9 +14,20 @@ class WordRecognized extends StateNotifier<String> {
   set value(String text) => state = text;
 }
 
+class ListenSpeech extends StateNotifier<bool> {
+  ListenSpeech(super.state);
+
+  set value(bool val) => state = val;
+}
+
 final wordProvider =
     StateNotifierProvider.autoDispose<WordRecognized, String>((ref) {
   return WordRecognized('');
+});
+
+final listenProvider =
+    StateNotifierProvider.autoDispose<ListenSpeech, bool>((ref) {
+  return ListenSpeech(false);
 });
 
 mixin QuizSpeakMixin<T extends QuizSpeakQuestionTypeWidget>
@@ -86,6 +97,7 @@ mixin QuizSpeakMixin<T extends QuizSpeakQuestionTypeWidget>
 
   /// Each time to start a speech recognition session
   void startListening() async {
+    print("START LISTEN FOR ${widget.item.id}");
     ref.read(wordProvider.notifier).value = '';
 
     final options = SpeechListenOptions(
@@ -102,6 +114,7 @@ mixin QuizSpeakMixin<T extends QuizSpeakQuestionTypeWidget>
       localeId: currentLocaleId,
       listenOptions: options,
     );
+    ref.read(listenProvider.notifier).value = true;
   }
 
   void stopListening() async {
@@ -116,6 +129,7 @@ mixin QuizSpeakMixin<T extends QuizSpeakQuestionTypeWidget>
     ref.read(wordProvider.notifier).value = result.recognizedWords;
 
     if (result.finalResult) {
+      ref.read(listenProvider.notifier).value = false;
       stopListening();
     }
   }
