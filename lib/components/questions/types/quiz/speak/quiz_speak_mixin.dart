@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:speech_to_text/speech_recognition_error.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
@@ -7,9 +8,20 @@ import 'package:student_design_system/student_design_system.dart';
 
 import 'quiz_speak_question_type_widget.dart';
 
-mixin QuizSpeakMixin<T extends QuizSpeakQuestionTypeWidget> on State<T> {
+class WordRecognized extends StateNotifier<String> {
+  WordRecognized(super.state);
+
+  set value(String text) => state = text;
+}
+
+final wordProvider =
+    StateNotifierProvider.autoDispose<WordRecognized, String>((ref) {
+  return WordRecognized('');
+});
+
+mixin QuizSpeakMixin<T extends QuizSpeakQuestionTypeWidget>
+    on ConsumerState<T> {
   final SpeechToText speech = SpeechToText();
-  String lastWords = '';
 
   final String currentLocaleId = 'en_US';
 
@@ -25,7 +37,7 @@ mixin QuizSpeakMixin<T extends QuizSpeakQuestionTypeWidget> on State<T> {
   @override
   void dispose() {
     super.dispose();
-    speech.cancel();
+    print('DISPOSE PAGE ${widget.item.id}');
   }
 
   void initSpeech() async {
@@ -45,7 +57,6 @@ mixin QuizSpeakMixin<T extends QuizSpeakQuestionTypeWidget> on State<T> {
       }
       if (!mounted) return;
     } catch (e) {
-      _onError;
       widget.onCantSpeakNow();
     }
   }
@@ -75,9 +86,7 @@ mixin QuizSpeakMixin<T extends QuizSpeakQuestionTypeWidget> on State<T> {
 
   /// Each time to start a speech recognition session
   void startListening() async {
-    setState(() {
-      lastWords = '';
-    });
+    ref.read(wordProvider.notifier).value = '';
 
     final options = SpeechListenOptions(
       onDevice: false,
@@ -99,14 +108,12 @@ mixin QuizSpeakMixin<T extends QuizSpeakQuestionTypeWidget> on State<T> {
     await speech.stop();
     await speech.cancel();
 
-    widget.onAnswer(lastWords);
+    widget.onAnswer(ref.read(wordProvider));
   }
 
   void resultListener(SpeechRecognitionResult result) {
     //TODO: get the word near of the result
-    setState(() {
-      lastWords = result.recognizedWords;
-    });
+    ref.read(wordProvider.notifier).value = result.recognizedWords;
 
     if (result.finalResult) {
       stopListening();

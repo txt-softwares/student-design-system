@@ -1,5 +1,6 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lottie/lottie.dart';
 import 'package:student_design_system/components/questions/types/quiz/speak/head_quiz_speak_widget.dart';
@@ -7,7 +8,7 @@ import 'package:student_design_system/components/questions/types/quiz/speak/quiz
 import 'package:student_design_system/student_design_system.dart';
 import '../../../../../utils/text_to_speech.dart';
 
-class QuizSpeakQuestionTypeWidget extends StatefulWidget {
+class QuizSpeakQuestionTypeWidget extends ConsumerStatefulWidget {
   const QuizSpeakQuestionTypeWidget({
     Key? key,
     required this.item,
@@ -20,12 +21,12 @@ class QuizSpeakQuestionTypeWidget extends StatefulWidget {
   final Function() onCantSpeakNow;
 
   @override
-  State<QuizSpeakQuestionTypeWidget> createState() =>
+  ConsumerState<QuizSpeakQuestionTypeWidget> createState() =>
       _QuizSpeakQuestionTypeWidgetState();
 }
 
 class _QuizSpeakQuestionTypeWidgetState
-    extends State<QuizSpeakQuestionTypeWidget> with QuizSpeakMixin {
+    extends ConsumerState<QuizSpeakQuestionTypeWidget> with QuizSpeakMixin {
   @override
   void initState() {
     super.initState();
@@ -43,6 +44,7 @@ class _QuizSpeakQuestionTypeWidgetState
 
   @override
   Widget build(BuildContext context) {
+    final words = ref.watch(wordProvider);
     return Column(
       children: [
         Divider(
@@ -77,7 +79,7 @@ class _QuizSpeakQuestionTypeWidgetState
                     ),
                   ),
                   child: RichText(
-                    text: highlightWords(widget.item.expectedAnswer, lastWords),
+                    text: highlightWords(widget.item.expectedAnswer, words),
                   ),
                 ),
               ),
@@ -108,7 +110,7 @@ class _QuizSpeakQuestionTypeWidgetState
                   color: StudentDesignSystem.config.colors.dark[200]!,
                 ),
               ),
-              child: !speech.isNotListening
+              child: speech.isListening
                   ? Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
