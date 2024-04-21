@@ -7,10 +7,14 @@ import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 
 final sttProvider = Provider.family.autoDispose<StudentSTT, int>((ref, id) {
-  return StudentSTT();
+  return StudentSTT(id: id);
 });
 
 class StudentSTT {
+  final int id;
+
+  StudentSTT({required this.id});
+
   final SpeechToText speech = SpeechToText();
 
   final String currentLocaleId = 'en_US';
@@ -33,6 +37,7 @@ class StudentSTT {
     required Function() onFinishAnswer,
   }) async {
     try {
+      log('init stt for $id');
       final permission = await askPermission();
 
       if (!permission) {
@@ -65,7 +70,7 @@ class StudentSTT {
     Function() onStart,
     Function() onFinishAnswer,
   ) async {
-    log('ERROR: ${errorNotification.errorMsg}');
+    log('ERROR: ${errorNotification.errorMsg} for $id');
 
     if (errorNotification.errorMsg == 'error_no_match') {
       await speech.stop();
@@ -85,6 +90,8 @@ class StudentSTT {
     required Function() onStart,
     required Function() onFinishAnswer,
   }) async {
+    log('start listen speech for $id');
+
     onAnswer('');
 
     final options = SpeechListenOptions(
@@ -105,6 +112,8 @@ class StudentSTT {
   }
 
   Future<void> stop({required Function()? onFinishAnswer}) async {
+    log('stop listen speech for $id');
+
     await speech.stop();
     await speech.cancel();
     if (onFinishAnswer != null) {
@@ -117,6 +126,8 @@ class StudentSTT {
     Function(String) onAnswer,
     Function() onFinishAnswer,
   ) {
+    log('result listen speech for $id: ${result.recognizedWords}');
+
     //TODO: get the word near of the result
     onAnswer(result.recognizedWords);
 

@@ -33,8 +33,6 @@ class _QuizSpeakQuestionTypeWidgetState
     super.initState();
 
     Future.microtask(() async {
-      await Future.delayed(Duration(milliseconds: 100));
-      print('LISTEN SPEAK FOR: ${widget.item.id}');
       initSpeech();
     });
   }
@@ -42,7 +40,9 @@ class _QuizSpeakQuestionTypeWidgetState
   @override
   void dispose() {
     super.dispose();
-    ref.read(sttProvider(widget.item.id)).stop(onFinishAnswer: null);
+    if (mounted) {
+      ref.read(sttProvider(widget.item.id)).stop(onFinishAnswer: null);
+    }
   }
 
   @override
@@ -50,6 +50,7 @@ class _QuizSpeakQuestionTypeWidgetState
     final words = ref.watch(wordProvider(widget.item.id));
     ref.watch(sttProvider(widget.item.id));
     return Column(
+      key: widget.key,
       children: [
         Divider(
           color: StudentDesignSystem.config.colors.darkblue[200],

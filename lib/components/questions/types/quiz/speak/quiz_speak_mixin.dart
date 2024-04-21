@@ -29,12 +29,6 @@ final listenProvider = StateNotifierProvider.autoDispose
 
 mixin QuizSpeakMixin<T extends QuizSpeakQuestionTypeWidget>
     on ConsumerState<T> {
-  @override
-  void dispose() {
-    super.dispose();
-    print('DISPOSE PAGE ${widget.item.id}');
-  }
-
   void initSpeech() async {
     ref.read(sttProvider(widget.item.id)).init(
           mounted: mounted,
