@@ -21,12 +21,12 @@ class ListenSpeech extends StateNotifier<bool> {
 }
 
 final wordProvider =
-    StateNotifierProvider.autoDispose<WordRecognized, String>((ref) {
+    StateNotifierProvider.family<WordRecognized, String, int>((ref, id) {
   return WordRecognized('');
 });
 
 final listenProvider =
-    StateNotifierProvider.autoDispose<ListenSpeech, bool>((ref) {
+    StateNotifierProvider.family<ListenSpeech, bool, int>((ref, id) {
   return ListenSpeech(false);
 });
 
@@ -98,7 +98,7 @@ mixin QuizSpeakMixin<T extends QuizSpeakQuestionTypeWidget>
   /// Each time to start a speech recognition session
   void startListening() async {
     print("START LISTEN FOR ${widget.item.id}");
-    ref.read(wordProvider.notifier).value = '';
+    ref.read(wordProvider(widget.item.id).notifier).value = '';
 
     final options = SpeechListenOptions(
       onDevice: false,
@@ -114,22 +114,23 @@ mixin QuizSpeakMixin<T extends QuizSpeakQuestionTypeWidget>
       localeId: currentLocaleId,
       listenOptions: options,
     );
-    ref.read(listenProvider.notifier).value = true;
+    ref.read(listenProvider(widget.item.id).notifier).value = true;
   }
 
   void stopListening() async {
     await speech.stop();
     await speech.cancel();
 
-    widget.onAnswer(ref.read(wordProvider));
+    widget.onAnswer(ref.read(wordProvider(widget.item.id)));
   }
 
   void resultListener(SpeechRecognitionResult result) {
     //TODO: get the word near of the result
-    ref.read(wordProvider.notifier).value = result.recognizedWords;
+    ref.read(wordProvider(widget.item.id).notifier).value =
+        result.recognizedWords;
 
     if (result.finalResult) {
-      ref.read(listenProvider.notifier).value = false;
+      ref.read(listenProvider(widget.item.id).notifier).value = false;
       stopListening();
     }
   }

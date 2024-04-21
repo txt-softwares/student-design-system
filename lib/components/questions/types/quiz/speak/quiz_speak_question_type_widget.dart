@@ -46,7 +46,7 @@ class _QuizSpeakQuestionTypeWidgetState
 
   @override
   Widget build(BuildContext context) {
-    final words = ref.watch(wordProvider);
+    final words = ref.watch(wordProvider(widget.item.id));
     return Column(
       children: [
         Divider(
@@ -112,7 +112,7 @@ class _QuizSpeakQuestionTypeWidgetState
                   color: StudentDesignSystem.config.colors.dark[200]!,
                 ),
               ),
-              child: ref.watch(listenProvider)
+              child: ref.watch(listenProvider(widget.item.id))
                   ? Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
