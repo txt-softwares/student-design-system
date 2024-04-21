@@ -31,9 +31,9 @@ class _QuizSpeakQuestionTypeWidgetState
   void initState() {
     super.initState();
 
-    print('LISTEN SPEAK FOR: ${widget.item.id}');
-
-    Future.microtask(() {
+    Future.microtask(() async {
+      await Future.delayed(Duration(milliseconds: 100));
+      print('LISTEN SPEAK FOR: ${widget.item.id}');
       initSpeech();
     });
   }
@@ -42,6 +42,7 @@ class _QuizSpeakQuestionTypeWidgetState
   void dispose() {
     super.dispose();
     speech.cancel();
+    speech.stop();
   }
 
   @override
