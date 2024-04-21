@@ -6,8 +6,8 @@ import 'package:speech_to_text/speech_recognition_error.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 
-final sttProvider = Provider.family.autoDispose<StudentSTT, int>((ref, id) {
-  return StudentSTT(id: id);
+final sttProvider = Provider<StudentSTT>((ref) {
+  return StudentSTT(id: 2);
 });
 
 class StudentSTT {

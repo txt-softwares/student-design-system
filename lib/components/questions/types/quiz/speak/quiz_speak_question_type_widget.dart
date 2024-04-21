@@ -40,15 +40,12 @@ class _QuizSpeakQuestionTypeWidgetState
   @override
   void dispose() {
     super.dispose();
-    if (mounted) {
-      ref.read(sttProvider(widget.item.id)).stop(onFinishAnswer: null);
-    }
   }
 
   @override
   Widget build(BuildContext context) {
     final words = ref.watch(wordProvider(widget.item.id));
-    ref.watch(sttProvider(widget.item.id));
+    ref.watch(sttProvider);
     return Column(
       key: widget.key,
       children: [

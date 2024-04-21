@@ -30,7 +30,7 @@ final listenProvider = StateNotifierProvider.autoDispose
 mixin QuizSpeakMixin<T extends QuizSpeakQuestionTypeWidget>
     on ConsumerState<T> {
   void initSpeech() async {
-    ref.read(sttProvider(widget.item.id)).init(
+    ref.read(sttProvider).init(
           mounted: mounted,
           onCantSpeak: widget.onCantSpeakNow,
           onStopedError: _onError,
@@ -59,7 +59,7 @@ mixin QuizSpeakMixin<T extends QuizSpeakQuestionTypeWidget>
 
   /// Each time to start a speech recognition session
   void startListening() async {
-    ref.read(sttProvider(widget.item.id)).startListening(
+    ref.read(sttProvider).startListening(
       onAnswer: (p0) {
         ref.read(wordProvider(widget.item.id).notifier).value = p0;
       },
@@ -74,7 +74,7 @@ mixin QuizSpeakMixin<T extends QuizSpeakQuestionTypeWidget>
   }
 
   void stopListening() async {
-    ref.read(sttProvider(widget.item.id)).stop(onFinishAnswer: () {
+    ref.read(sttProvider).stop(onFinishAnswer: () {
       ref.read(listenProvider(widget.item.id).notifier).value = false;
       widget.onAnswer(ref.read(wordProvider(widget.item.id)));
     });
