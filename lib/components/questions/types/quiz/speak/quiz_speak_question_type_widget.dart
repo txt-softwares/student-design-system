@@ -30,9 +30,9 @@ class _QuizSpeakQuestionTypeWidgetState
   void initState() {
     super.initState();
 
-    Future.microtask(() {
-      initSpeech();
-    });
+    print('LISTEN SPEAK FOR: ${widget.item.id}');
+
+    initSpeech();
   }
 
   @override

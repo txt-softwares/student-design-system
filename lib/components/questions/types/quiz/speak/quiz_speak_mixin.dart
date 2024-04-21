@@ -51,9 +51,16 @@ mixin QuizSpeakMixin<T extends QuizSpeakQuestionTypeWidget> on State<T> {
   }
 
   void _onError(SpeechRecognitionError errorNotification) async {
-    stopListening();
-
     print('ERROR: ${errorNotification.errorMsg}');
+
+    if (errorNotification.errorMsg == 'error_no_match') {
+      await speech.stop();
+      await speech.cancel();
+      startListening();
+      return;
+    }
+
+    stopListening();
     if (mounted) {
       StudentSnackBar.show(
         context: context,
@@ -62,8 +69,8 @@ mixin QuizSpeakMixin<T extends QuizSpeakQuestionTypeWidget> on State<T> {
         bgColor: StudentDesignSystem.config.colors.error[50]!,
         mainColor: StudentDesignSystem.config.colors.error[500]!,
       );
+      widget.onCantSpeakNow();
     }
-    widget.onCantSpeakNow();
   }
 
   /// Each time to start a speech recognition session
