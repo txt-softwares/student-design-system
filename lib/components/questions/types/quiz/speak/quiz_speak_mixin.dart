@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:speech_to_text/speech_recognition_error.dart';
-import 'package:speech_to_text/speech_recognition_result.dart';
-import 'package:speech_to_text/speech_to_text.dart';
 import 'package:student_design_system/student_design_system.dart';
+import 'package:student_design_system/utils/speech_to_text.dart';
 
 import 'quiz_speak_question_type_widget.dart';
 
@@ -20,31 +17,18 @@ class ListenSpeech extends StateNotifier<bool> {
   set value(bool val) => state = val;
 }
 
-final wordProvider =
-    StateNotifierProvider.family<WordRecognized, String, int>((ref, id) {
+final wordProvider = StateNotifierProvider.autoDispose
+    .family<WordRecognized, String, int>((ref, id) {
   return WordRecognized('');
 });
 
-final listenProvider =
-    StateNotifierProvider.family<ListenSpeech, bool, int>((ref, id) {
+final listenProvider = StateNotifierProvider.autoDispose
+    .family<ListenSpeech, bool, int>((ref, id) {
   return ListenSpeech(false);
 });
 
 mixin QuizSpeakMixin<T extends QuizSpeakQuestionTypeWidget>
     on ConsumerState<T> {
-  final SpeechToText speech = SpeechToText();
-
-  final String currentLocaleId = 'en_US';
-
-  Future<bool> askPermission() async {
-    Map<Permission, PermissionStatus> statuses = await [
-      Permission.microphone,
-    ].request();
-
-    return statuses.entries
-        .every((element) => element.value == PermissionStatus.granted);
-  }
-
   @override
   void dispose() {
     super.dispose();
@@ -52,87 +36,54 @@ mixin QuizSpeakMixin<T extends QuizSpeakQuestionTypeWidget>
   }
 
   void initSpeech() async {
-    try {
-      final permission = await askPermission();
-
-      if (!permission) {
-        widget.onCantSpeakNow();
-        return;
-      }
-
-      var hasSpeech = await speech.initialize(
-        onError: _onError,
-      );
-      if (!hasSpeech) {
-        widget.onCantSpeakNow();
-      }
-      if (!mounted) return;
-    } catch (e) {
-      widget.onCantSpeakNow();
-    }
+    ref.read(sttProvider(widget.item.id)).init(
+          mounted: mounted,
+          onCantSpeak: widget.onCantSpeakNow,
+          onStopedError: _onError,
+          onAnswer: (p0) {
+            ref.read(wordProvider(widget.item.id).notifier).value = p0;
+          },
+          onStart: () {
+            ref.read(listenProvider(widget.item.id).notifier).value = true;
+          },
+          onFinishAnswer: () {
+            ref.read(listenProvider(widget.item.id).notifier).value = false;
+            widget.onAnswer(ref.read(wordProvider(widget.item.id)));
+          },
+        );
   }
 
-  void _onError(SpeechRecognitionError errorNotification) async {
-    print('ERROR: ${errorNotification.errorMsg}');
-
-    if (errorNotification.errorMsg == 'error_no_match') {
-      await speech.stop();
-      await speech.cancel();
-      startListening();
-      return;
-    }
-
-    stopListening();
-    if (mounted) {
-      StudentSnackBar.show(
-        context: context,
-        text:
-            'Erro ao tentar te ouvir, tente esse formato novamente mais tarde',
-        bgColor: StudentDesignSystem.config.colors.error[50]!,
-        mainColor: StudentDesignSystem.config.colors.error[500]!,
-      );
-      widget.onCantSpeakNow();
-    }
+  void _onError() async {
+    StudentSnackBar.show(
+      context: context,
+      text: 'Erro ao tentar te ouvir, tente novamente mais tarde',
+      bgColor: StudentDesignSystem.config.colors.error[50]!,
+      mainColor: StudentDesignSystem.config.colors.error[500]!,
+    );
+    widget.onCantSpeakNow();
   }
 
   /// Each time to start a speech recognition session
   void startListening() async {
-    print("START LISTEN FOR ${widget.item.id}");
-    ref.read(wordProvider(widget.item.id).notifier).value = '';
-
-    final options = SpeechListenOptions(
-      onDevice: false,
-      listenMode: ListenMode.dictation,
-      cancelOnError: true,
-      partialResults: true,
-      autoPunctuation: true,
-      enableHapticFeedback: true,
+    ref.read(sttProvider(widget.item.id)).startListening(
+      onAnswer: (p0) {
+        ref.read(wordProvider(widget.item.id).notifier).value = p0;
+      },
+      onStart: () {
+        ref.read(listenProvider(widget.item.id).notifier).value = true;
+      },
+      onFinishAnswer: () {
+        ref.read(listenProvider(widget.item.id).notifier).value = false;
+        widget.onAnswer(ref.read(wordProvider(widget.item.id)));
+      },
     );
-
-    speech.listen(
-      onResult: resultListener,
-      localeId: currentLocaleId,
-      listenOptions: options,
-    );
-    ref.read(listenProvider(widget.item.id).notifier).value = true;
   }
 
   void stopListening() async {
-    await speech.stop();
-    await speech.cancel();
-
-    widget.onAnswer(ref.read(wordProvider(widget.item.id)));
-  }
-
-  void resultListener(SpeechRecognitionResult result) {
-    //TODO: get the word near of the result
-    ref.read(wordProvider(widget.item.id).notifier).value =
-        result.recognizedWords;
-
-    if (result.finalResult) {
+    ref.read(sttProvider(widget.item.id)).stop(onFinishAnswer: () {
       ref.read(listenProvider(widget.item.id).notifier).value = false;
-      stopListening();
-    }
+      widget.onAnswer(ref.read(wordProvider(widget.item.id)));
+    });
   }
 
   String removeSpecialCharacters(String input) {

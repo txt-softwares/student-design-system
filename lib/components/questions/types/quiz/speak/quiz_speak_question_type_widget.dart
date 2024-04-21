@@ -6,6 +6,7 @@ import 'package:lottie/lottie.dart';
 import 'package:student_design_system/components/questions/types/quiz/speak/head_quiz_speak_widget.dart';
 import 'package:student_design_system/components/questions/types/quiz/speak/quiz_speak_mixin.dart';
 import 'package:student_design_system/student_design_system.dart';
+import 'package:student_design_system/utils/speech_to_text.dart';
 import '../../../../../utils/text_to_speech.dart';
 
 class QuizSpeakQuestionTypeWidget extends ConsumerStatefulWidget {
@@ -41,13 +42,13 @@ class _QuizSpeakQuestionTypeWidgetState
   @override
   void dispose() {
     super.dispose();
-    speech.cancel();
-    speech.stop();
+    ref.read(sttProvider(widget.item.id)).stop(onFinishAnswer: null);
   }
 
   @override
   Widget build(BuildContext context) {
     final words = ref.watch(wordProvider(widget.item.id));
+    ref.watch(sttProvider(widget.item.id));
     return Column(
       children: [
         Divider(
@@ -100,7 +101,9 @@ class _QuizSpeakQuestionTypeWidgetState
         ),
         Expanded(
           child: GestureDetector(
-            onTap: speech.isNotListening ? startListening : stopListening,
+            onTap: !ref.watch(listenProvider(widget.item.id))
+                ? startListening
+                : stopListening,
             child: Container(
               width: double.maxFinite,
               margin: const EdgeInsets.all(24).copyWith(top: 0),
