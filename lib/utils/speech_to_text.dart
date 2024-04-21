@@ -7,7 +7,7 @@ import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 
 final sttProvider = Provider<StudentSTT>((ref) {
-  return StudentSTT(id: 2);
+  return StudentSTT(id: 0);
 });
 
 class StudentSTT {
@@ -73,8 +73,7 @@ class StudentSTT {
     log('ERROR: ${errorNotification.errorMsg} for $id');
 
     if (errorNotification.errorMsg == 'error_no_match') {
-      startListening(
-          onAnswer: onAnswer, onStart: onStart, onFinishAnswer: onFinishAnswer);
+      onStopedError();
       return;
     }
 
