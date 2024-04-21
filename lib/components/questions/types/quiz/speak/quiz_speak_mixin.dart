@@ -3,10 +3,11 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:speech_to_text/speech_recognition_error.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
-import 'package:student_design_system/components/questions/types/quiz/speak/quiz_speak_widget.dart';
 import 'package:student_design_system/student_design_system.dart';
 
-mixin QuizSpeakMixin<T extends QuizSpeakWidget> on State<T> {
+import 'quiz_speak_question_type_widget.dart';
+
+mixin QuizSpeakMixin<T extends QuizSpeakQuestionTypeWidget> on State<T> {
   final SpeechToText speech = SpeechToText();
   String lastWords = '';
 
@@ -50,15 +51,19 @@ mixin QuizSpeakMixin<T extends QuizSpeakWidget> on State<T> {
   }
 
   void _onError(SpeechRecognitionError errorNotification) async {
-    await Future.delayed(const Duration(milliseconds: 199));
-    StudentSnackBar.show(
-      context: context,
-      text: 'Erro ao tentar te ouvir, tente esse formato novamente mais tarde',
-      bgColor: StudentDesignSystem.config.colors.error[50]!,
-      mainColor: StudentDesignSystem.config.colors.error[500]!,
-    );
-    widget.onCantSpeakNow();
     stopListening();
+
+    print('ERROR: ${errorNotification.errorMsg}');
+    if (mounted) {
+      StudentSnackBar.show(
+        context: context,
+        text:
+            'Erro ao tentar te ouvir, tente esse formato novamente mais tarde',
+        bgColor: StudentDesignSystem.config.colors.error[50]!,
+        mainColor: StudentDesignSystem.config.colors.error[500]!,
+      );
+    }
+    widget.onCantSpeakNow();
   }
 
   /// Each time to start a speech recognition session
@@ -69,7 +74,7 @@ mixin QuizSpeakMixin<T extends QuizSpeakWidget> on State<T> {
 
     final options = SpeechListenOptions(
       onDevice: false,
-      listenMode: ListenMode.confirmation,
+      listenMode: ListenMode.dictation,
       cancelOnError: true,
       partialResults: true,
       autoPunctuation: true,
@@ -85,19 +90,16 @@ mixin QuizSpeakMixin<T extends QuizSpeakWidget> on State<T> {
 
   void stopListening() async {
     await speech.stop();
-    speech.cancel();
+    await speech.cancel();
+
     widget.onAnswer(lastWords);
   }
 
   void resultListener(SpeechRecognitionResult result) {
+    //TODO: get the word near of the result
     setState(() {
       lastWords = result.recognizedWords;
     });
-
-    if (lastWords.split(" ").length > widget.expectedAnswer.split(' ').length) {
-      stopListening();
-      return;
-    }
 
     if (result.finalResult) {
       stopListening();

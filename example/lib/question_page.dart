@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:student_design_system/components/questions/types/quiz/speak/quiz_speak_question_type_widget.dart';
 import 'package:student_design_system/student_design_system.dart';
 
 class QuestionWidget extends StatefulWidget {
@@ -19,8 +20,9 @@ class _QuestionWidgetState extends State<QuestionWidget> {
     return Scaffold(
         body: Padding(
       padding: const EdgeInsets.only(top: 60),
-      child: TaskFlipCardTypeWidget(
-        showLabel: true,
+      child: QuizSpeakQuestionTypeWidget(
+        onAnswer: (answer) {},
+        onCantSpeakNow: () {},
         item: QuizQuestionModel(
             id: 1,
             content: 'content',
