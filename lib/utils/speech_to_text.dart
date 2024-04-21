@@ -73,8 +73,6 @@ class StudentSTT {
     log('ERROR: ${errorNotification.errorMsg} for $id');
 
     if (errorNotification.errorMsg == 'error_no_match') {
-      await speech.stop();
-      await speech.cancel();
       startListening(
           onAnswer: onAnswer, onStart: onStart, onFinishAnswer: onFinishAnswer);
       return;
