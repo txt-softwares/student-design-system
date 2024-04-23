@@ -28,6 +28,7 @@ class _TaskFlipCardTypeWidgetState extends State<TaskFlipCardTypeWidget> {
       direction: FlipDirection.HORIZONTAL,
       side: CardSide.FRONT,
       front: FlipCardItemWidget(
+        isBack: false,
         showLabel: widget.showLabel,
         answer: widget.item.expectedAnswer,
         child: widget.item.file != null
@@ -40,7 +41,9 @@ class _TaskFlipCardTypeWidgetState extends State<TaskFlipCardTypeWidget> {
               ),
       ),
       back: FlipCardItemWidget(
+        isBack: true,
         showLabel: false,
+        answer: widget.item.expectedAnswer,
         child: BoxText.heading4(
           widget.item.expectedAnswer,
           align: TextAlign.center,
