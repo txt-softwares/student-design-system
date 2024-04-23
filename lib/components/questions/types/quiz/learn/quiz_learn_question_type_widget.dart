@@ -90,18 +90,18 @@ class _QuizLearnQuestionTypeWidgetState
                   ),
                 ),
                 const SpaceHorizontal.x3(),
-                StudentButtonWidget.secoundary(
-                  width: 108,
-                  title: 'Não sei',
-                  onTap: () {
-                    showModalBottomSheet(
-                      context: context,
-                      builder: (context) => QuizLearnModalWidget(
-                        content: widget.option.expectedAnswer,
-                      ),
-                    );
-                  },
-                ),
+                // StudentButtonWidget.secoundary(
+                //   width: 108,
+                //   title: 'Não sei',
+                //   onTap: () {
+                //     showModalBottomSheet(
+                //       context: context,
+                //       builder: (context) => QuizLearnModalWidget(
+                //         content: widget.option.expectedAnswer,
+                //       ),
+                //     );
+                //   },
+                // ),
               ],
             ),
           const SpaceVertical.x10(),
