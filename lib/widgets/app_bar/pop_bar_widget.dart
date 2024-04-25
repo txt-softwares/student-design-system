@@ -49,7 +49,7 @@ class PopBarWidget extends StatelessWidget {
           ),
           const Spacer(),
           if (timeSeconds != null)
-            BoxText.bodyXLargeSemiBold('${timeSeconds!}, segundos'),
+            BoxText.bodyXLargeSemiBold('${timeSeconds!},0 segundos'),
           const Spacer(),
           if (sufix != null) sufix!,
         ],
