@@ -9,10 +9,12 @@ class FlipCardItemWidget extends StatefulWidget {
     required this.child,
     required this.showLabel,
     this.answer,
+    required this.isBack,
   });
   final Widget child;
   final bool showLabel;
   final String? answer;
+  final bool isBack;
 
   @override
   State<FlipCardItemWidget> createState() => _FlipCardItemWidgetState();
@@ -59,7 +61,7 @@ class _FlipCardItemWidgetState extends State<FlipCardItemWidget> {
             ),
           ),
         ),
-        if (widget.answer != null)
+        if (widget.answer != null && widget.isBack)
           Align(
             alignment: Alignment.topRight,
             child: GestureDetector(

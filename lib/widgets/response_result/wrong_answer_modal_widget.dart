@@ -48,14 +48,14 @@ class WrongAnswerModalWidget extends StatelessWidget {
           ),
           if (correctAnswer != null) const Spacer(),
           if (correctAnswer != null)
-            BoxText.heading4(
+            BoxText.bodyLargeSemiBold(
               rightAnswerMessage,
               color: Colors.white,
             ),
           const SpaceVertical.x2(),
           if (correctAnswer == null) const SpaceVertical.x4(),
           if (correctAnswer != null)
-            BoxText.bodyLargeSemiBold(
+            BoxText.heading4(
               correctAnswer!,
               color: Colors.white,
             ),

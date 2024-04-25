@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
-import '../modal/student_modal_widget.dart';
+import 'package:student_design_system/student_design_system.dart';
 
 class PopBarWidget extends StatelessWidget {
   const PopBarWidget({
     super.key,
     required this.sufix,
+    this.timeSeconds,
   });
   final Widget? sufix;
+  final int? timeSeconds;
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +47,9 @@ class PopBarWidget extends StatelessWidget {
               package: 'student_design_system',
             ),
           ),
+          const Spacer(),
+          if (timeSeconds != null)
+            BoxText.bodyXLargeSemiBold('${timeSeconds!}, segundos'),
           const Spacer(),
           if (sufix != null) sufix!,
         ],
