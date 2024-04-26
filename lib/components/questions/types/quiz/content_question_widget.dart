@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:student_design_system/student_design_system.dart';
 
-import '../../../../utils/text_to_speech.dart';
-
 class ContentQuestionWidget extends StatefulWidget {
   const ContentQuestionWidget({
     super.key,
@@ -20,20 +18,6 @@ class ContentQuestionWidget extends StatefulWidget {
 }
 
 class _ContentQuestionWidgetState extends State<ContentQuestionWidget> {
-  final tts = StudentTTS();
-
-  @override
-  void initState() {
-    super.initState();
-    tts.init();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    tts.stop();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -50,15 +34,6 @@ class _ContentQuestionWidgetState extends State<ContentQuestionWidget> {
               child: widget.file != null
                   ? StudentPictureWidget.network(widget.file!, height: 197)
                   : QuizTextAnswerWidget(text: widget.text),
-            ),
-          ),
-          Align(
-            alignment: Alignment.topRight,
-            child: GestureDetector(
-              onTap: () {
-                tts.speak(widget.answer);
-              },
-              child: const Icon(IconlyBold.volumeUp),
             ),
           ),
         ],
