@@ -37,7 +37,6 @@ mixin MatchMixin<T extends CombineQuizQuestionWidget> on State<T> {
       setState(() {
         isCorrect = secondSelected?.id == firstSelected?.id;
       });
-      await Future.delayed(const Duration(seconds: 1));
       setState(() {
         totalAnswers++;
 
