@@ -30,6 +30,11 @@ class _FlipCardQuestionTypeWidgetState
 
   @override
   void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     _swipeItems = widget.options
         .map((e) => SwipeItem(
               content: e.id,
@@ -42,11 +47,6 @@ class _FlipCardQuestionTypeWidgetState
             ))
         .toList();
     _matchEngine = MatchEngine(swipeItems: _swipeItems);
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return SwipeCards(
       matchEngine: _matchEngine!,
       itemBuilder: (BuildContext context, int index) {

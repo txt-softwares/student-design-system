@@ -33,7 +33,7 @@ mixin MatchMixin<T extends MatchWidget> on State<T> {
       setState(() {
         isCorrect = contentSelected == matchSelected;
       });
-      await Future.delayed(const Duration(seconds: 1));
+      await Future.delayed(const Duration(milliseconds: 200));
       setState(() {
         totalAnswers++;
 
