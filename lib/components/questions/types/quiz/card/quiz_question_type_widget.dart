@@ -28,13 +28,11 @@ class _FlipCardQuestionTypeWidgetState
   MatchEngine? _matchEngine;
   int currentIndex = -1;
 
+  final List<QuizQuestionModel> wrongOptions = [];
+
   @override
   void initState() {
     super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
     _swipeItems = widget.options
         .map((e) => SwipeItem(
               content: e.id,
@@ -43,15 +41,21 @@ class _FlipCardQuestionTypeWidgetState
               },
               nopeAction: () {
                 widget.onAnswer(false, e.id);
+                addNewCards();
               },
             ))
         .toList();
     _matchEngine = MatchEngine(swipeItems: _swipeItems);
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return SwipeCards(
       matchEngine: _matchEngine!,
       itemBuilder: (BuildContext context, int index) {
+        final allOptions = [...widget.options, ...wrongOptions];
         return TaskFlipCardTypeWidget(
-          item: widget.options[index],
+          item: allOptions[index],
           showLabel: widget.showLabel,
         );
       },
@@ -64,5 +68,22 @@ class _FlipCardQuestionTypeWidgetState
       upSwipeAllowed: false,
       fillSpace: true,
     );
+  }
+
+  void addNewCards() {
+    _swipeItems.add(SwipeItem(
+      content: _matchEngine?.currentItem?.content,
+      likeAction: () {
+        widget.onAnswer(true, _matchEngine?.currentItem?.content);
+      },
+      nopeAction: () {
+        widget.onAnswer(false, _matchEngine?.currentItem?.content);
+        addNewCards();
+      },
+    ));
+    setState(() {
+      wrongOptions.add(widget.options.firstWhere(
+          (element) => element.id == _matchEngine?.currentItem?.content));
+    });
   }
 }
