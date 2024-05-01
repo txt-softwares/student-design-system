@@ -160,6 +160,15 @@ class _QuizSpeakQuestionTypeWidgetState
             ),
           ),
         ),
+        if (ref.watch(listenProvider(widget.item.id))) ...[
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: StudentButtonWidget.secoundary(
+              title: 'Parar de ouvir',
+              onTap: stopListening,
+            ),
+          ),
+        ]
       ],
     );
   }

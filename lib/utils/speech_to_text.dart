@@ -5,6 +5,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:speech_to_text/speech_recognition_error.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
+import 'package:string_similarity/string_similarity.dart';
 
 final sttProvider = Provider<StudentSTT>((ref) {
   return StudentSTT(id: 0);
@@ -86,6 +87,7 @@ class StudentSTT {
     required Function(String) onAnswer,
     required Function() onStart,
     required Function() onFinishAnswer,
+    required String expectedWord,
   }) async {
     log('start listen speech for $id');
 
@@ -101,11 +103,28 @@ class StudentSTT {
     );
 
     speech.listen(
-      onResult: (result) => _resultListener(result, onAnswer, onFinishAnswer),
+      onResult: (result) =>
+          _resultListener(result, onAnswer, onFinishAnswer, expectedWord),
       localeId: currentLocaleId,
       listenOptions: options,
     );
     onStart();
+  }
+
+  String findSimilar(
+      String expectedAnswer, String defaultAnswer, List<String> options) {
+    double highSimilarotu = 0;
+    String textMostSimilar = '';
+
+    for (String item in [defaultAnswer, ...options]) {
+      double similar = StringSimilarity.compareTwoStrings(expectedAnswer, item);
+      if (similar > highSimilarotu) {
+        highSimilarotu = similar;
+        textMostSimilar = item;
+      }
+    }
+
+    return textMostSimilar;
   }
 
   Future<void> stop({required Function()? onFinishAnswer}) async {
@@ -122,11 +141,14 @@ class StudentSTT {
     SpeechRecognitionResult result,
     Function(String) onAnswer,
     Function() onFinishAnswer,
+    String expectedAnswer,
   ) {
-    log('result listen speech for $id: ${result.recognizedWords}');
+    log('result listen speech for $id: main: ${result.recognizedWords}, alternates: ${result.alternates.toString()}');
 
-    //TODO: get the word near of the result
-    onAnswer(result.recognizedWords);
+    final text = findSimilar(expectedAnswer, result.recognizedWords,
+        result.alternates.map((e) => e.recognizedWords).toList());
+
+    onAnswer(text);
 
     if (result.finalResult) {
       stop(onFinishAnswer: onFinishAnswer);

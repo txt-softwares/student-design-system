@@ -60,17 +60,18 @@ mixin QuizSpeakMixin<T extends QuizSpeakQuestionTypeWidget>
   /// Each time to start a speech recognition session
   void startListening() async {
     ref.read(sttProvider).startListening(
-      onAnswer: (p0) {
-        ref.read(wordProvider(widget.item.id).notifier).value = p0;
-      },
-      onStart: () {
-        ref.read(listenProvider(widget.item.id).notifier).value = true;
-      },
-      onFinishAnswer: () {
-        ref.read(listenProvider(widget.item.id).notifier).value = false;
-        widget.onAnswer(ref.read(wordProvider(widget.item.id)));
-      },
-    );
+          onAnswer: (p0) {
+            ref.read(wordProvider(widget.item.id).notifier).value = p0;
+          },
+          onStart: () {
+            ref.read(listenProvider(widget.item.id).notifier).value = true;
+          },
+          onFinishAnswer: () {
+            ref.read(listenProvider(widget.item.id).notifier).value = false;
+            widget.onAnswer(ref.read(wordProvider(widget.item.id)));
+          },
+          expectedWord: widget.item.expectedAnswer,
+        );
   }
 
   void stopListening() async {
