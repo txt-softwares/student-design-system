@@ -41,20 +41,23 @@ class _LearnErrorQuestionWidgetState extends State<LearnErrorQuestionWidget> {
         borderRadius: BorderRadius.circular(16),
         color: StudentDesignSystem.config.colors.error[50]!,
       ),
-      padding: const EdgeInsets.all(24),
+      padding: const EdgeInsets.all(16),
       child: Stack(
         children: [
-          widget.item.file != null
-              ? ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
-                  child: CachedNetworkImage(imageUrl: widget.item.file!),
-                )
-              : HtmlWidget(
-                  '<center>${widget.item.content}</center>',
-                  textStyle: TextStyles.bodyXLargeSemiBold.copyWith(
-                    color: StudentDesignSystem.config.colors.error,
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+            child: widget.item.file != null
+                ? ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: CachedNetworkImage(imageUrl: widget.item.file!),
+                  )
+                : HtmlWidget(
+                    '<center>${widget.item.content}</center>',
+                    textStyle: TextStyles.bodyXLargeSemiBold.copyWith(
+                      color: StudentDesignSystem.config.colors.error,
+                    ),
                   ),
-                ),
+          ),
           Align(
             alignment: Alignment.topRight,
             child: GestureDetector(
