@@ -117,7 +117,8 @@ class StudentSTT {
     String textMostSimilar = '';
 
     for (String item in [defaultAnswer, ...options]) {
-      double similar = StringSimilarity.compareTwoStrings(expectedAnswer, item);
+      double similar = StringSimilarity.compareTwoStrings(
+          clearString(expectedAnswer), clearString(item));
       if (similar > highSimilarotu) {
         highSimilarotu = similar;
         textMostSimilar = item;
@@ -125,6 +126,12 @@ class StudentSTT {
     }
 
     return textMostSimilar;
+  }
+
+  static String clearString(String input) {
+    final text = input.trim();
+    RegExp regex = RegExp(r'[^a-zA-Z0-9]');
+    return text.replaceAll(regex, '').toLowerCase();
   }
 
   Future<void> stop({required Function()? onFinishAnswer}) async {
