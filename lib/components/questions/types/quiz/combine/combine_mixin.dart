@@ -25,6 +25,13 @@ mixin MatchMixin<T extends CombineQuizQuestionWidget> on State<T> {
     if (isCorrect != null) {
       return;
     }
+
+    if (firstSelected != null &&
+        (firstSelected?.id == match.id &&
+            match.answerInCombine == firstSelected?.answerInCombine)) {
+      return;
+    }
+
     setState(() {
       if (firstSelected != null) {
         secondSelected = match;
@@ -37,7 +44,9 @@ mixin MatchMixin<T extends CombineQuizQuestionWidget> on State<T> {
       setState(() {
         isCorrect = secondSelected?.id == firstSelected?.id;
       });
-      setState(() {
+      await Future.delayed(const Duration(milliseconds: 200));
+
+      setState(() async {
         totalAnswers++;
 
         if (isCorrect!) {
