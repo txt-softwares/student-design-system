@@ -51,16 +51,15 @@ mixin MatchMixin<T extends CombineQuizQuestionWidget> on State<T> {
 
         if (isCorrect!) {
           answers.add(match);
+          if (answers.length >= widget.questions.length) {
+            widget.onAnswer(totalAnswers, startAt.difference(DateTime.now()));
+          }
         }
 
         firstSelected = null;
         secondSelected = null;
         isCorrect = null;
       });
-
-      if (answers.length >= widget.questions.length) {
-        widget.onAnswer(totalAnswers, startAt.difference(DateTime.now()));
-      }
     }
   }
 }
