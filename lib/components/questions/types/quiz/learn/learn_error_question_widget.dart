@@ -45,7 +45,7 @@ class _LearnErrorQuestionWidgetState extends State<LearnErrorQuestionWidget> {
       child: Stack(
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 30),
+            padding: const EdgeInsets.only(top: 36),
             child: widget.item.file != null
                 ? ClipRRect(
                     borderRadius: BorderRadius.circular(8),
