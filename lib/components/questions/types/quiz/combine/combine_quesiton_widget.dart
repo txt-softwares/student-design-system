@@ -8,10 +8,12 @@ class CombineQuizQuestionWidget extends StatefulWidget {
     Key? key,
     required this.questions,
     required this.onAnswer,
+    required this.onCombine,
   }) : super(key: key);
 
   final List<QuizQuestionModel> questions;
   final Function(int totalAnswers, Duration duration) onAnswer;
+  final Function() onCombine;
 
   @override
   State<CombineQuizQuestionWidget> createState() =>

@@ -50,6 +50,7 @@ mixin MatchMixin<T extends CombineQuizQuestionWidget> on State<T> {
         totalAnswers++;
 
         if (isCorrect!) {
+          widget.onCombine();
           answers.add(match);
           if (answers.length >= widget.questions.length) {
             widget.onAnswer(totalAnswers, startAt.difference(DateTime.now()));
