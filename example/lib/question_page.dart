@@ -21,13 +21,12 @@ class _QuestionWidgetState extends State<QuestionWidget> {
         body: Padding(
       padding: const EdgeInsets.only(top: 60),
       child: QuizSpeakQuestionTypeWidget(
-        onAnswer: (answer) {},
+        onAnswer: (answer) {
+          print(answer);
+        },
         onCantSpeakNow: () {},
         item: QuizQuestionModel(
-            id: 1,
-            content: 'content',
-            file: null,
-            expectedAnswer: 'expected Answer'),
+            id: 1, content: 'content', file: null, expectedAnswer: 'Me'),
       ),
       //   child: Column(
       //     children: [

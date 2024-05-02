@@ -74,7 +74,7 @@ class _StudentFlashCardTutorialWidgetState
                   color: dsColors.white,
                 ),
                 const SizedBox(height: 100),
-                BoxText.heading3(
+                BoxText.heading2(
                   widget.tutorialPageIndex == 1
                       ? 'Arraste para a direita se tiver aprendido o cartão'
                       : 'Arraste para a esquerda se ainda estiver aprendendo',
