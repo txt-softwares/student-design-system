@@ -18,52 +18,54 @@ class _QuestionWidgetState extends State<QuestionWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(),
         body: Padding(
-      padding: const EdgeInsets.only(top: 60),
-      child: QuizSpeakQuestionTypeWidget(
-        onAnswer: (answer) {
-          print(answer);
-        },
-        onCantSpeakNow: () {},
-        item: QuizQuestionModel(
-            id: 1, content: 'content', file: null, expectedAnswer: 'Me'),
-      ),
-      //   child: Column(
-      //     children: [
-      //       const QuestionsPercentIndicatorWidget(
-      //         totalQuestions: 5,
-      //         finishedQuestions: 1,
-      //       ),
-      //       Expanded(
-      //         child: MultipleChoiceQuestionWidget(
-      //           title: 'Question content',
-      //           // expectedAnswer: 'my name is william',
-      //           file:
-      //               'https://cia-images-adm.s3.amazonaws.com/question/86325.webm',
-      //           // onCantSpeakNow: () {
-      //           //   setState(() {
-      //           //     canSpeak = !canSpeak;
-      //           //   });
-      //           // },
-      //           onAnswer: (id) {},
-      //           options: [
-      //             StudentTaskOptionModel(
-      //               id: 1,
-      //               content: 'I want to sleep',
-      //               correct: true,
-      //             ),
-      //             StudentTaskOptionModel(
-      //               id: 2,
-      //               content: 'I went to slept',
-      //               correct: false,
-      //             ),
-      //           ],
-      //         ),
-      //       ),
-      //     ],
-      //   ),
-      // ),
-    )
+          padding: const EdgeInsets.all(30),
+          child: Column(
+            children: [
+              StudentDropDownWidget(
+                list: const ['name 1', 'name 2', 'name 3'],
+                hintText: 'Selecione',
+                onChanged: (p0) {},
+              ),
+            ],
+          ),
+          //   child: Column(
+          //     children: [
+          //       const QuestionsPercentIndicatorWidget(
+          //         totalQuestions: 5,
+          //         finishedQuestions: 1,
+          //       ),
+          //       Expanded(
+          //         child: MultipleChoiceQuestionWidget(
+          //           title: 'Question content',
+          //           // expectedAnswer: 'my name is william',
+          //           file:
+          //               'https://cia-images-adm.s3.amazonaws.com/question/86325.webm',
+          //           // onCantSpeakNow: () {
+          //           //   setState(() {
+          //           //     canSpeak = !canSpeak;
+          //           //   });
+          //           // },
+          //           onAnswer: (id) {},
+          //           options: [
+          //             StudentTaskOptionModel(
+          //               id: 1,
+          //               content: 'I want to sleep',
+          //               correct: true,
+          //             ),
+          //             StudentTaskOptionModel(
+          //               id: 2,
+          //               content: 'I went to slept',
+          //               correct: false,
+          //             ),
+          //           ],
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ),
+        )
         // body: MatchWidget(
         //   file: null,
 
